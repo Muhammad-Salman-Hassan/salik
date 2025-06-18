@@ -121,52 +121,6 @@ const StockChart: React.FC = () => {
     }
   });
 
-  // Generate sample data based on time range
-  const generateStockData = (timeRange: string): StockDataPoint[] => {
-    const now = new Date();
-    let days = 180; // Default 6 months
-    
-    switch (timeRange) {
-      case '1day': days = 1; break;
-      case '5days': days = 5; break;
-      case '3months': days = 90; break;
-      case '6months': days = 180; break;
-      case '1year': days = 365; break;
-      case '3years': days = 1095; break;
-    }
-
-    const data: StockDataPoint[] = [];
-    let basePrice = 5.0;
-    
-    for (let i = days; i >= 0; i--) {
-      const date = new Date(now);
-      date.setDate(date.getDate() - i);
-      
-      // Generate realistic price movement
-      const volatility = 0.02;
-      const change = (Math.random() - 0.5) * volatility;
-      basePrice = Math.max(4.5, Math.min(6.0, basePrice * (1 + change)));
-      
-      const open = basePrice;
-      const high = open * (1 + Math.random() * 0.01);
-      const low = open * (1 - Math.random() * 0.01);
-      const close = low + Math.random() * (high - low);
-      
-      data.push({
-        date: timeRange === '1day' ? 
-          `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}` :
-          `${date.getDate()}/${date.getMonth() + 1}`,
-        timestamp: date,
-        open,
-        high,
-        low,
-        close,
-        volume: Math.floor(Math.random() * 10000000 + 1000000)
-      });
-    }
-    
-    return data;
-  };
 
   const stockData: StockDataPoint[] = [
     { date: "20/5", timestamp: new Date("2025-05-20T10:00:00Z"), open: 5.10, high: 5.15, low: 5.05, close: 5.12, volume: 3200000 },
