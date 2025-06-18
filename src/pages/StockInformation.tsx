@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -31,8 +31,18 @@ import {
   Badge,
   Button,
   Select,
-} from '@chakra-ui/react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+} from "@chakra-ui/react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from "recharts";
 
 const StockMetric: React.FC<{
   label: string;
@@ -51,7 +61,7 @@ const StockMetric: React.FC<{
       </StatNumber>
       {change && (
         <StatHelpText>
-          <StatArrow type={isPositive ? 'increase' : 'decrease'} />
+          <StatArrow type={isPositive ? "increase" : "decrease"} />
           {change}
         </StatHelpText>
       )}
@@ -65,49 +75,79 @@ const StockMetric: React.FC<{
 };
 
 const StockInformation: React.FC = () => {
-  const heroBg = useColorModeValue('gray.50', 'gray.900');
-  const sectionBg = useColorModeValue('white', 'gray.800');
-  const cardBg = useColorModeValue('white', 'gray.800');
+  const heroBg = useColorModeValue("gray.50", "gray.900");
+  const sectionBg = useColorModeValue("white", "gray.800");
+  const cardBg = useColorModeValue("white", "gray.800");
 
-  const [selectedPeriod, setSelectedPeriod] = useState('1Y');
+  const [selectedPeriod, setSelectedPeriod] = useState("1Y");
 
   // Sample stock data
   const stockData = [
-    { date: '2024-01', price: 145.32, volume: 2.1 },
-    { date: '2024-02', price: 149.87, volume: 2.3 },
-    { date: '2024-03', price: 152.45, volume: 2.0 },
-    { date: '2024-04', price: 148.92, volume: 2.4 },
-    { date: '2024-05', price: 154.33, volume: 2.2 },
-    { date: '2024-06', price: 151.78, volume: 2.1 },
-    { date: '2024-07', price: 157.42, volume: 2.5 },
-    { date: '2024-08', price: 153.89, volume: 2.3 },
-    { date: '2024-09', price: 159.67, volume: 2.6 },
-    { date: '2024-10', price: 155.34, volume: 2.4 },
-    { date: '2024-11', price: 161.23, volume: 2.7 },
-    { date: '2024-12', price: 156.78, volume: 2.8 },
+    { date: "2024-01", price: 145.32, volume: 2.1 },
+    { date: "2024-02", price: 149.87, volume: 2.3 },
+    { date: "2024-03", price: 152.45, volume: 2.0 },
+    { date: "2024-04", price: 148.92, volume: 2.4 },
+    { date: "2024-05", price: 154.33, volume: 2.2 },
+    { date: "2024-06", price: 151.78, volume: 2.1 },
+    { date: "2024-07", price: 157.42, volume: 2.5 },
+    { date: "2024-08", price: 153.89, volume: 2.3 },
+    { date: "2024-09", price: 159.67, volume: 2.6 },
+    { date: "2024-10", price: 155.34, volume: 2.4 },
+    { date: "2024-11", price: 161.23, volume: 2.7 },
+    { date: "2024-12", price: 156.78, volume: 2.8 },
   ];
 
   const volumeData = [
-    { date: '2024-01', volume: 2.1 },
-    { date: '2024-02', volume: 2.3 },
-    { date: '2024-03', volume: 2.0 },
-    { date: '2024-04', volume: 2.4 },
-    { date: '2024-05', volume: 2.2 },
-    { date: '2024-06', volume: 2.1 },
-    { date: '2024-07', volume: 2.5 },
-    { date: '2024-08', volume: 2.3 },
-    { date: '2024-09', volume: 2.6 },
-    { date: '2024-10', volume: 2.4 },
-    { date: '2024-11', volume: 2.7 },
-    { date: '2024-12', volume: 2.8 },
+    { date: "2024-01", volume: 2.1 },
+    { date: "2024-02", volume: 2.3 },
+    { date: "2024-03", volume: 2.0 },
+    { date: "2024-04", volume: 2.4 },
+    { date: "2024-05", volume: 2.2 },
+    { date: "2024-06", volume: 2.1 },
+    { date: "2024-07", volume: 2.5 },
+    { date: "2024-08", volume: 2.3 },
+    { date: "2024-09", volume: 2.6 },
+    { date: "2024-10", volume: 2.4 },
+    { date: "2024-11", volume: 2.7 },
+    { date: "2024-12", volume: 2.8 },
   ];
 
   const historicalData = [
-    { period: '2020', high: 128.45, low: 89.32, close: 124.67, volume: '18.5M' },
-    { period: '2021', high: 142.89, low: 118.23, close: 138.45, volume: '22.1M' },
-    { period: '2022', high: 151.34, low: 128.91, close: 143.78, volume: '25.3M' },
-    { period: '2023', high: 159.87, low: 142.56, close: 152.34, volume: '28.7M' },
-    { period: '2024', high: 164.50, low: 148.23, close: 156.78, volume: '31.2M' },
+    {
+      period: "2020",
+      high: 128.45,
+      low: 89.32,
+      close: 124.67,
+      volume: "18.5M",
+    },
+    {
+      period: "2021",
+      high: 142.89,
+      low: 118.23,
+      close: 138.45,
+      volume: "22.1M",
+    },
+    {
+      period: "2022",
+      high: 151.34,
+      low: 128.91,
+      close: 143.78,
+      volume: "25.3M",
+    },
+    {
+      period: "2023",
+      high: 159.87,
+      low: 142.56,
+      close: 152.34,
+      volume: "28.7M",
+    },
+    {
+      period: "2024",
+      high: 164.5,
+      low: 148.23,
+      close: 156.78,
+      volume: "31.2M",
+    },
   ];
 
   return (
@@ -117,22 +157,28 @@ const StockInformation: React.FC = () => {
         <Container maxW="7xl">
           <VStack spacing={8} textAlign="center" maxW="4xl" mx="auto">
             <VStack spacing={4}>
-              <Badge colorScheme="green" px={4} py={2} borderRadius="full" fontSize="sm">
+              <Badge
+                colorScheme="green"
+                px={4}
+                py={2}
+                borderRadius="full"
+                fontSize="sm"
+              >
                 NYSE: INVT
               </Badge>
               <Heading
-                fontSize={{ base: '3xl', md: '5xl' }}
+                fontSize={{ base: "3xl", md: "5xl" }}
                 fontWeight="bold"
                 lineHeight="shorter"
               >
-                Stock{' '}
+                Stock{" "}
                 <Text as="span" color="brand.500">
                   Information
                 </Text>
               </Heading>
               <Text fontSize="xl" color="gray.600" lineHeight="tall">
-                Real-time stock data, charts, and comprehensive financial information
-                for InvestorCorp shares.
+                Real-time stock data, charts, and comprehensive financial
+                information for InvestorCorp shares.
               </Text>
             </VStack>
           </VStack>
@@ -149,7 +195,11 @@ const StockInformation: React.FC = () => {
                 Live market data updated every 15 minutes
               </Text>
             </VStack>
-            <SimpleGrid columns={{ base: 2, md: 4, lg: 6 }} spacing={6} w="full">
+            <SimpleGrid
+              columns={{ base: 2, md: 4, lg: 6 }}
+              spacing={6}
+              w="full"
+            >
               <StockMetric
                 label="Current Price"
                 value="$156.78"
@@ -196,7 +246,12 @@ const StockInformation: React.FC = () => {
             <VStack spacing={4} textAlign="center">
               <Heading size="xl">Price Charts</Heading>
               <HStack spacing={4}>
-                <Select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)} size="sm" maxW="120px">
+                <Select
+                  value={selectedPeriod}
+                  onChange={(e) => setSelectedPeriod(e.target.value)}
+                  size="sm"
+                  maxW="120px"
+                >
                   <option value="1D">1 Day</option>
                   <option value="1W">1 Week</option>
                   <option value="1M">1 Month</option>
@@ -216,7 +271,9 @@ const StockInformation: React.FC = () => {
                 <TabPanel>
                   <Card bg={cardBg} shadow="md" borderRadius="xl">
                     <CardHeader>
-                      <Heading size="md">Stock Price Trend ({selectedPeriod})</Heading>
+                      <Heading size="md">
+                        Stock Price Trend ({selectedPeriod})
+                      </Heading>
                     </CardHeader>
                     <CardBody>
                       <Box h="400px">
@@ -224,14 +281,14 @@ const StockInformation: React.FC = () => {
                           <LineChart data={stockData}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="date" />
-                            <YAxis domain={['dataMin - 5', 'dataMax + 5']} />
+                            <YAxis domain={["dataMin - 5", "dataMax + 5"]} />
                             <Tooltip />
-                            <Line 
-                              type="monotone" 
-                              dataKey="price" 
-                              stroke="#0066cc" 
+                            <Line
+                              type="monotone"
+                              dataKey="price"
+                              stroke="#0066cc"
                               strokeWidth={2}
-                              dot={{ fill: '#0066cc' }}
+                              dot={{ fill: "#0066cc" }}
                             />
                           </LineChart>
                         </ResponsiveContainer>
@@ -242,7 +299,9 @@ const StockInformation: React.FC = () => {
                 <TabPanel>
                   <Card bg={cardBg} shadow="md" borderRadius="xl">
                     <CardHeader>
-                      <Heading size="md">Trading Volume ({selectedPeriod})</Heading>
+                      <Heading size="md">
+                        Trading Volume ({selectedPeriod})
+                      </Heading>
                     </CardHeader>
                     <CardBody>
                       <Box h="400px">
@@ -391,7 +450,12 @@ const StockInformation: React.FC = () => {
                   <VStack spacing={4}>
                     <HStack justify="space-between" w="full">
                       <Text>Stock Symbol</Text>
-                      <Badge colorScheme="brand" px={3} py={1} borderRadius="full">
+                      <Badge
+                        colorScheme="brand"
+                        px={3}
+                        py={1}
+                        borderRadius="full"
+                      >
                         NYSE: INVT
                       </Badge>
                     </HStack>
@@ -422,7 +486,9 @@ const StockInformation: React.FC = () => {
                   <VStack spacing={4}>
                     <HStack justify="space-between" w="full">
                       <Text>Dividend Yield</Text>
-                      <Text fontWeight="bold" color="green.500">2.1%</Text>
+                      <Text fontWeight="bold" color="green.500">
+                        2.1%
+                      </Text>
                     </HStack>
                     <HStack justify="space-between" w="full">
                       <Text>Annual Dividend</Text>
@@ -454,7 +520,8 @@ const StockInformation: React.FC = () => {
           <VStack spacing={8} textAlign="center">
             <Heading size="xl">Investment Tools & Resources</Heading>
             <Text fontSize="lg" color="gray.600" maxW="2xl">
-              Access additional tools and resources to support your investment decisions
+              Access additional tools and resources to support your investment
+              decisions
             </Text>
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} w="full">
               <Button size="lg" variant="outline" h="auto" p={6}>
