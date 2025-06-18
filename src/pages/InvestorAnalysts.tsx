@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Box,
   Flex,
+  Tabs,
   Text,
 } from '@chakra-ui/react';
 import {
@@ -77,37 +78,37 @@ const InvestorAnalysts: React.FC = () => {
         borderRadius="lg"
         overflow="hidden"
       >
-        <TabsRoot defaultValue="analysts" fitted>
-          <TabsList
+        <Tabs.Root defaultValue="analysts" fitted>
+          <Tabs.List
             flexDirection={{ base: 'column', md: 'row' }}
-            overflowX={{ base: 'visible'}}
+            overflowX={{ base: 'visible' }}
             flexWrap="nowrap"
           >
-            <TabsTrigger value="analysts" w={{ base: '100%', md: 'auto' }}>
+            <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }}>
               Analyst List with Rating
-            </TabsTrigger>
-            <TabsTrigger value="consensus" w={{ base: '100%', md: 'auto' }}>
+            </Tabs.Trigger>
+            <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }}>
               Consensus Estimates
-            </TabsTrigger>
-            <TabsTrigger value="details" w={{ base: '100%', md: 'auto' }}>
+            </Tabs.Trigger>
+            <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }}>
               Recommendation OverView
-            </TabsTrigger>
-          </TabsList>
+            </Tabs.Trigger>
+          </Tabs.List>
 
           <Box flex="1" overflowY="auto" px={{ base: 2, md: 4 }} py={4}>
-            <TabsContent value="analysts">
+            <Tabs.Content value="analysts">
               <AnalystWithRating data={mockCompanyRatings} />
-            </TabsContent>
+            </Tabs.Content>
 
-            <TabsContent value="consensus">
+            <Tabs.Content value="consensus">
               <ConsensusEstimates />
-            </TabsContent>
+            </Tabs.Content>
 
-            <TabsContent value="details">
-              <ConsensusRecommendation data={data} consensusValue={1.8}/>
-            </TabsContent>
+            <Tabs.Content value="details">
+              <ConsensusRecommendation data={data} consensusValue={1.8} />
+            </Tabs.Content>
           </Box>
-        </TabsRoot>
+        </Tabs.Root>
       </Flex>
     </Box>
   );

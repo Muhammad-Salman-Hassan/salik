@@ -7,6 +7,7 @@ import InvestorAnalysts from './pages/InvestorAnalysts';
 import StockInformation from './pages/StockInformation';
 import InvestorDividends from './pages/InvestorDividends';
 import Footer from './components/Footer';
+import StockInformations from './pages/StockInformations';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<InvestorHome />} />
           <Route path="/investors/analysts" element={<InvestorAnalysts />} />
+          <Route path="/investors/stock" element={<StockInformations />} />
           {/* <Route path="/stock-information" element={<StockInformation />} />
           <Route path="/investors/dividends" element={<InvestorDividends />} /> */}
         </Routes>
