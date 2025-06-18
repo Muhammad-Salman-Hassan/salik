@@ -78,7 +78,7 @@ const InvestorAnalysts: React.FC = () => {
         borderRadius="lg"
         overflow="hidden"
       >
-        <Tabs.Root defaultValue="analysts" fitted>
+        <Tabs.Root defaultValue="analysts" fitted variant="enclosed" colorPalette="teal">
           <Tabs.List
             flexDirection={{ base: 'column', md: 'row' }}
             overflowX={{ base: 'visible' }}

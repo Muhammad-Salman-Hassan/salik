@@ -1,4 +1,4 @@
-// types.ts
+// =================RATINGFILTER==========================
 export type RatingFilterOption =
     | '14_days'
     | '1_month'
@@ -11,6 +11,8 @@ export interface RatingFilter {
     filterType: RatingFilterOption;
     customDate?: string;
 }
+
+// =================ANALYST PAGE==========================
 
 export interface Analyst {
     name: string;
@@ -66,6 +68,7 @@ export interface ViewState {
     chartType?: string;
 }
 
+// =================DISCLAIMER COMPONENT==========================
 
 
 export interface DisclaimerProps {
@@ -89,6 +92,9 @@ export interface ChartDataPoint {
     high?: number;
     low?: number;
 }
+
+// =================CONSENSUS PAGE==========================
+
 
 export interface ConsensusBarChartProps {
     data: ChartDataPoint[];
@@ -116,14 +122,14 @@ export interface RecommendationData {
     hold: number;
     underperform: number;
     sell: number;
-    }
+}
 
 export interface ConsensusRecommendationProps {
     data: RecommendationData;
-    consensusValue?: number; 
+    consensusValue?: number;
     showDetailed?: boolean;
     title?: string;
-    
+
 }
 
 export interface RecommendationPeriod {
@@ -134,39 +140,117 @@ export interface RecommendationPeriod {
     hold: number;
     underperform: number;
     sell: number;
-  }
-  
-  export interface RecommendationHistoryPoint {
+}
+
+export interface RecommendationHistoryPoint {
     month: string;
     date: Date;
     recommendation: number; // 1-5 scale
     recommendationType: string; // 'Buy', 'Outperform', etc.
-  }
-  
-  export interface RecommendationsTableProps {
+}
+
+export interface RecommendationsTableProps {
     data: RecommendationPeriod[];
     title?: string;
-  }
-  
-  export interface RecommendationHistoryChartProps {
+}
+
+export interface RecommendationHistoryChartProps {
     data: RecommendationHistoryPoint[];
     title?: string;
     height?: number;
-  }
+}
 
 
- export  interface PriceHistoryPoint {
+export interface PriceHistoryPoint {
     month: string;
     date: Date;
     targetPrice: number;
     closingPrice: number;
-  }
-  
- export interface TargetPriceHistoryProps {
+}
+
+export interface TargetPriceHistoryProps {
     data: PriceHistoryPoint[];
     title?: string;
     height?: number;
     currency?: string;
     showLegend?: boolean;
-  }
-  
+}
+
+// =================STOCK SHARES PAGE==========================
+
+
+export interface ShareData {
+    id: string;
+    selectShare: string;
+    market: string;
+    currency: string;
+    dataStartingFrom: string;
+}
+
+export interface ShareSelectionTableProps {
+    data?: ShareData[];
+    onShareSelect?: (shareId: string) => void;
+}
+
+
+// =================DIVIDEND PAAAGE===========================
+export interface CalculationInputs {
+    dateOfInvestment: string;
+    endDateOfInvestment: string;
+    amountInvested: string;
+    sharesPurchased: string;
+    currency: string;
+}
+
+export interface ApiResponse {
+    investment: number;
+    dividendsPaidOut: number;
+    dividendsFrequency: string;
+    reinvested: {
+        dividendsTotal: number;
+        yieldOnInvestment: number;
+        annualizedYield: number;
+        endShares: number;
+        totalReturn: number;
+    };
+    cashedOut: {
+        dividendsTotal: number;
+        yieldOnInvestment: number;
+        annualizedYield: number;
+        endShares: number;
+        totalReturn: number;
+    };
+    chartData: Array<{
+        year: string;
+        reinvested: number;
+        cashedOut: number;
+    }>;
+}
+
+export interface DividendCalculatorProps {
+    onCalculate?: (inputs: CalculationInputs) => Promise<ApiResponse>;
+    isLoading?: boolean;
+}
+
+
+export interface DividendData {
+    date: string;
+    value: number;
+    type: 'Semi-Annual' | 'Annual' | 'Interim';
+    color: string;
+}
+
+export interface DividendTableData {
+    financialPeriod: string;
+    type: string;
+    dividendAdjusted: number;
+    exDividendDate: string;
+    registryCloseDate: string;
+    paymentDate: string;
+}
+
+export interface DividendPerShareProps {
+    chartData?: DividendData[];
+    tableData?: DividendTableData[];
+    onViewChange?: (view: string) => void;
+}

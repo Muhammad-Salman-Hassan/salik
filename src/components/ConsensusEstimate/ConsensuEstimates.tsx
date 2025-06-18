@@ -146,7 +146,7 @@ const ConsensusEstimates: React.FC = () => {
  
     const renderMainTable = (filteredData) => (
         <Table.Root variant="outline">
-            <Table.Header bg="#53565a">
+            <Table.Header bg="#008080">
                 <Table.Row>
                     <Table.ColumnHeader color="white">
                         Median / actual ({estimatesData[0]?.unit})
@@ -203,9 +203,9 @@ const ConsensusEstimates: React.FC = () => {
 
         return (
             <Box w="full">
-                {/* Summary Table */}
+             
                 <Table.Root variant="outline" mb={6}>
-                    <Table.Header bg="#53565a">
+                    <Table.Header bg="#008080">
                         <Table.Row>
                             <Table.ColumnHeader color="white">
                                 {metric.metric} ({metric.unit})
@@ -274,7 +274,7 @@ const ConsensusEstimates: React.FC = () => {
                     </Table.Body>
                 </Table.Root>
 
-                {/* Chart */}
+               
                 <Box h="400px" w="full" bg="white" p={4} borderRadius="md" border="1px solid" borderColor="gray.200">
                     <Text fontSize="md" fontWeight="semibold" mb={4} textAlign="center">
                         {metric.metric} ({metric.unit}, median)
@@ -357,12 +357,14 @@ const ConsensusEstimates: React.FC = () => {
             <Flex justify="space-between" align="center" mb={4}>
                 {currentView.type !== 'main' ? (
                     <Button
-                        variant="ghost"
+                        variant="subtle"
+                        backgroundColor="#008080"
+                        color="white"
                         size="sm"
                         onClick={handleBackClick}
-                        leftIcon={<MdArrowBack />}
+                        
                     >
-                        Back to Main view
+                        <MdArrowBack /> Back to Main view
                     </Button>
                 ) : (
                     <span></span>

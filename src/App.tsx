@@ -1,13 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
-import Navbar from './components/Navbar';
+
 import InvestorHome from './pages/InvestorHome';
 import InvestorAnalysts from './pages/InvestorAnalysts';
-import StockInformation from './pages/StockInformation';
-import InvestorDividends from './pages/InvestorDividends';
-import Footer from './components/Footer';
+
 import StockInformations from './pages/StockInformations';
+import Dividends from './pages/Dividends';
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
           <Route path="/" element={<InvestorHome />} />
           <Route path="/investors/analysts" element={<InvestorAnalysts />} />
           <Route path="/investors/stock" element={<StockInformations />} />
+          <Route path="/investors/dividends" element={<Dividends />} />
           {/* <Route path="/stock-information" element={<StockInformation />} />
           <Route path="/investors/dividends" element={<InvestorDividends />} /> */}
         </Routes>

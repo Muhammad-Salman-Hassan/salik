@@ -16,9 +16,9 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                 {title}
             </Text>
 
-            <Table.Root  size="sm">
-                <Table.Header bg="#53565a">
-                    <Table.Row bg="#53565a">
+            <Table.Root  size="sm" variant="outline">
+                <Table.Header bg="#008080">
+                    <Table.Row bg="#008080">
                         <Table.ColumnHeader color="white" py={3}></Table.ColumnHeader>
                         {data.map((period, index) => (
                             <Table.ColumnHeader key={index} color="white" textAlign="center" py={3}>

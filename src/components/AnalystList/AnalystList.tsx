@@ -6,6 +6,7 @@ import {
     Link,
     Flex,
     useDisclosure,
+    Collapsible,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { CompanyRating, RatingFilter } from '../../util/Interface';
@@ -34,7 +35,7 @@ export const AnalystWithRating = ({ data }: { data: CompanyRating[] }) => {
         <VStack align="start" gap={6} p={4} w="full">
             <Box w="full" overflowX="auto">
                 <Table.Root variant="outline">
-                    <Table.Header bg="#53565a">
+                    <Table.Header bg="#008080">
                         <Table.Row>
                             <Table.ColumnHeader color="white">Company</Table.ColumnHeader>
                             <Table.ColumnHeader color="white">Analyst</Table.ColumnHeader>
@@ -45,25 +46,29 @@ export const AnalystWithRating = ({ data }: { data: CompanyRating[] }) => {
                     <Table.Body>
                         {filteredData.map((item, i) => (
                             <Table.Row key={i}>
-                                <Table.Cell>{item.company}</Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell fontWeight="bold">{item.company}</Table.Cell>
+                                <Table.Cell  style={{width:"30%"}}>
                                     <Text
-                                        fontWeight="bold"
+                                        fontWeight="light"
                                         cursor="pointer"
                                         onClick={() =>
                                             setAnalystVisibleIndex(i === analystVisibleIndex ? null : i)
                                         }
+                                        style={{width:"50%"}}
+                                        color="#008080"
                                         textDecoration="underline"
                                     >
                                         {item.analyst.name}
                                     </Text>
-                                    {analystVisibleIndex === i && (
-                                        <Box fontSize="sm" color="gray.600">
-                                            <Text>Email: {item.analyst.email}</Text>
-                                            <Text>Tel: {item.analyst.phone}</Text>
-                                            <Text>Last rating input: {item.analyst.lastRatingDate}</Text>
-                                        </Box>
-                                    )}
+                                    <Collapsible.Root open={analystVisibleIndex === i} style={{width:"max-content"}}>
+                                        <Collapsible.Content style={{width:"max-content"}}>
+                                            <Box fontSize="sm" color="gray.600"   mt={2}>
+                                                <Text>Email: {item.analyst.email}</Text>
+                                                <Text>Tel: {item.analyst.phone}</Text>
+                                                <Text>Last rating input: {item.analyst.lastRatingDate}</Text>
+                                            </Box>
+                                        </Collapsible.Content>
+                                    </Collapsible.Root>
                                 </Table.Cell>
                                 <Table.Cell>{item.country}</Table.Cell>
                                 <Table.Cell>
