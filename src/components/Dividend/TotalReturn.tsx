@@ -20,6 +20,7 @@ import {
     ResponsiveContainer,
     Tooltip,
     ReferenceLine,
+    Brush,
 } from 'recharts';
 import {
     MdBarChart,
@@ -146,7 +147,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         <XAxis
                             dataKey="date"
                             tick={{ fontSize: 11 }}
-                            angle={-45}
+                            angle={360}
                             textAnchor="end"
                             height={60}
                         />
@@ -161,13 +162,24 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         />
                         <Tooltip content={<CustomTooltip />} />
                         <ReferenceLine y={0} stroke="#666" strokeDasharray="2 2" />
+                        <defs>
+                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#0c5d56" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#008080" stopOpacity={0} />
+                            </linearGradient>
+
+                        </defs>
                         <Area
                             type="monotone"
                             dataKey="cumulativeReturn"
-                            stroke="#4A5568"
-                            fill="#E2E8F0"
-                            fillOpacity={0.6}
+                            stroke="#008080"
+                            fill="url(#colorUv)"
+
+                            fillOpacity={0.2}
                         />
+                        
+                        <Brush dataKey="period" height={30} stroke="#008080" />
+
                     </AreaChart>
                 </ResponsiveContainer>
             );
@@ -200,6 +212,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         fill="#008080"
                         radius={[2, 2, 0, 0]}
                     />
+                    <Brush dataKey="period" height={30} stroke="#008080" />
                 </BarChart>
             </ResponsiveContainer>
         );
@@ -224,7 +237,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         variant={activeChart === 'cumulative' ? 'solid' : 'outline'}
                         size="sm"
                         onClick={() => handleChartChange('cumulative')}
-                      
+
                         bg={activeChart === 'cumulative' ? '#4A5568' : 'transparent'}
                         color={activeChart === 'cumulative' ? 'white' : 'gray.600'}
                     >
