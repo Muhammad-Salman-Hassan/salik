@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Box,
   Flex,
@@ -11,9 +11,6 @@ import {
   Checkbox,
   RadioGroup,
   Tabs,
-  Select,
-  Portal,
-  createListCollection,
   NativeSelect,
 } from "@chakra-ui/react";
 import {
@@ -31,66 +28,10 @@ import {
   Brush,
 } from "recharts";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import { performanceDummyData, performanceDummyDataByYear, sharesDummyData, stockDummyData, tradeDummyData } from "../../util/DummyData";
+import { ChartControls, PerformanceData, StockDataPoint, StockInfo } from "../../util/Interface";
 // Types
-interface StockDataPoint {
-  date: string;
-  timestamp: Date;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-  ma10?: number | null;
-  ma20?: number | null;
-  ma50?: number | null;
-}
 
-interface StockInfo {
-  symbol: string;
-  name: string;
-  last: number;
-  high: number;
-  low: number;
-  change: number;
-  changePercent: number;
-  bid: number;
-  ask: number;
-  volume: number;
-}
-
-interface ChartControls {
-  timeRange:
-  | "1day"
-  | "5days"
-  | "3months"
-  | "6months"
-  | "1year"
-  | "3years"
-  | "custom";
-  customStartDate?: string;
-  customEndDate?: string;
-  chartType: "line" | "bar" | "candlestick" | "mountain";
-  showVolume: boolean;
-  showMovingAverages: {
-    ma10: boolean;
-    ma20: boolean;
-    ma50: boolean;
-  };
-  indicators: {
-    earnings: boolean;
-    pressReleases: boolean;
-    periodHighLow: boolean;
-    percentView: boolean;
-  };
-  lowerGraphs: {
-    hideShowVolume: boolean;
-    dailyChange: boolean;
-  };
-  indices: {
-    dfmIndustrials: boolean;
-    dfmGeneralIndex: boolean;
-  };
-}
 const ShareGraph: React.FC = () => {
   const [stockInfo] = useState<StockInfo>({
     symbol: "Salik",
@@ -130,280 +71,19 @@ const ShareGraph: React.FC = () => {
     },
   });
 
-  const stockData: StockDataPoint[] = [
-    {
-      date: "20/5",
-      timestamp: new Date("2025-05-20T10:00:00Z"),
-      open: 5.1,
-      high: 5.15,
-      low: 5.05,
-      close: 5.12,
-      volume: 3200000,
-    },
-    {
-      date: "21/5",
-      timestamp: new Date("2025-05-21T10:00:00Z"),
-      open: 5.12,
-      high: 5.18,
-      low: 5.1,
-      close: 5.14,
-      volume: 4100000,
-    },
-    {
-      date: "22/5",
-      timestamp: new Date("2025-05-22T10:00:00Z"),
-      open: 5.14,
-      high: 5.2,
-      low: 5.11,
-      close: 5.17,
-      volume: 3800000,
-    },
-    {
-      date: "23/5",
-      timestamp: new Date("2025-05-23T10:00:00Z"),
-      open: 5.17,
-      high: 5.22,
-      low: 5.13,
-      close: 5.16,
-      volume: 2900000,
-    },
-    {
-      date: "24/5",
-      timestamp: new Date("2025-05-24T10:00:00Z"),
-      open: 5.16,
-      high: 5.19,
-      low: 5.1,
-      close: 5.11,
-      volume: 3300000,
-    },
-    {
-      date: "25/5",
-      timestamp: new Date("2025-05-25T10:00:00Z"),
-      open: 5.11,
-      high: 5.18,
-      low: 5.08,
-      close: 5.15,
-      volume: 3600000,
-    },
-    {
-      date: "26/5",
-      timestamp: new Date("2025-05-26T10:00:00Z"),
-      open: 5.15,
-      high: 5.2,
-      low: 5.12,
-      close: 5.18,
-      volume: 3000000,
-    },
-    {
-      date: "27/5",
-      timestamp: new Date("2025-05-27T10:00:00Z"),
-      open: 5.18,
-      high: 5.22,
-      low: 5.16,
-      close: 5.19,
-      volume: 4100000,
-    },
-    {
-      date: "28/5",
-      timestamp: new Date("2025-05-28T10:00:00Z"),
-      open: 5.19,
-      high: 5.24,
-      low: 5.15,
-      close: 5.2,
-      volume: 3900000,
-    },
-    {
-      date: "29/5",
-      timestamp: new Date("2025-05-29T10:00:00Z"),
-      open: 5.2,
-      high: 5.23,
-      low: 5.17,
-      close: 5.21,
-      volume: 3500000,
-    },
-    {
-      date: "30/5",
-      timestamp: new Date("2025-05-30T10:00:00Z"),
-      open: 5.21,
-      high: 5.25,
-      low: 5.19,
-      close: 5.23,
-      volume: 3700000,
-    },
-    {
-      date: "31/5",
-      timestamp: new Date("2025-05-31T10:00:00Z"),
-      open: 5.23,
-      high: 5.26,
-      low: 5.2,
-      close: 5.24,
-      volume: 3400000,
-    },
-    {
-      date: "1/6",
-      timestamp: new Date("2025-06-01T10:00:00Z"),
-      open: 5.24,
-      high: 5.28,
-      low: 5.22,
-      close: 5.27,
-      volume: 3900000,
-    },
-    {
-      date: "2/6",
-      timestamp: new Date("2025-06-02T10:00:00Z"),
-      open: 5.27,
-      high: 5.3,
-      low: 5.23,
-      close: 5.25,
-      volume: 3100000,
-    },
-    {
-      date: "3/6",
-      timestamp: new Date("2025-06-03T10:00:00Z"),
-      open: 5.25,
-      high: 5.29,
-      low: 5.2,
-      close: 5.21,
-      volume: 3800000,
-    },
-    {
-      date: "4/6",
-      timestamp: new Date("2025-06-04T10:00:00Z"),
-      open: 5.21,
-      high: 5.22,
-      low: 5.15,
-      close: 5.18,
-      volume: 4000000,
-    },
-    {
-      date: "5/6",
-      timestamp: new Date("2025-06-05T10:00:00Z"),
-      open: 5.18,
-      high: 5.2,
-      low: 5.14,
-      close: 5.16,
-      volume: 2900000,
-    },
-    {
-      date: "6/6",
-      timestamp: new Date("2025-06-06T10:00:00Z"),
-      open: 5.16,
-      high: 5.19,
-      low: 5.13,
-      close: 5.17,
-      volume: 3100000,
-    },
-    {
-      date: "7/6",
-      timestamp: new Date("2025-06-07T10:00:00Z"),
-      open: 5.17,
-      high: 5.22,
-      low: 5.15,
-      close: 5.2,
-      volume: 2700000,
-    },
-    {
-      date: "8/6",
-      timestamp: new Date("2025-06-08T10:00:00Z"),
-      open: 5.2,
-      high: 5.23,
-      low: 5.18,
-      close: 5.21,
-      volume: 3500000,
-    },
-    {
-      date: "9/6",
-      timestamp: new Date("2025-06-09T10:00:00Z"),
-      open: 5.21,
-      high: 5.25,
-      low: 5.2,
-      close: 5.23,
-      volume: 3900000,
-    },
-    {
-      date: "10/6",
-      timestamp: new Date("2025-06-10T10:00:00Z"),
-      open: 5.23,
-      high: 5.27,
-      low: 5.22,
-      close: 5.25,
-      volume: 4200000,
-    },
-    {
-      date: "11/6",
-      timestamp: new Date("2025-06-11T10:00:00Z"),
-      open: 5.25,
-      high: 5.28,
-      low: 5.24,
-      close: 5.27,
-      volume: 3300000,
-    },
-    {
-      date: "12/6",
-      timestamp: new Date("2025-06-12T10:00:00Z"),
-      open: 5.27,
-      high: 5.3,
-      low: 5.25,
-      close: 5.28,
-      volume: 4100000,
-    },
-    {
-      date: "13/6",
-      timestamp: new Date("2025-06-13T10:00:00Z"),
-      open: 5.28,
-      high: 5.31,
-      low: 5.26,
-      close: 5.29,
-      volume: 2900000,
-    },
-    {
-      date: "14/6",
-      timestamp: new Date("2025-06-14T10:00:00Z"),
-      open: 5.29,
-      high: 5.32,
-      low: 5.27,
-      close: 5.3,
-      volume: 3600000,
-    },
-    {
-      date: "15/6",
-      timestamp: new Date("2025-06-15T10:00:00Z"),
-      open: 5.3,
-      high: 5.34,
-      low: 5.29,
-      close: 5.33,
-      volume: 3000000,
-    },
-    {
-      date: "16/6",
-      timestamp: new Date("2025-06-16T10:00:00Z"),
-      open: 5.33,
-      high: 5.36,
-      low: 5.31,
-      close: 5.35,
-      volume: 3200000,
-    },
-    {
-      date: "17/6",
-      timestamp: new Date("2025-06-17T10:00:00Z"),
-      open: 5.35,
-      high: 5.39,
-      low: 5.34,
-      close: 5.38,
-      volume: 3700000,
-    },
-    {
-      date: "18/6",
-      timestamp: new Date("2025-06-18T10:00:00Z"),
-      open: 5.38,
-      high: 5.4,
-      low: 5.36,
-      close: 5.39,
-      volume: 3900000,
-    },
+  const stockData: StockDataPoint[] = stockDummyData
+  const shareData: { name: string; data: string }[] = sharesDummyData
+  const tradeData: { volume: string; last: string; time: string }[] = tradeDummyData
+  const performanceData: PerformanceData[] = performanceDummyData
+  const [selectedPeriod, setSelectedPeriod] = useState<string>("normal");
+  const performaceSelectOptions: { value: string; label: string }[] = [
+    { value: "normal", label: "Share price development" },
+    { value: "byYears", label: "Share price development by years" },
   ];
+  const performanceDataByYrs: PerformanceData[] = performanceDummyDataByYear
 
-  // Calculate moving averages
+
+
   const calculateMovingAverage = (data: StockDataPoint[], period: number) => {
     return data.map((point, index) => {
       if (index < period - 1) return { ...point, ma: null };
@@ -455,7 +135,6 @@ const ShareGraph: React.FC = () => {
     }));
   };
 
-  // Custom Tooltip
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -572,162 +251,7 @@ const ShareGraph: React.FC = () => {
       </ChartComponent>
     );
   };
-  const shareData: { name: string; data: string }[] = [
-    {
-      name: "Currency",
-      data: "AED",
-    },
-    {
-      name: "Market",
-      data: "Dubai",
-    },
-    {
-      name: "ISIN code",
-      data: "AEE01110S227",
-    },
-    {
-      name: "Ticker code",
-      data: "SALIK",
-    },
-    {
-      name: "Industry",
-      data: "Transportation",
-    },
-    {
-      name: "Market Capitalization",
-      data: "41,250,000,000",
-    },
-    {
-      name: "Number of Shares",
-      data: "7,500,000,000",
-    },
-  ];
-  const tradeData: { volume: string; last: string; time: string }[] = [
-    {
-      volume: "5,000",
-      last: "5.50",
-      time: "14:57:23",
-    },
-    {
-      volume: "159",
-      last: "5.50",
-      time: "14:55:55",
-    },
-    {
-      volume: "49,871",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "3,231",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "6,645",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "4,115",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "12,813",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "5,311",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "14,558",
-      last: "5.50",
-      time: "14:55:23",
-    },
-    {
-      volume: "129",
-      last: "5.50",
-      time: "14:55:23",
-    },
-  ];
-  interface PerformanceData {
-    instrument: string;
-    change_1m?: number;
-    change_3m?: number;
-    change_52w?: number;
-    change_5yrs?: number;
-    high_52w?: string;
-    low_52w?: string;
-    change_2025?: number | null;
-    change_2024?: number | null;
-    change_2023?: number | null;
-    change_2022?: number | null;
-    change_2021?: number | null;
-  }
-  const performanceData: PerformanceData[] = [
-    {
-      instrument: "Salik",
-      change_1m: -2.61,
-      change_3m: 14.75,
-      change_52w: 69.7,
-      change_5yrs: 152.25,
-      high_52w: "5.99",
-      low_52w: "3.26",
-    },
-    {
-      instrument: "DFM Industrials",
-      change_1m: -3.43,
-      change_3m: 3.85,
-      change_52w: 31.25,
-      change_5yrs: 58.14,
-      high_52w: "3,941.20",
-      low_52w: "2,702.42",
-    },
-    {
-      instrument: "DFM General Index",
-      change_1m: -2.17,
-      change_3m: 4.34,
-      change_52w: 34.71,
-      change_5yrs: 158.49,
-      high_52w: "5,630.61",
-      low_52w: "3,974.60",
-    },
-  ];
-  const [selectedPeriod, setSelectedPeriod] = useState<string>("normal");
-  const performaceSelectOptions: { value: string; label: string }[] = [
-    { value: "normal", label: "Share price development" },
-    { value: "byYears", label: "Share price development by years" },
-  ];
-  const performanceDataByYrs: PerformanceData[] = [
-    {
-      instrument: "Salik",
-      change_2025: 3.7,
-      change_2024: 73.63,
-      change_2023: 25.4,
-      change_2022: null,
-      change_2021: null,
-    },
-    {
-      instrument: "DFM Industrials",
-      change_2025: 6.43,
-      change_2024: 14.86,
-      change_2023: 26.7,
-      change_2022: null,
-      change_2021: null,
-    },
-    {
-      instrument: "DFM General Index",
-      change_2025: 4.14,
-      change_2024: 27.06,
-      change_2023: 21.69,
-      change_2022: 4.38,
-      change_2021: 28.24,
-    },
-  ];
+
   const getTextColor = (change: number | null | undefined) => {
     if (change && change > 0) {
       return "green";
@@ -738,7 +262,17 @@ const ShareGraph: React.FC = () => {
     }
   };
   return (
-    <Box mx="auto" p={6}>
+    <Box mx="auto" p={6}  bg="white"
+  
+    borderRadius="xl"
+    boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+    border="1px solid"
+    borderColor="gray.100"
+    transition="all 0.3s ease"
+    _hover={{
+      boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+      transform: "translateY(-2px)"
+    }}>
 
       <Text fontSize="sm" color="gray.600" mb={4}>
         Date & Time: 18 June 2025 13:58 (GMT+04:00)
@@ -864,7 +398,6 @@ const ShareGraph: React.FC = () => {
             }}>Performance</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="graph">
-          {/* Time Range Controls */}
           <Box bg="white"
             p={4}
             mb={4}
@@ -1129,11 +662,7 @@ const ShareGraph: React.FC = () => {
               ))}
             </Table.Body>
           </Table.Root>
-          <Flex justify="flex-end" marginTop={22}>
-            <a href="https://tools.eurolandir.com/tools/sharegraph/type=1&isin=AEE01110S227&marketid=22&currency=&cet=0&culturecode=en-gb&solutionid=2552&languageid=32&systemCurrency=LocalCurrency">
-              All trades during today
-            </a>
-          </Flex>
+
         </Tabs.Content>
         <Tabs.Content value="performance">
           <Flex justify="end" align="center" mb={4}>

@@ -309,3 +309,108 @@ export interface DividendOverviewData {
 export interface DividendDashboardProps {
     data?: DividendOverviewData;
 }
+
+
+export interface PerformanceData {
+    instrument: string;
+    change_1m?: number;
+    change_3m?: number;
+    change_52w?: number;
+    change_5yrs?: number;
+    high_52w?: string;
+    low_52w?: string;
+    change_2025?: number | null;
+    change_2024?: number | null;
+    change_2023?: number | null;
+    change_2022?: number | null;
+    change_2021?: number | null;
+}
+
+
+export interface StockDataPoint {
+    date: string;
+    timestamp: Date;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+    volume: number;
+    ma10?: number | null;
+    ma20?: number | null;
+    ma50?: number | null;
+}
+
+export interface StockInfo {
+    symbol: string;
+    name: string;
+    last: number;
+    high: number;
+    low: number;
+    change: number;
+    changePercent: number;
+    bid: number;
+    ask: number;
+    volume: number;
+}
+
+export interface ChartControls {
+    timeRange:
+    | "1day"
+    | "5days"
+    | "3months"
+    | "6months"
+    | "1year"
+    | "3years"
+    | "custom";
+    customStartDate?: string;
+    customEndDate?: string;
+    chartType: "line" | "bar" | "candlestick" | "mountain";
+    showVolume: boolean;
+    showMovingAverages: {
+        ma10: boolean;
+        ma20: boolean;
+        ma50: boolean;
+    };
+    indicators: {
+        earnings: boolean;
+        pressReleases: boolean;
+        periodHighLow: boolean;
+        percentView: boolean;
+    };
+    lowerGraphs: {
+        hideShowVolume: boolean;
+        dailyChange: boolean;
+    };
+    indices: {
+        dfmIndustrials: boolean;
+        dfmGeneralIndex: boolean;
+    };
+}
+
+export interface StockStat {
+    label: string;
+    value: string;
+}
+
+export interface FormData {
+    alerts: {
+      dailyClosing: boolean;
+      priceTarget: boolean;
+      priceTargetValue: string;
+      stopLoss: boolean;
+      stopLossValue: string;
+      variation: boolean;
+      variationValue: string;
+      volumeTarget: boolean;
+      volumeTargetValue: string;
+    };
+    subscription: {
+      email: string;
+      firstName: string;
+      lastName: string;
+      profession: string;
+      company: string;
+      country: string;
+    };
+    modifyEmail: string;
+  }
