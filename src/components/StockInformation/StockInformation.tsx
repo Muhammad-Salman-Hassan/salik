@@ -9,7 +9,8 @@ import InvestmentCalculator from "./InvestmentCalculator";
 
 const StockChart: React.FC = () => {
     return (
-        <Box w="full" p={4}>
+        <Box w="full" h="full" p={{ base: 3, md: 6 }} >
+
             <Text fontSize="xl" fontWeight="bold" mb={4}>
                 Stock information
             </Text>
@@ -99,29 +100,23 @@ const StockChart: React.FC = () => {
                             boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                         }}>Share Alert</Tabs.Trigger>
                 </Tabs.List>
-                <Tabs.Content value="graph">
-                    <ShareGraph />
-                </Tabs.Content>
-                <Tabs.Content value="Series">
-                    <ShareSeries />
-                </Tabs.Content>
-                <Tabs.Content value="Lookup">
-                    <SharePriceLookup />
-                </Tabs.Content>
-                <Tabs.Content value="Calculator">
-                    <InvestmentCalculator />
-                </Tabs.Content>
-                <Tabs.Content value="Alert">
-                    <SharePriceAlertForm />
-                </Tabs.Content>
-                <Container maxW="7xl" >
-                    <Flex justify="flex-end">
-                        <Box height="10" width="230px" marginTop={22}>
-                            Supplied by ©EUROLAND IR Data delayed at least 15 minutes Terms of
-                            Service | Cookie Policy
-                        </Box>
-                    </Flex>
-                </Container>
+                {/* <Box flex="1" overflowY="auto" px={{ base: 2, md: 4 }} py={4}> */}
+                    <Tabs.Content value="graph">
+                        <ShareGraph />
+                    </Tabs.Content>
+                    <Tabs.Content value="Series">
+                        <ShareSeries />
+                    </Tabs.Content>
+                    <Tabs.Content value="Lookup">
+                        <SharePriceLookup />
+                    </Tabs.Content>
+                    <Tabs.Content value="Calculator">
+                        <InvestmentCalculator />
+                    </Tabs.Content>
+                    <Tabs.Content value="Alert">
+                        <SharePriceAlertForm />
+                    </Tabs.Content>
+                {/* </Box> */}
                 {/* content */}
             </Tabs.Root>
         </Box>
