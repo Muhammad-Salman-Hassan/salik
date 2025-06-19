@@ -83,14 +83,60 @@ const InvestorAnalysts: React.FC = () => {
             flexDirection={{ base: 'column', md: 'row' }}
             overflowX={{ base: 'visible' }}
             flexWrap="nowrap"
+            background="teal"
           >
-            <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }}>
+            <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }} 
+                            color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
               Analyst List with Rating
             </Tabs.Trigger>
-            <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }}>
+            <Tabs.Trigger value="consensus"w={{ base: '100%', md: 'auto' }} 
+                            color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
               Consensus Estimates
             </Tabs.Trigger>
-            <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }}>
+            <Tabs.Trigger value="details"w={{ base: '100%', md: 'auto' }} 
+                            color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
               Recommendation OverView
             </Tabs.Trigger>
           </Tabs.List>

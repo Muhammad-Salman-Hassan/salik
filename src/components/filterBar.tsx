@@ -27,7 +27,16 @@ interface Props {
 
 export const FilterBar: React.FC<Props> = ({ filter, onChange, onApply }) => {
     return (
-        <Box bg="#ECECEC" p={4} w="full" mt={5}>
+        <Box bg="#FFFF"  w="full" mt={5} p={6}
+        borderRadius="xl"
+        boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+        border="1px solid"
+        borderColor="gray.100"
+        transition="all 0.3s ease"
+        _hover={{
+            boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+            transform: "translateY(-2px)"
+        }}>
             <Text fontWeight="bold">Recalculate data above,</Text>
             <Text mb={2}>show ratings not older than:</Text>
 
