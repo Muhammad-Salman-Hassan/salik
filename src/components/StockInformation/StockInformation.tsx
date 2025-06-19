@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Text } from "@chakra-ui/react";
 import { Tabs } from "@chakra-ui/react";
 import ShareGraph from "./ShareGraph";
 import ShareSeries from "./ShareSeries";
 import SharePriceAlertForm from "./ShareAlert";
+import SharePriceLookup from "./SharePriceLookup";
+import InvestmentCalculator from "./InvestmentCalculator";
 
 const StockChart: React.FC = () => {
   return (
@@ -26,20 +28,22 @@ const StockChart: React.FC = () => {
           <ShareSeries />
         </Tabs.Content>
         <Tabs.Content value="Lookup">
-          Lookup
+          <SharePriceLookup />
         </Tabs.Content>
         <Tabs.Content value="Calculator">
-          Lookup
+          <InvestmentCalculator />
         </Tabs.Content>
         <Tabs.Content value="Alert">
           <SharePriceAlertForm />
         </Tabs.Content>
-        <Flex justify="flex-end">
-          <Box height="10" width="230px" marginTop={22}>
-            Supplied by ©EUROLAND IR Data delayed at least 15 minutes Terms of
-            Service | Cookie Policy
-          </Box>
-        </Flex>
+        <Container maxW="7xl" >
+          <Flex justify="flex-end">
+            <Box height="10" width="230px" marginTop={22}>
+              Supplied by ©EUROLAND IR Data delayed at least 15 minutes Terms of
+              Service | Cookie Policy
+            </Box>
+          </Flex>
+        </Container>
         {/* content */}
       </Tabs.Root>
     </Box>
