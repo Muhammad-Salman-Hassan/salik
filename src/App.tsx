@@ -18,8 +18,7 @@ function App() {
           <Route path="/investors/analysts" element={<InvestorAnalysts />} />
           <Route path="/investors/stock" element={<StockInformations />} />
           <Route path="/investors/dividends" element={<Dividends />} />
-          {/* <Route path="/stock-information" element={<StockInformation />} />
-          <Route path="/investors/dividends" element={<InvestorDividends />} /> */}
+          
         </Routes>
       </Box>
       {/* <Footer /> */}

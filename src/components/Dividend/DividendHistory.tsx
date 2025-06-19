@@ -172,7 +172,7 @@ const DividendPerShare: React.FC<DividendPerShareProps> = ({
                         <Bar
                             dataKey="value"
                             radius={[2, 2, 0, 0]}
-                            
+
                         />
                     </BarChart>
                 </ResponsiveContainer>
