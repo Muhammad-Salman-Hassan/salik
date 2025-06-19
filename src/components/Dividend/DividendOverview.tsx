@@ -126,12 +126,7 @@ const DividendOverview: React.FC<DividendDashboardProps> = ({ data }) => {
                     fill="url(#colorUv)"
                     strokeWidth={2}
                 />
-                <defs>
-                    <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#6B7280" stopOpacity={0.3} />
-                        <stop offset="100%" stopColor="#6B7280" stopOpacity={0.1} />
-                    </linearGradient>
-                </defs>
+                
             </AreaChart>
         </ResponsiveContainer>
     );
