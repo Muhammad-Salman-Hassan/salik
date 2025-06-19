@@ -20,6 +20,7 @@ import {
     ResponsiveContainer,
     Tooltip,
     ReferenceLine,
+    Brush,
 } from 'recharts';
 import {
     MdBarChart,
@@ -200,6 +201,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         fill="#008080"
                         radius={[2, 2, 0, 0]}
                     />
+                    <Brush dataKey="period" height={30} stroke="#008080" />
                 </BarChart>
             </ResponsiveContainer>
         );
