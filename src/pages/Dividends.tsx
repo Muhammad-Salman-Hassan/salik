@@ -2,6 +2,8 @@ import { Box, Flex, Tabs, Text } from "@chakra-ui/react"
 import ShareDividendTable from "../components/Dividend/ShareDividend"
 import DividendCalculator from "../components/Dividend/DividendCalculator"
 import DividendPerShare from "../components/Dividend/DividendHistory"
+import TotalReturn from "../components/Dividend/TotalReturn"
+import DividendOverview from "../components/Dividend/DividendOverview"
 
 const Dividends = () => {
     return (
@@ -38,31 +40,99 @@ const Dividends = () => {
                 h="full"
                 borderRadius="lg"
                 overflow="hidden"
+                mt={4}
             >
-                <Tabs.Root defaultValue="analysts" fitted variant="enclosed" colorPalette="teal">
+                <Tabs.Root defaultValue="analysts" fitted variant="enclosed" >
                     <Tabs.List
                         flexDirection={{ base: 'column', md: 'row' }}
                         overflowX={{ base: 'visible' }}
                         flexWrap="nowrap"
+                        background={"teal"}
+
                     >
-                        <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }}>
-                            Analyst List with Rating
+                        <Tabs.Trigger value="overview"
+                            w={{ base: '100%', md: 'auto' }}
+                            color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}
+                        >
+                            OverView
                         </Tabs.Trigger>
-                        <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }}>
-                           Dividend History
+                        <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }} color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
+                            Total Returns
                         </Tabs.Trigger>
-                        <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }}>
+                        <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }} color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
+                            Dividend History
+                        </Tabs.Trigger>
+                        <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }} color="white"
+                            bg="transparent"
+                            borderRadius="md"
+                            px={4}
+                            py={3}
+                            fontSize="sm"
+                            fontWeight="medium"
+                            transition="all 0.2s"
+
+                            _selected={{
+                                bg: "white",
+                                color: "teal.600",
+                                fontWeight: "semibold",
+                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                            }}>
                             Dividend Calculator
                         </Tabs.Trigger>
                     </Tabs.List>
 
-                    <Box flex="1" overflowY="auto" px={{ base: 2, md: 4 }} py={4}>
+                    <Box flex="1" overflowY="auto"  py={4}>
+                        <Tabs.Content value="overview">
+                            <DividendOverview />
+                        </Tabs.Content>
                         <Tabs.Content value="analysts">
-                            TEST
+                            <TotalReturn />
                         </Tabs.Content>
 
                         <Tabs.Content value="consensus">
-                           <DividendPerShare/>
+                            <DividendPerShare />
                         </Tabs.Content>
 
                         <Tabs.Content value="details">

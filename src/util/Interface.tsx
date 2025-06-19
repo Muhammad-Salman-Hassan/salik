@@ -254,3 +254,58 @@ export interface DividendPerShareProps {
     tableData?: DividendTableData[];
     onViewChange?: (view: string) => void;
 }
+
+
+export interface ReturnData {
+    date: string;
+    periodicReturn: number;
+    cumulativeReturn: number;
+    annualReturn: number;
+}
+
+export interface ReturnTableData {
+    period: string;
+    periodicReturn: number;
+    cumulativeReturn: number;
+    annualReturn: number;
+}
+
+export type ChartType = 'periodic' | 'cumulative' | 'annual';
+export type TimeRange = '1year' | '3year' | 'all';
+
+
+
+export interface DividendOverviewData {
+    latestDividend: {
+        amount: number;
+        currency: string;
+        exDividendDate: string;
+        paymentDate: string;
+        type: string;
+    };
+    dividendYield: {
+        currentYield: number;
+        monthlyDividend: number;
+        currency: string;
+    };
+    totalReturns: {
+        twelveMonths: number;
+        threeYears: number;
+    };
+    annualDividend: Array<{
+        year: string;
+        amount: number;
+    }>;
+    annualDividendYield: Array<{
+        year: string;
+        yield: number;
+    }>;
+    chartData: {
+        twelveMonths: Array<{ month: string; value: number }>;
+        threeYears: Array<{ month: string; value: number }>;
+    };
+}
+
+export interface DividendDashboardProps {
+    data?: DividendOverviewData;
+}
