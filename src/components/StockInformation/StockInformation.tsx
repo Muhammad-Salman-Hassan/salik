@@ -26,10 +26,10 @@ const StockChart: React.FC = () => {
           <ShareSeries />
         </Tabs.Content>
         <Tabs.Content value="Lookup">
-          Manage your tasks for freelancers
+          Lookup
         </Tabs.Content>
         <Tabs.Content value="Calculator">
-          Manage your tasks for freelancers
+          Lookup
         </Tabs.Content>
         <Tabs.Content value="Alert">
           <SharePriceAlertForm />
