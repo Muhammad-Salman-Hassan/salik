@@ -59,13 +59,13 @@ interface StockInfo {
 
 interface ChartControls {
   timeRange:
-    | "1day"
-    | "5days"
-    | "3months"
-    | "6months"
-    | "1year"
-    | "3years"
-    | "custom";
+  | "1day"
+  | "5days"
+  | "3months"
+  | "6months"
+  | "1year"
+  | "3years"
+  | "custom";
   customStartDate?: string;
   customEndDate?: string;
   chartType: "line" | "bar" | "candlestick" | "mountain";
@@ -486,8 +486,8 @@ const ShareGraph: React.FC = () => {
       controls.chartType === "mountain"
         ? ComposedChart
         : controls.chartType === "bar"
-        ? BarChart
-        : LineChart;
+          ? BarChart
+          : LineChart;
 
     return (
       <ChartComponent data={dataWithMA}>
@@ -498,15 +498,22 @@ const ShareGraph: React.FC = () => {
           tick={{ fontSize: 11 }}
         />
         <Tooltip content={<CustomTooltip />} />
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#0c5d56" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#008080" stopOpacity={0} />
+          </linearGradient>
+
+        </defs>
 
         {/* Render chart elements based on type */}
         {controls.chartType === "mountain" && (
           <Area
             type="monotone"
             dataKey="close"
-            stroke="#4A5568"
-            fill="#E2E8F0"
-            fillOpacity={0.6}
+            stroke="#008080"
+            fillOpacity={0.2}
+            fill="url(#colorUv)"
           />
         )}
 
@@ -514,15 +521,17 @@ const ShareGraph: React.FC = () => {
 
         {(controls.chartType === "line" ||
           controls.chartType === "candlestick") && (
-          <Line
-            type="monotone"
-            dataKey="close"
-            stroke="#4A5568"
-            strokeWidth={2}
-            dot={false}
-            activeDot={{ r: 4 }}
-          />
-        )}
+            <Line
+              type="monotone"
+              dataKey="close"
+              stroke="#0c5d56"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ r: 4 }}
+              fill="url(#colorUv)"
+
+            />
+          )}
 
         {/* Moving averages for all chart types */}
         {controls.showMovingAverages.ma10 && (
@@ -532,6 +541,7 @@ const ShareGraph: React.FC = () => {
             stroke="#FF6B6B"
             strokeWidth={1}
             dot={false}
+            fill="url(#colorUv)"
           />
         )}
         {controls.showMovingAverages.ma20 && (
@@ -541,6 +551,7 @@ const ShareGraph: React.FC = () => {
             stroke="#4ECDC4"
             strokeWidth={1}
             dot={false}
+            fill="url(#colorUv)"
           />
         )}
         {controls.showMovingAverages.ma50 && (
@@ -550,6 +561,7 @@ const ShareGraph: React.FC = () => {
             stroke="#45B7D1"
             strokeWidth={1}
             dot={false}
+            fill="url(#colorUv)"
           />
         )}
       </ChartComponent>
@@ -721,16 +733,16 @@ const ShareGraph: React.FC = () => {
     }
   };
   return (
-    <Box maxW="1200px" mx="auto" p={6}>
-      {/* Date & Time */}
+    <Box mx="auto" p={6}>
+
       <Text fontSize="sm" color="gray.600" mb={4}>
         Date & Time: 18 June 2025 13:58 (GMT+04:00)
       </Text>
 
-      {/* Stock Info Table */}
+
       <Box mb={6} overflowX="auto">
-        <Table.Root variant="outline" size="sm">
-          <Table.Header bg="#53565a">
+        <Table.Root variant="outline" size="sm" >
+          <Table.Header bg="teal">
             <Table.Row>
               <Table.ColumnHeader color="white">Share (AED)</Table.ColumnHeader>
               <Table.ColumnHeader color="white" textAlign="center">
@@ -780,66 +792,138 @@ const ShareGraph: React.FC = () => {
           </Table.Body>
         </Table.Root>
       </Box>
-      <Tabs.Root variant="enclosed" fitted defaultValue={"graph"}>
-        <Tabs.List>
-          <Tabs.Trigger value="graph">Share Graph</Tabs.Trigger>
-          <Tabs.Trigger value="data">Share Data</Tabs.Trigger>
-          <Tabs.Trigger value="trades">Trades</Tabs.Trigger>
-          <Tabs.Trigger value="performance">Performance</Tabs.Trigger>
+      <Tabs.Root variant="enclosed" fitted defaultValue={"graph"} colorPalette="teal" >
+        <Tabs.List flexDirection={{ base: 'column', md: 'row' }}
+          overflowX={{ base: 'visible' }}
+          flexWrap="nowrap"
+          background="teal.700">
+          <Tabs.Trigger value="graph" color="white"
+            bg="transparent"
+            borderRadius="md"
+            px={4}
+            py={3}
+            fontSize="sm"
+            fontWeight="medium"
+            transition="all 0.2s"
+
+            _selected={{
+              bg: "white",
+              color: "teal.600",
+              fontWeight: "semibold",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>Share Graph</Tabs.Trigger>
+          <Tabs.Trigger value="data" color="white"
+            bg="transparent"
+            borderRadius="md"
+            px={4}
+            py={3}
+            fontSize="sm"
+            fontWeight="medium"
+            transition="all 0.2s"
+
+            _selected={{
+              bg: "white",
+              color: "teal.600",
+              fontWeight: "semibold",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>Share Data</Tabs.Trigger>
+          <Tabs.Trigger value="trades" color="white"
+            bg="transparent"
+            borderRadius="md"
+            px={4}
+            py={3}
+            fontSize="sm"
+            fontWeight="medium"
+            transition="all 0.2s"
+
+            _selected={{
+              bg: "white",
+              color: "teal.600",
+              fontWeight: "semibold",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>Trades</Tabs.Trigger>
+          <Tabs.Trigger value="performance" color="white"
+            bg="transparent"
+            borderRadius="md"
+            px={4}
+            py={3}
+            fontSize="sm"
+            fontWeight="medium"
+            transition="all 0.2s"
+
+            _selected={{
+              bg: "white",
+              color: "teal.600",
+              fontWeight: "semibold",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            }}>Performance</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="graph">
           {/* Time Range Controls */}
-          <RadioGroup.Root
-            value={controls.timeRange}
-            onValueChange={(e) => updateControl("timeRange", e.value)}
-          >
-            <Flex align="center" gap={4} mb={4} wrap="wrap">
-              {[
-                { value: "1day", label: "1 day" },
-                { value: "5days", label: "5 days" },
-                { value: "3months", label: "3 months" },
-                { value: "6months", label: "6 months" },
-                { value: "1year", label: "1 year" },
-                { value: "3years", label: "3 years" },
-                { value: "custom", label: "Custom range" },
-              ].map((option) => (
-                <RadioGroup.Item key={option.value} value={option.value}>
-                  <RadioGroup.ItemControl />
-                  <RadioGroup.ItemHiddenInput />
-                  <RadioGroup.ItemText fontSize="sm">
-                    {option.label}
-                  </RadioGroup.ItemText>
-                </RadioGroup.Item>
-              ))}
-            </Flex>
-          </RadioGroup.Root>
+          <Box bg="white"
+            p={4}
+            mb={4}
+            borderRadius="xl"
+            boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+            border="1px solid"
+            borderColor="gray.100"
+            transition="all 0.3s ease"
+            _hover={{
+              boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+              transform: "translateY(-2px)"
+            }}>
+            <RadioGroup.Root
+              value={controls.timeRange}
+              onValueChange={(e) => updateControl("timeRange", e.value)}
+            >
+              <Flex align="center" gap={4} mb={4} wrap="wrap">
+                {[
+                  { value: "1day", label: "1 day" },
+                  { value: "5days", label: "5 days" },
+                  { value: "3months", label: "3 months" },
+                  { value: "6months", label: "6 months" },
+                  { value: "1year", label: "1 year" },
+                  { value: "3years", label: "3 years" },
+                  { value: "custom", label: "Custom range" },
+                ].map((option) => (
+                  <RadioGroup.Item key={option.value} value={option.value}>
+                    {/* <RadioGroup.ItemControl /> */}
+                    <RadioGroup.ItemIndicator />
+                    <RadioGroup.ItemHiddenInput />
+                    <RadioGroup.ItemText fontSize="sm">
+                      {option.label}
+                    </RadioGroup.ItemText>
+                  </RadioGroup.Item>
+                ))}
+              </Flex>
+            </RadioGroup.Root>
 
-          {/* Stock Price Info */}
-          <Box mb={4} p={2} bg="gray.50" borderRadius="md">
-            <Text fontSize="sm">
-              22/05/2025{" "}
-              <Text as="span" fontWeight="bold">
-                ■ Salik
-              </Text>{" "}
-              Open:
-              <Text as="span" fontWeight="bold">
-                5.50
-              </Text>{" "}
-              | High:
-              <Text as="span" fontWeight="bold">
-                5.65
-              </Text>{" "}
-              | Low:
-              <Text as="span" fontWeight="bold">
-                5.47
-              </Text>{" "}
-              | Close:
-              <Text as="span" fontWeight="bold">
-                5.60
+            {/* Stock Price Info */}
+            <Box p={2} bg="gray.50" borderRadius="md">
+              <Text fontSize="sm">
+                22/05/2025{" "}
+                <Text as="span" fontWeight="bold">
+                  ■ Salik
+                </Text>{" "}
+                Open:
+                <Text as="span" fontWeight="bold" color={"green.700"}>
+                  5.50
+                </Text>{" "}
+                | High:
+                <Text as="span" fontWeight="bold" color={"red.600"}>
+                  5.65
+                </Text>{" "}
+                | Low:
+                <Text as="span" fontWeight="bold">
+                  5.47
+                </Text>{" "}
+                | Close:
+                <Text as="span" fontWeight="bold">
+                  5.60
+                </Text>
               </Text>
-            </Text>
+            </Box>
           </Box>
-
           {/* Main Chart */}
           <Box
             h="400px"
