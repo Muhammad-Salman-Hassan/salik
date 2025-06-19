@@ -110,11 +110,20 @@ const DividendOverview: React.FC<DividendDashboardProps> = ({ data }) => {
     const MiniAreaChart = ({ data, height = 80 }: { data: any[], height?: number }) => (
         <ResponsiveContainer width="100%" height={height}>
             <AreaChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                <defs>
+                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#0c5d56" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#008080" stopOpacity={0} />
+                    </linearGradient>
+                  
+                </defs>
                 <Area
                     type="monotone"
                     dataKey="value"
-                    stroke="#6B7280"
-                    fill="url(#gradient)"
+                    stroke="#008080"
+                    // fill="#0c5d56"
+                    fillOpacity={0.2}
+                    fill="url(#colorUv)"
                     strokeWidth={2}
                 />
                 <defs>

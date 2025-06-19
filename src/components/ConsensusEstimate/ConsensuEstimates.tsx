@@ -304,7 +304,7 @@ const ConsensusEstimates: React.FC = () => {
 
         return (
             <Table.Root variant="outline">
-                <Table.Header bg="#53565a">
+                <Table.Header bg="#008080">
                     <Table.Row>
                         <Table.ColumnHeader color="white">Metric</Table.ColumnHeader>
                         <Table.ColumnHeader color="white">Average</Table.ColumnHeader>
