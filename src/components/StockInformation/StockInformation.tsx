@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Text } from "@chakra-ui/react";
 import { Tabs } from "@chakra-ui/react";
 import ShareGraph from "./ShareGraph";
 import ShareSeries from "./ShareSeries";
 import SharePriceAlertForm from "./ShareAlert";
+import SharePriceLookup from "./SharePriceLookup";
+import InvestmentCalculator from "./InvestmentCalculator";
 
 const StockChart: React.FC = () => {
     return (
