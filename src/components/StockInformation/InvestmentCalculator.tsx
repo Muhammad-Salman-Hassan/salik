@@ -11,7 +11,9 @@ import {
   Button,
   NativeSelect,
   Table,
-  Heading,
+  Container,
+  Card,
+  HStack,
 } from "@chakra-ui/react";
 import {
   Area,
@@ -29,9 +31,8 @@ import {
 import { ChartControls, StockDataPoint, StockStat } from "../../util/Interface";
 import { investmentStockDummyData, stocckStatsEndDummyData, stockStatsDummyData } from "../../util/DummyData";
 
-
 const InvestmentCalculator: React.FC = () => {
-  const stockData: StockDataPoint[] = investmentStockDummyData
+  const stockData: StockDataPoint[] = investmentStockDummyData;
 
   const [controls, setControls] = useState<ChartControls>({
     timeRange: "6months",
@@ -57,6 +58,13 @@ const InvestmentCalculator: React.FC = () => {
       dfmGeneralIndex: false,
     },
   });
+
+  const [hideGraph, setHideGraph] = useState(false);
+  const [showShareGraph, setShowShareGraph] = useState(false);
+
+  const stockStats: StockStat[] = stockStatsDummyData;
+  const stockStatsEnd: StockStat[] = stocckStatsEndDummyData;
+
   const calculateMovingAverage = (data: StockDataPoint[], period: number) => {
     return data.map((point, index) => {
       if (index < period - 1) return { ...point, ma: null };
@@ -68,6 +76,7 @@ const InvestmentCalculator: React.FC = () => {
       return { ...point, ma: sum / period };
     });
   };
+
   const dataWithMA = useMemo(() => {
     let result = stockData;
 
@@ -89,6 +98,34 @@ const InvestmentCalculator: React.FC = () => {
     return result;
   }, [stockData, controls.showMovingAverages]);
 
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <Box
+          bg="white"
+          p={3}
+          borderRadius="md"
+          boxShadow="xl"
+          border="1px solid"
+          borderColor="gray.200"
+          fontSize="sm"
+        >
+          <Text fontWeight="bold" mb={2} color="gray.700">
+            {label}
+          </Text>
+          <VStack align="start" gap={1}>
+            <Text>Open: <Text as="span" fontWeight="semibold">{data.open?.toFixed(2)}</Text></Text>
+            <Text>High: <Text as="span" fontWeight="semibold" color="green.600">{data.high?.toFixed(2)}</Text></Text>
+            <Text>Low: <Text as="span" fontWeight="semibold" color="red.600">{data.low?.toFixed(2)}</Text></Text>
+            <Text>Close: <Text as="span" fontWeight="semibold">{data.close?.toFixed(2)}</Text></Text>
+            <Text>Volume: <Text as="span" fontWeight="semibold">{data.volume?.toLocaleString()}</Text></Text>
+          </VStack>
+        </Box>
+      );
+    }
+    return null;
+  };
 
   const renderChart = () => {
     const ChartComponent =
@@ -99,394 +136,340 @@ const InvestmentCalculator: React.FC = () => {
           : LineChart;
 
     return (
-      <ChartComponent data={dataWithMA}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-        <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-        <YAxis
-          domain={["dataMin - 0.1", "dataMax + 0.1"]}
-          tick={{ fontSize: 11 }}
-        />
-        <Tooltip content={<CustomTooltip />} />
-
-        {/* Render chart elements based on type */}
-        {controls.chartType === "mountain" && (
-          <Area
-            type="monotone"
-            dataKey="close"
-            stroke="#4A5568"
-            fill="#E2E8F0"
-            fillOpacity={0.6}
+      <ResponsiveContainer width="100%" height={400}>
+        <ChartComponent data={dataWithMA} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+          <XAxis 
+            dataKey="date" 
+            tick={{ fontSize: 11 }}
+            stroke="#666"
           />
-        )}
-
-        {controls.chartType === "bar" && <Bar dataKey="close" fill="#4A5568" />}
-
-        {(controls.chartType === "line" ||
-          controls.chartType === "candlestick") && (
-            <Line
-              type="linear"
+          <YAxis
+            domain={["dataMin - 0.1", "dataMax + 0.1"]}
+            tick={{ fontSize: 11 }}
+            stroke="#666"
+          />
+          <Tooltip content={<CustomTooltip />} />
+          {controls.chartType === "mountain" && (
+            <Area
+              type="monotone"
               dataKey="close"
-              stroke="#4A5568"
-              strokeWidth={2}
-              dot={false}
-              activeDot={{ r: 4 }}
+              stroke="#3182ce"
+              fill="#bee3f8"
+              fillOpacity={0.6}
             />
           )}
 
-        {/* Moving averages for all chart types */}
-        {controls.showMovingAverages.ma10 && (
-          <Line
-            type="monotone"
-            dataKey="ma10"
-            stroke="#FF6B6B"
-            strokeWidth={1}
-            dot={false}
-          />
-        )}
-        {controls.showMovingAverages.ma20 && (
-          <Line
-            type="monotone"
-            dataKey="ma20"
-            stroke="#4ECDC4"
-            strokeWidth={1}
-            dot={false}
-          />
-        )}
-        {controls.showMovingAverages.ma50 && (
-          <Line
-            type="monotone"
-            dataKey="ma50"
-            stroke="#45B7D1"
-            strokeWidth={1}
-            dot={false}
-          />
-        )}
-      </ChartComponent>
+          {controls.chartType === "bar" && (
+            <Bar dataKey="close" fill="#3182ce" radius={[2, 2, 0, 0]} />
+          )}
+
+          {(controls.chartType === "line" || controls.chartType === "candlestick") && (
+            <Line
+              type="linear"
+              dataKey="close"
+              stroke="#3182ce"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ r: 4, fill: "#3182ce" }}
+            />
+          )}
+
+          {controls.showMovingAverages.ma10 && (
+            <Line
+              type="monotone"
+              dataKey="ma10"
+              stroke="#FF6B6B"
+              strokeWidth={2}
+              dot={false}
+            />
+          )}
+          {controls.showMovingAverages.ma20 && (
+            <Line
+              type="monotone"
+              dataKey="ma20"
+              stroke="#4ECDC4"
+              strokeWidth={2}
+              dot={false}
+            />
+          )}
+          {controls.showMovingAverages.ma50 && (
+            <Line
+              type="monotone"
+              dataKey="ma50"
+              stroke="#45B7D1"
+              strokeWidth={2}
+              dot={false}
+            />
+          )}
+        </ChartComponent>
+      </ResponsiveContainer>
     );
   };
 
-
-
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <Box
-          bg="white"
-          p={3}
-          borderRadius="md"
-          boxShadow="lg"
-          border="1px solid"
-          borderColor="gray.200"
-        >
-          <Text fontWeight="bold" mb={1}>
-            {label}
-          </Text>
-          <Text fontSize="sm">Open: {data.open?.toFixed(2)}</Text>
-          <Text fontSize="sm">High: {data.high?.toFixed(2)}</Text>
-          <Text fontSize="sm">Low: {data.low?.toFixed(2)}</Text>
-          <Text fontSize="sm">Close: {data.close?.toFixed(2)}</Text>
-          <Text fontSize="sm">Volume: {data.volume?.toLocaleString()}</Text>
-        </Box>
-      );
-    }
-    return null;
-  };
-
   const updateControl = (key: keyof ChartControls, value: any) => {
-
     setControls((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
-  const [hideGraph, setHideGraph] = useState(false);
-  const [showShareGraph, setShowShareGraph] = useState(false);
 
-  const stockStats: StockStat[] = stockStatsDummyData
-  const stockStatsEnd: StockStat[] = stocckStatsEndDummyData
+  const ResultsSection = () => (
+    <Card.Root mt={6} p={6} bg="gray.50">
+      {/* Tables Section */}
+      <Flex 
+        direction={{ base: "column", lg: "row" }} 
+        gap={6} 
+        mb={6}
+      >
+        <Box flex={1}>
+          <Table.Root size="sm" variant="outline" bg="white" borderRadius="md" overflow="hidden">
+            <Table.Header bg="blue.500">
+              <Table.Row>
+                <Table.ColumnHeader color="white" fontWeight="bold" py={3}>
+                  Initial Investment - June 19, 2024
+                </Table.ColumnHeader>
+                <Table.ColumnHeader></Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {stockStats.map((item, index) => (
+                <Table.Row key={index} _hover={{ bg: "gray.50" }}>
+                  <Table.Cell py={3} fontWeight="medium">{item.label}</Table.Cell>
+                  <Table.Cell textAlign="end" fontWeight="semibold" color="blue.600">
+                    {item.value}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Root>
+        </Box>
+
+        <Box flex={1}>
+          <Table.Root size="sm" variant="outline" bg="white" borderRadius="md" overflow="hidden">
+            <Table.Header bg="green.500">
+              <Table.Row>
+                <Table.ColumnHeader color="white" fontWeight="bold" py={3}>
+                  End Value - June 19, 2025
+                </Table.ColumnHeader>
+                <Table.ColumnHeader></Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {stockStatsEnd.map((item, index) => (
+                <Table.Row key={index} _hover={{ bg: "gray.50" }}>
+                  <Table.Cell py={3} fontWeight="medium">{item.label}</Table.Cell>
+                  <Table.Cell textAlign="end" fontWeight="semibold" color="green.600">
+                    {item.value}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Root>
+        </Box>
+      </Flex>
+
+      {/* Chart Controls */}
+      <Box mb={4}>
+        <Text fontSize="sm" fontWeight="medium" mb={3} color="gray.700">
+          Chart Type:
+        </Text>
+        <RadioGroup.Root
+          value={controls.chartType}
+          onValueChange={(details) => updateControl("chartType", details.value)}
+        >
+          <HStack gap={6}>
+            {[
+              { value: "line", label: "Line Graph" },
+              { value: "bar", label: "Bar Chart" },
+              { value: "mountain", label: "Area Chart" },
+            ].map((option) => (
+              <RadioGroup.Item
+                key={option.value}
+                value={option.value}
+                cursor="pointer"
+              >
+                <RadioGroup.ItemIndicator />
+                <RadioGroup.ItemHiddenInput />
+                <RadioGroup.ItemText fontSize="sm" fontWeight="medium">
+                  {option.label}
+                </RadioGroup.ItemText>
+              </RadioGroup.Item>
+            ))}
+          </HStack>
+        </RadioGroup.Root>
+      </Box>
+
+      {/* Chart Container */}
+      <Card.Root bg="white" p={4}>
+        <Box height="400px" width="100%">
+          {renderChart()}
+        </Box>
+      </Card.Root>
+    </Card.Root>
+  );
 
   return (
-    <Box borderTop="1px"  bg="white"
-    p={6}
-    borderRadius="xl"
-    boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
-    border="1px solid"
-    borderColor="gray.100"
-    transition="all 0.3s ease"
-    _hover={{
-      boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
-      transform: "translateY(-2px)"
-    }}>
-      {/* <Container as={Stack} maxW="7xl" py={8}> */}
-      <Text fontSize="sm" color="gray.600" mb={4}>
-        Salik - Data starting from 29/09/2022
-      </Text>
-      <Tabs.Root defaultValue="amount" variant="plain">
-        <Tabs.List bg="bg.muted" rounded="l3" p="1">
-          <Tabs.Trigger value="amount">By Amount Invested</Tabs.Trigger>
-          <Tabs.Trigger value="share">By Share bought</Tabs.Trigger>
-          <Tabs.Indicator rounded="l2" />
-        </Tabs.List>
-        <Tabs.Content value="amount">
-          <Flex gap={4} align={"end"} mb={4}>
-            <Grid mt={4}>
-              <small>Date of investment</small>
-              <Input placeholder="Select Date" type="date" />
-            </Grid>
-            <Grid mt={4}>
-              <small>End date of investment</small>
-              <Input placeholder="Select Date" type="date" />
-            </Grid>
-            <Grid mt={4}>
-              <small>Choose currency</small>
-              <NativeSelect.Root w={170}>
-                <NativeSelect.Field>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                </NativeSelect.Field>
-                <NativeSelect.Indicator />
-              </NativeSelect.Root>
-            </Grid>
-            <Grid mt={4}>
-              <small>Amount invested</small>
-              <Input placeholder="Select Date" />
-            </Grid>
-            <Button
-              colorScheme="gray"
-              mt={4}
-              onClick={() => setHideGraph(true)}
+    <Card.Root 
+        bg="white"
+        p={{ base: 4, md: 6, lg: 8 }}
+        borderRadius="xl"
+        boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+        border="1px solid"
+        borderColor="gray.100"
+        transition="all 0.3s ease"
+        _hover={{
+          boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+          transform: "translateY(-2px)"
+        }}
+      >
+        <Text fontSize="sm" color="gray.600" mb={6}>
+          Salik - Data starting from 29/09/2022
+        </Text>
+
+        <Tabs.Root defaultValue="amount" variant="enclosed">
+          <Tabs.List bg="gray.100" rounded="lg" p={1} mb={6}>
+            <Tabs.Trigger 
+              value="amount" 
+              px={4} 
+              py={2} 
+              fontWeight="medium"
+              _selected={{ bg: "white", boxShadow: "sm" }}
             >
-              Calculate
-            </Button>
-          </Flex>
-          {hideGraph && (
-            <>
-              {" "}
-              <Box
-              
-                mt={4}
-                borderColor="gray.200"
-                borderRadius="md"
-                p={2}
-              >
-                <Flex gap={4}>
-                  <Table.Root size="sm" variant="outline">
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.ColumnHeader>
-                          Initial investment 19 June 2024
-                        </Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {stockStats.map((item, index) => (
-                        <Table.Row key={index}>
-                          <Table.Cell>{item.label}</Table.Cell>
-                          <Table.Cell textAlign="end">
-                            <Flex gap="2" align="center" justify={"end"}>
-                              {item.value}
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table.Root>
-                  <Table.Root size="sm" variant="outline">
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.ColumnHeader>
-                          End value 19 June 2025
-                        </Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {stockStatsEnd.map((item, index) => (
-                        <Table.Row key={index}>
-                          <Table.Cell>{item.label}</Table.Cell>
-                          <Table.Cell textAlign="end">
-                            <Flex gap="2" align="center" justify={"end"}>
-                              {item.value}
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table.Root>
-                </Flex>
-                <Box mt={4} mb={2}>
-                  <RadioGroup.Root
-                    value={controls.chartType}
-                    onValueChange={(details) =>
-                      updateControl("chartType", details.value)
-                    }
-                  >
-                    <VStack align="start" gap={1}>
-                      <Flex gap={4}>
-                        {[
-                          { value: "line", label: "Line Graph" },
-                          { value: "bar", label: "Bar" },
+              By Amount Invested
+            </Tabs.Trigger>
+            <Tabs.Trigger 
+              value="share" 
+              px={4} 
+              py={2} 
+              fontWeight="medium"
+              _selected={{ bg: "white", boxShadow: "sm" }}
+            >
+              By Share Bought
+            </Tabs.Trigger>
+            <Tabs.Indicator rounded="md" />
+          </Tabs.List>
 
-                          { value: "mountain", label: "Mountain" },
-                        ].map((option) => (
-                          <RadioGroup.Item
-                            key={option.value}
-                            value={option.value}
-                          >
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemText fontSize="sm">
-                              {option.label}
-                            </RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        ))}
-                      </Flex>
-                    </VStack>
-                  </RadioGroup.Root>
-                </Box>
-                <ResponsiveContainer width="100%" height="100%">
-                  {renderChart()}
-                </ResponsiveContainer>
-              </Box>
-            </>
-          )}
-        </Tabs.Content>
-        <Tabs.Content value="share">
-          <Flex gap={4} direction={"column"} w={"600px"}>
-            <Grid mt={4}>
-              <Flex gap={2} align={"start"} direction={"column"}>
-                <Text w={410}>Date of investment: </Text>
-                <Input placeholder="Select Date" type="date" />
-                <Text w={490}>End date of investment: </Text>
-                <Input placeholder="Select Date" type="date" />
+          <Tabs.Content value="amount">
+            <Card.Root bg="gray.50" p={6} mb={4}>
+              <Flex 
+                direction={{ base: "column", md: "row" }} 
+                gap={4} 
+                align={{ base: "stretch", md: "end" }}
+                wrap={{ base: "nowrap", lg: "wrap" }}
+              >
+                <VStack align="start" flex={1} minW="200px">
+                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                    Date of Investment
+                  </Text>
+                  <Input type="date" bg="white" />
+                </VStack>
+
+                <VStack align="start" flex={1} minW="200px">
+                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                    End Date of Investment
+                  </Text>
+                  <Input type="date" bg="white" />
+                </VStack>
+
+                <VStack align="start" flex={1} minW="180px">
+                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                    Choose Currency
+                  </Text>
+                  <NativeSelect.Root>
+                    <NativeSelect.Field bg="white">
+                      <option value="aed">AED - UAE Dirham</option>
+                      <option value="usd">USD - US Dollar</option>
+                      <option value="eur">EUR - Euro</option>
+                    </NativeSelect.Field>
+                    <NativeSelect.Indicator />
+                  </NativeSelect.Root>
+                </VStack>
+
+                <VStack align="start" flex={1} minW="200px">
+                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                    Amount Invested
+                  </Text>
+                  <Input placeholder="Enter amount" bg="white" />
+                </VStack>
+
+                <Button
+                  colorScheme="blue"
+                  size="lg"
+                  px={8}
+                  onClick={() => setHideGraph(true)}
+                  alignSelf={{ base: "stretch", md: "end" }}
+                >
+                  Calculate
+                </Button>
               </Flex>
-            </Grid>
-            <Flex gap={2} align="end">
-              <Grid>
-                <small>Number of shares invested</small>
-                <Input placeholder="Select Date" w={235} />
-              </Grid>
-              <Grid>
-                <small>Choose currency</small>
-                <NativeSelect.Root w={270}>
-                  <NativeSelect.Field>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                  </NativeSelect.Field>
-                  <NativeSelect.Indicator />
-                </NativeSelect.Root>
-              </Grid>
-              <Button
-                colorScheme="gray"
-                mt={4}
-                onClick={() => setShowShareGraph(true)}
-              >
-                Submit
-              </Button>
-            </Flex>
-          </Flex>
-          {hideGraph && (
-            <>
-              {" "}
-              <Box
-               
-                mt={4}
-                borderColor="gray.200"
-                borderRadius="md"
-                p={2}
-              >
-                <Flex gap={4}>
-                  <Table.Root size="sm" variant="outline">
-                    <Table.Header bg={'teal'}>
-                      <Table.Row>
-                        <Table.ColumnHeader color={"white"}>
-                          Initial investment 19 June 2024
-                        </Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {stockStats.map((item, index) => (
-                        <Table.Row key={index}>
-                          <Table.Cell>{item.label}</Table.Cell>
-                          <Table.Cell textAlign="end">
-                            <Flex gap="2" align="center" justify={"end"}>
-                              {item.value}
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table.Root>
-                  <Table.Root size="sm" variant="outline" >
-                    <Table.Header bg={'teal'}>
-                      <Table.Row>
-                        <Table.ColumnHeader color={"white"}>
-                          End value 19 June 2025
-                        </Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                        <Table.ColumnHeader></Table.ColumnHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {stockStatsEnd.map((item, index) => (
-                        <Table.Row key={index}>
-                          <Table.Cell>{item.label}</Table.Cell>
-                          <Table.Cell textAlign="end">
-                            <Flex gap="2" align="center" justify={"end"}>
-                              {item.value}
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table.Root>
-                </Flex>
-                <Box mt={4} mb={2}>
-                  <RadioGroup.Root
-                    value={controls.chartType}
-                    onValueChange={(details) =>
-                      updateControl("chartType", details.value)
-                    }
-                  >
-                    <VStack align="start" gap={1}>
-                      <Flex gap={4}>
-                        {[
-                          { value: "line", label: "Line Graph" },
-                          { value: "bar", label: "Bar" },
+            </Card.Root>
 
-                          { value: "mountain", label: "Mountain" },
-                        ].map((option) => (
-                          <RadioGroup.Item
-                            key={option.value}
-                            value={option.value}
-                          >
-                            <RadioGroup.ItemIndicator />
-                            <RadioGroup.ItemHiddenInput />
-                            <RadioGroup.ItemText fontSize="sm">
-                              {option.label}
-                            </RadioGroup.ItemText>
-                          </RadioGroup.Item>
-                        ))}
-                      </Flex>
-                    </VStack>
-                  </RadioGroup.Root>
-                </Box>
-                <ResponsiveContainer width="100%" height="100%">
-                  {renderChart()}
-                </ResponsiveContainer>
-              </Box>
-            </>
-          )}
-        </Tabs.Content>
-      </Tabs.Root>
-      {/* </Container> */}
-    </Box>
+            {hideGraph && <ResultsSection />}
+          </Tabs.Content>
+
+          <Tabs.Content value="share">
+            <Card.Root bg="gray.50" p={6} mb={4}>
+              <VStack gap={6} align="stretch" maxW="600px">
+                <VStack align="start" gap={4}>
+                  <VStack align="start" w="full">
+                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                      Date of Investment
+                    </Text>
+                    <Input type="date" bg="white" />
+                  </VStack>
+                  
+                  <VStack align="start" w="full">
+                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                      End Date of Investment
+                    </Text>
+                    <Input type="date" bg="white" />
+                  </VStack>
+                </VStack>
+
+                <Flex 
+                  direction={{ base: "column", md: "row" }} 
+                  gap={4} 
+                  align={{ base: "stretch", md: "end" }}
+                >
+                  <VStack align="start" flex={1}>
+                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                      Number of Shares
+                    </Text>
+                    <Input placeholder="Enter number of shares" bg="white" />
+                  </VStack>
+
+                  <VStack align="start" flex={1}>
+                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                      Choose Currency
+                    </Text>
+                    <NativeSelect.Root>
+                      <NativeSelect.Field bg="white">
+                        <option value="aed">AED - UAE Dirham</option>
+                        <option value="usd">USD - US Dollar</option>
+                        <option value="eur">EUR - Euro</option>
+                      </NativeSelect.Field>
+                      <NativeSelect.Indicator />
+                    </NativeSelect.Root>
+                  </VStack>
+
+                  <Button
+                    colorScheme="blue"
+                    size="lg"
+                    px={8}
+                    onClick={() => setShowShareGraph(true)}
+                    alignSelf={{ base: "stretch", md: "end" }}
+                  >
+                    Calculate
+                  </Button>
+                </Flex>
+              </VStack>
+            </Card.Root>
+
+            {(hideGraph || showShareGraph) && <ResultsSection />}
+          </Tabs.Content>
+        </Tabs.Root>
+      </Card.Root>
   );
 };
 
