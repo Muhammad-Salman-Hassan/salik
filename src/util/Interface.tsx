@@ -394,23 +394,49 @@ export interface StockStat {
 
 export interface FormData {
     alerts: {
-      dailyClosing: boolean;
-      priceTarget: boolean;
-      priceTargetValue: string;
-      stopLoss: boolean;
-      stopLossValue: string;
-      variation: boolean;
-      variationValue: string;
-      volumeTarget: boolean;
-      volumeTargetValue: string;
+        dailyClosing: boolean;
+        priceTarget: boolean;
+        priceTargetValue: string;
+        stopLoss: boolean;
+        stopLossValue: string;
+        variation: boolean;
+        variationValue: string;
+        volumeTarget: boolean;
+        volumeTargetValue: string;
     };
     subscription: {
-      email: string;
-      firstName: string;
-      lastName: string;
-      profession: string;
-      company: string;
-      country: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        profession: string;
+        company: string;
+        country: string;
     };
     modifyEmail: string;
-  }
+}
+
+
+export interface Document {
+    id: string;
+    name: string;
+    type: 'earnings' | 'datasheet' | 'financial' | 'presentation' | 'all';
+    url: string;
+    size: string;
+    downloadCount: number;
+    isNew?: boolean;
+}
+
+export interface PeriodData {
+    period: string;
+    shortName: string;
+    color: string;
+    documents: Document[];
+}
+export interface YearData {
+    year: string;
+    periods: PeriodData[];
+}
+
+export interface ReportProps {
+    data: PeriodData[];
+}

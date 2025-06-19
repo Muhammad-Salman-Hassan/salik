@@ -1060,3 +1060,349 @@ export const stockStatsDummyData = [
         value: "6",
     },
 ];
+
+
+export const dummyPeriodDataResult = [
+    {
+        year: '2025',
+        periods: [
+            {
+                period: 'Q1 2025',
+                shortName: 'Q1',
+                color: 'blue',
+                documents: [
+                    {
+                        id: 'q1-2025-earnings',
+                        name: 'Q1 2025 Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.4 MB',
+                        downloadCount: 1240,
+                        isNew: true
+                    },
+                    {
+                        id: 'q1-2025-datasheet',
+                        name: 'Q1 2025 Company Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '1.8 MB',
+                        downloadCount: 856
+                    },
+                    {
+                        id: 'q1-2025-financial',
+                        name: 'Q1 2025 Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '3.2 MB',
+                        downloadCount: 2103,
+                        isNew: true
+                    },
+                    {
+                        id: 'q1-2025-presentation',
+                        name: 'Q1 2025 Investor Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '4.7 MB',
+                        downloadCount: 1567,
+                        isNew: true
+                    },
+                    {
+                        id: 'q1-2025-all',
+                        name: 'Q1 2025 Complete Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '12.1 MB',
+                        downloadCount: 432
+                    }
+                ]
+            },
+            {
+                period: 'H1 2025',
+                shortName: 'H1',
+                color: 'green',
+                documents: [
+                    {
+                        id: 'h1-2025-earnings',
+                        name: 'H1 2025 Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.6 MB',
+                        downloadCount: 945
+                    },
+                    {
+                        id: 'h1-2025-datasheet',
+                        name: 'H1 2025 Company Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '1.9 MB',
+                        downloadCount: 723
+                    },
+                    {
+                        id: 'h1-2025-financial',
+                        name: 'H1 2025 Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '3.4 MB',
+                        downloadCount: 1876
+                    },
+                    {
+                        id: 'h1-2025-presentation',
+                        name: 'H1 2025 Investor Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '5.1 MB',
+                        downloadCount: 1234
+                    },
+                    {
+                        id: 'h1-2025-all',
+                        name: 'H1 2025 Complete Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '13.0 MB',
+                        downloadCount: 387
+                    }
+                ]
+            },
+            {
+                period: 'FY 2025',
+                shortName: 'FY',
+                color: 'purple',
+                documents: [
+                    {
+                        id: 'fy-2025-earnings',
+                        name: 'FY 2025 Annual Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '3.1 MB',
+                        downloadCount: 2341
+                    },
+                    {
+                        id: 'fy-2025-datasheet',
+                        name: 'FY 2025 Annual Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '2.3 MB',
+                        downloadCount: 1567
+                    },
+                    {
+                        id: 'fy-2025-financial',
+                        name: 'FY 2025 Annual Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '4.2 MB',
+                        downloadCount: 3421
+                    },
+                    {
+                        id: 'fy-2025-presentation',
+                        name: 'FY 2025 Annual Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '6.8 MB',
+                        downloadCount: 2876
+                    },
+                    {
+                        id: 'fy-2025-all',
+                        name: 'FY 2025 Complete Annual Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '16.4 MB',
+                        downloadCount: 1123
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        year: '2024',
+        periods: [
+            {
+                period: 'Q1 2024',
+                shortName: 'Q1',
+                color: 'blue',
+                documents: [
+                    {
+                        id: 'q1-2024-earnings',
+                        name: 'Q1 2024 Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.2 MB',
+                        downloadCount: 2140
+                    },
+                    {
+                        id: 'q1-2024-datasheet',
+                        name: 'Q1 2024 Company Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '1.7 MB',
+                        downloadCount: 1456
+                    },
+                    {
+                        id: 'q1-2024-financial',
+                        name: 'Q1 2024 Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '3.0 MB',
+                        downloadCount: 2503
+                    },
+                    {
+                        id: 'q1-2024-presentation',
+                        name: 'Q1 2024 Investor Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '4.5 MB',
+                        downloadCount: 1867
+                    },
+                    {
+                        id: 'q1-2024-all',
+                        name: 'Q1 2024 Complete Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '11.4 MB',
+                        downloadCount: 632
+                    }
+                ]
+            },
+            {
+                period: 'Q2 2024',
+                shortName: 'Q2',
+                color: 'orange',
+                documents: [
+                    {
+                        id: 'q2-2024-earnings',
+                        name: 'Q2 2024 Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.3 MB',
+                        downloadCount: 1945
+                    },
+                    {
+                        id: 'q2-2024-datasheet',
+                        name: 'Q2 2024 Company Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '1.8 MB',
+                        downloadCount: 1323
+                    },
+                    {
+                        id: 'q2-2024-financial',
+                        name: 'Q2 2024 Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '3.1 MB',
+                        downloadCount: 2276
+                    },
+                    {
+                        id: 'q2-2024-presentation',
+                        name: 'Q2 2024 Investor Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '4.6 MB',
+                        downloadCount: 1634
+                    },
+                    {
+                        id: 'q2-2024-all',
+                        name: 'Q2 2024 Complete Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '11.8 MB',
+                        downloadCount: 587
+                    }
+                ]
+            },
+            {
+                period: 'FY 2024',
+                shortName: 'FY',
+                color: 'red',
+                documents: [
+                    {
+                        id: 'fy-2024-earnings',
+                        name: 'FY 2024 Annual Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.9 MB',
+                        downloadCount: 4341
+                    },
+                    {
+                        id: 'fy-2024-datasheet',
+                        name: 'FY 2024 Annual Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '2.1 MB',
+                        downloadCount: 3567
+                    },
+                    {
+                        id: 'fy-2024-financial',
+                        name: 'FY 2024 Annual Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '4.0 MB',
+                        downloadCount: 5421
+                    },
+                    {
+                        id: 'fy-2024-presentation',
+                        name: 'FY 2024 Annual Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '6.5 MB',
+                        downloadCount: 4876
+                    },
+                    {
+                        id: 'fy-2024-all',
+                        name: 'FY 2024 Complete Annual Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '15.5 MB',
+                        downloadCount: 2123
+                    }
+                ]
+            },
+            {
+                period: 'FY 2024',
+                shortName: 'FY',
+                color: 'red',
+                documents: [
+                    {
+                        id: 'fy-2024-earnings',
+                        name: 'FY 2024 Annual Earnings Release',
+                        type: 'earnings',
+                        url: 'https://yourpf.pdf',
+                        size: '2.9 MB',
+                        downloadCount: 4341
+                    },
+                    {
+                        id: 'fy-2024-datasheet',
+                        name: 'FY 2024 Annual Datasheet',
+                        type: 'datasheet',
+                        url: 'https://yourpf.pdf',
+                        size: '2.1 MB',
+                        downloadCount: 3567
+                    },
+                    {
+                        id: 'fy-2024-financial',
+                        name: 'FY 2024 Annual Financial Statements',
+                        type: 'financial',
+                        url: 'https://yourpf.pdf',
+                        size: '4.0 MB',
+                        downloadCount: 5421
+                    },
+                    {
+                        id: 'fy-2024-presentation',
+                        name: 'FY 2024 Annual Presentation',
+                        type: 'presentation',
+                        url: 'https://yourpf.pdf',
+                        size: '6.5 MB',
+                        downloadCount: 4876
+                    },
+                    {
+                        id: 'fy-2024-all',
+                        name: 'FY 2024 Complete Annual Package',
+                        type: 'all',
+                        url: 'https://yourpf.pdf',
+                        size: '15.5 MB',
+                        downloadCount: 2123
+                    }
+                ]
+            }
+        ]
+    }
+];
