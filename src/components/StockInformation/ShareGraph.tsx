@@ -28,6 +28,7 @@ import {
   Tooltip,
   ComposedChart,
   Area,
+  Brush,
 } from "recharts";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 // Types
@@ -481,7 +482,7 @@ const ShareGraph: React.FC = () => {
     return null;
   };
 
-  const renderChart = () => {
+  const renderChart = (controll: boolean) => {
     const ChartComponent =
       controls.chartType === "mountain"
         ? ComposedChart
@@ -506,7 +507,11 @@ const ShareGraph: React.FC = () => {
 
         </defs>
 
-        {/* Render chart elements based on type */}
+        {controll && (
+          <Brush dataKey="date" height={30} stroke="#008080" />
+
+        )}
+
         {controls.chartType === "mountain" && (
           <Area
             type="monotone"
@@ -924,84 +929,22 @@ const ShareGraph: React.FC = () => {
               </Text>
             </Box>
           </Box>
-          {/* Main Chart */}
+
           <Box
             h="400px"
             mb={4}
+
             border="1px solid"
             borderColor="gray.200"
             borderRadius="md"
             p={2}
           >
             <ResponsiveContainer width="100%" height="100%">
-              {renderChart()}
+              {renderChart(controls.lowerGraphs.hideShowVolume)}
             </ResponsiveContainer>
           </Box>
 
-          {/* Volume Chart with Brush for Main Chart Interaction */}
-          {controls.lowerGraphs.hideShowVolume && (
-            <Box
-              h="150px"
-              mb={4}
-              border="1px solid"
-              borderColor="gray.200"
-              borderRadius="md"
-              p={2}
-            >
-              <Text fontSize="sm" mb={2}>
-                Volume (shares): 12,128,862
-              </Text>
-              <ResponsiveContainer width="100%" height="100%">
-                <ComposedChart
-                  data={stockData}
-                  onMouseMove={(state: any) => {
-                    if (state && state.activeTooltipIndex !== undefined) {
-                      // You can add interaction logic here if needed
-                      // This simulates the volume chart affecting the main chart
-                    }
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="2 2" stroke="#f0f0f0" />
-                  <XAxis dataKey="date" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip
-                    formatter={(value: any) => [
-                      value?.toLocaleString(),
-                      "Volume",
-                    ]}
-                    labelStyle={{ color: "#333" }}
-                  />
 
-                  {/* Volume bars */}
-                  <Bar
-                    dataKey="volume"
-                    fill="#4A5568"
-                    fillOpacity={0.7}
-                    stroke="#4A5568"
-                    strokeWidth={1}
-                  />
-
-                  {/* Mini price line overlay */}
-                  <Line
-                    type="monotone"
-                    dataKey="close"
-                    stroke="#E53E3E"
-                    strokeWidth={1}
-                    dot={false}
-                    yAxisId="right"
-                  />
-
-                  {/* Right Y-axis for price overlay */}
-                  <YAxis
-                    yAxisId="right"
-                    orientation="right"
-                    tick={{ fontSize: 9 }}
-                    domain={["dataMin - 0.1", "dataMax + 0.1"]}
-                  />
-                </ComposedChart>
-              </ResponsiveContainer>
-            </Box>
-          )}
 
           {/* Action Buttons */}
           <Flex gap={2} mb={4}>
@@ -1088,7 +1031,7 @@ const ShareGraph: React.FC = () => {
                   {[
                     { value: "line", label: "Line Graph" },
                     { value: "bar", label: "Bar" },
-                    { value: "candlestick", label: "Candlestick" },
+
                     { value: "mountain", label: "Mountain" },
                   ].map((option) => (
                     <RadioGroup.Item key={option.value} value={option.value}>
@@ -1165,13 +1108,13 @@ const ShareGraph: React.FC = () => {
         </Tabs.Content>
         <Tabs.Content value="trades">
           <Table.Root size="sm" variant="outline">
-            <Table.Header>
-              <Table.Row>
-                <Table.ColumnHeader minW="200px">Time</Table.ColumnHeader>
-                <Table.ColumnHeader minW="200px" textAlign="end">
+            <Table.Header bg="teal" color="white">
+              <Table.Row >
+                <Table.ColumnHeader minW="200px" color="white">Time</Table.ColumnHeader>
+                <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                   Last
                 </Table.ColumnHeader>
-                <Table.ColumnHeader minW="200px" textAlign="end">
+                <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                   Volume
                 </Table.ColumnHeader>
               </Table.Row>
@@ -1212,24 +1155,24 @@ const ShareGraph: React.FC = () => {
           </Flex>
           {selectedPeriod == "normal" ? (
             <Table.Root size="sm" variant="outline">
-              <Table.Header>
+              <Table.Header bg="teal">
                 <Table.Row>
-                  <Table.ColumnHeader minW="200px">
+                  <Table.ColumnHeader minW="200px" color="white">
                     Instrument
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader minW="200px" textAlign="end">
+                  <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                     1M change %
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader minW="200px" textAlign="end">
+                  <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                     3M change %
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader minW="200px" textAlign="end">
+                  <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                     52W change %
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader minW="200px" textAlign="end">
+                  <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                     5 years change %
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader minW="200px" textAlign="end">
+                  <Table.ColumnHeader minW="200px" textAlign="end" color="white">
                     52W high & low
                   </Table.ColumnHeader>
                 </Table.Row>

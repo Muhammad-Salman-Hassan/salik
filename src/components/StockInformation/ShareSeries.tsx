@@ -30,10 +30,10 @@ const ShareSeries: React.FC = () => {
   return (
     <Box maxW="1200px" mx="auto" p={6}>
       <Table.Root size="sm" variant="outline">
-        <Table.Header>
+        <Table.Header bg="teal">
           <Table.Row>
-            <Table.ColumnHeader minW="200px">Share snapshot</Table.ColumnHeader>
-            <Table.ColumnHeader minW="200px" textAlign="end">
+            <Table.ColumnHeader minW="200px" color="white">Share snapshot</Table.ColumnHeader>
+            <Table.ColumnHeader minW="200px" textAlign="end" color="white">
               Salik
             </Table.ColumnHeader>
           </Table.Row>

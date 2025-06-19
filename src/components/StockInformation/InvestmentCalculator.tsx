@@ -5,7 +5,7 @@ import {
   Stack,
   Text,
   Tabs,
-  Tooltip,
+
   RadioGroup,
   VStack,
   Flex,
@@ -27,6 +27,7 @@ import {
   ResponsiveContainer,
   XAxis,
   YAxis,
+  Tooltip
 } from "recharts";
 import { FaCaretDown, FaCaretUp, FaEyeSlash } from "react-icons/fa";
 interface ChartControls {
@@ -437,7 +438,7 @@ const InvestmentCalculator: React.FC = () => {
         {(controls.chartType === "line" ||
           controls.chartType === "candlestick") && (
           <Line
-            type="monotone"
+            type="linear"
             dataKey="close"
             stroke="#4A5568"
             strokeWidth={2}
@@ -568,7 +569,7 @@ const InvestmentCalculator: React.FC = () => {
   };
   return (
     <Box borderTop="1px">
-      <Container as={Stack} maxW="7xl" py={8}>
+      {/* <Container as={Stack} maxW="7xl" py={8}> */}
         <Text fontSize="sm" color="gray.600" mb={4}>
           Salik - Data starting from 29/09/2022
         </Text>
@@ -607,7 +608,7 @@ const InvestmentCalculator: React.FC = () => {
                 mt={4}
                 onClick={() => setHideGraph(true)}
               >
-                Show Data
+                Calculate
               </Button>
             </Flex>
             {hideGraph && (
@@ -637,7 +638,7 @@ const InvestmentCalculator: React.FC = () => {
                             <Table.Cell>{item.label}</Table.Cell>
                             <Table.Cell textAlign="end">
                               <Flex gap="2" align="center" justify={"end"}>
-                                {item.valuex}
+                                {item.value}
                               </Flex>
                             </Table.Cell>
                           </Table.Row>
@@ -680,7 +681,7 @@ const InvestmentCalculator: React.FC = () => {
                           {[
                             { value: "line", label: "Line Graph" },
                             { value: "bar", label: "Bar" },
-                            { value: "candlestick", label: "Candlestick" },
+                            
                             { value: "mountain", label: "Mountain" },
                           ].map((option) => (
                             <RadioGroup.Item
@@ -766,7 +767,7 @@ const InvestmentCalculator: React.FC = () => {
                             <Table.Cell>{item.label}</Table.Cell>
                             <Table.Cell textAlign="end">
                               <Flex gap="2" align="center" justify={"end"}>
-                                {item.valuex}
+                                {item.value}
                               </Flex>
                             </Table.Cell>
                           </Table.Row>
@@ -835,7 +836,7 @@ const InvestmentCalculator: React.FC = () => {
             )}
           </Tabs.Content>
         </Tabs.Root>
-      </Container>
+      {/* </Container> */}
     </Box>
   );
 };
