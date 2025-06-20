@@ -9,7 +9,7 @@ import InvestorsReport from './pages/ResultandReports';
 function App() {
   return (
     <Box minH="100vh" display="flex" flexDirection="column">
-      {/* <Navbar /> */}
+
       <Box as="main" flex="1">
         <Routes>
           <Route path="/" element={<InvestorHome />} />
@@ -20,7 +20,7 @@ function App() {
           
         </Routes>
       </Box>
-      {/* <Footer /> */}
+    
     </Box>
   );
 }

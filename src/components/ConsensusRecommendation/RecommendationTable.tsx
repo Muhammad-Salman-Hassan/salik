@@ -28,7 +28,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {/* Average Row */}
+                    
                     <Table.Row bg="gray.50">
                         <Table.Cell fontWeight="semibold" py={3}>Average</Table.Cell>
                         {data.map((period, index) => (
@@ -38,7 +38,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                         ))}
                     </Table.Row>
 
-                    {/* Buy Row */}
+                    
                     <Table.Row>
                         <Table.Cell py={3}>1 Buy</Table.Cell>
                         {data.map((period, index) => (
@@ -48,7 +48,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                         ))}
                     </Table.Row>
 
-                    {/* Outperform Row */}
+                    
                     <Table.Row bg="gray.50">
                         <Table.Cell py={3}>2 Outperform</Table.Cell>
                         {data.map((period, index) => (
@@ -58,7 +58,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                         ))}
                     </Table.Row>
 
-                    {/* Hold Row */}
+                 
                     <Table.Row>
                         <Table.Cell py={3}>3 Hold</Table.Cell>
                         {data.map((period, index) => (
@@ -68,7 +68,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                         ))}
                     </Table.Row>
 
-                    {/* Underperform Row */}
+                 
                     <Table.Row bg="gray.50">
                         <Table.Cell py={3}>4 Underperform</Table.Cell>
                         {data.map((period, index) => (
@@ -78,7 +78,7 @@ const RecommendationsTable: React.FC<RecommendationsTableProps> = ({
                         ))}
                     </Table.Row>
 
-                    {/* Sell Row */}
+               
                     <Table.Row>
                         <Table.Cell py={3}>5 Sell</Table.Cell>
                         {data.map((period, index) => (

@@ -221,7 +221,7 @@ const ConsensusRecommendation: React.FC<ConsensusRecommendationProps> = ({
                         <Text>(2)Outperform</Text>
                     </Box>
 
-                    {/* Hold segment */}
+                 
                     <Box
                         bg={colors.hold}
                         flex={percentages.hold || 20}

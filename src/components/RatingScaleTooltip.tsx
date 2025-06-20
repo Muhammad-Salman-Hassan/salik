@@ -79,7 +79,7 @@ export const RatingScaleTooltip: React.FC<RatingScaleTooltipProps> = ({ value, l
         position="fixed"
       >
         <Flex direction="column" align="center" gap={1}>
-          {/* Arrow row – arrow appears above the matching number */}
+          
           <Flex gap={0}>
             {[1, 2, 3, 4, 5].map((num) => (
               <Box
@@ -101,7 +101,7 @@ export const RatingScaleTooltip: React.FC<RatingScaleTooltipProps> = ({ value, l
             ))}
           </Flex>
 
-          {/* Rating boxes row */}
+          
           <Flex gap={0}>
             {[1, 2, 3, 4, 5].map((num) => (
               <Box
@@ -124,7 +124,6 @@ export const RatingScaleTooltip: React.FC<RatingScaleTooltipProps> = ({ value, l
             ))}
           </Flex>
 
-          {/* Labels row */}
           <Flex justify="space-between" w="120px" fontSize="2xs" mt={1}>
             <Text color="green.600" fontWeight="semibold">Buy</Text>
             <Text color="red.600" fontWeight="semibold">Sell</Text>

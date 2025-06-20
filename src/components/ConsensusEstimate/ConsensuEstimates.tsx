@@ -353,7 +353,7 @@ const ConsensusEstimates: React.FC = () => {
     };
     return (
         <Box w="full" p={4}>
-            {/* Header */}
+           
             <Flex justify="space-between" align="center" mb={4}>
                 {currentView.type !== 'main' ? (
                     <Button
@@ -374,7 +374,6 @@ const ConsensusEstimates: React.FC = () => {
                 </Text>
             </Flex>
 
-            {/* Dynamic Content */}
             {currentView.type === 'main' && renderMainTable(filteredData)}
             {currentView.type === 'chart' && renderChartView()}
             {currentView.type === 'summary' && renderSummaryView()}

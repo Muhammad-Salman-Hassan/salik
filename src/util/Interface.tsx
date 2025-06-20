@@ -440,3 +440,49 @@ export interface YearData {
 export interface ReportProps {
     data: PeriodData[];
 }
+
+
+export interface FinancialData {
+    period: string;
+    revenue: number;
+    ebitda: number;
+    ebitdaMargin: number;
+    profitForPeriod: number;
+    netProfitMargin: number;
+    dividendsDeclared?: number;
+}
+
+export interface FinancialPositionData {
+    period: string;
+    currentAssets: number;
+    nonCurrentAssets: number;
+    totalAssets: number;
+    currentLiabilities: number;
+    nonCurrentLiabilities: number;
+    totalLiabilities: number;
+    equity: number;
+    grossDebt: number;
+    cashAndEquivalent: number;
+    netDebt: number;
+}
+
+export interface CashFlowData {
+    period: string;
+    operatingActivities: number;
+    investingActivities: number;
+    financingActivities: number;
+    changeInCash: number;
+    freecashFlow: number;
+    freecashFlowMargin: number;
+}
+
+export interface OperatingData {
+    period: string;
+    tollGates: number;
+    totalTrips: number;
+    discountedTrips?: number;
+    netTollTraffic?: number;
+    revenueGeneratingTrips?: number;
+}
+
+export type DataCategory = 'income' | 'position' | 'cashflow' | 'operating';

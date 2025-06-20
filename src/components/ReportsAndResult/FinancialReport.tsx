@@ -26,6 +26,7 @@ import {
 } from 'react-icons/fi';
 import { dummyPeriodDataResult } from '../../util/DummyData';
 import { Document, ReportProps, YearData } from '../../util/Interface';
+import { ReportsSummary } from './ReportSummaryDisplay';
 
 
 
@@ -307,6 +308,7 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
                     </VStack>
                 ))}
 
+                <ReportsSummary/>
 
             </VStack>
         </Box>
