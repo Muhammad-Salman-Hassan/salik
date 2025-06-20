@@ -216,7 +216,7 @@ const InvestmentCalculator: React.FC = () => {
 
   const ResultsSection = () => (
     <Card.Root mt={6} p={6} bg="gray.50">
-      {/* Tables Section */}
+     
       <Flex 
         direction={{ base: "column", lg: "row" }} 
         gap={6} 
@@ -269,7 +269,7 @@ const InvestmentCalculator: React.FC = () => {
         </Box>
       </Flex>
 
-      {/* Chart Controls */}
+   
       <Box mb={4}>
         <Text fontSize="sm" fontWeight="medium" mb={3} color="gray.700">
           Chart Type:
@@ -300,7 +300,7 @@ const InvestmentCalculator: React.FC = () => {
         </RadioGroup.Root>
       </Box>
 
-      {/* Chart Container */}
+     
       <Card.Root bg="white" p={4}>
         <Box height="400px" width="100%">
           {renderChart()}

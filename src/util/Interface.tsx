@@ -394,23 +394,95 @@ export interface StockStat {
 
 export interface FormData {
     alerts: {
-      dailyClosing: boolean;
-      priceTarget: boolean;
-      priceTargetValue: string;
-      stopLoss: boolean;
-      stopLossValue: string;
-      variation: boolean;
-      variationValue: string;
-      volumeTarget: boolean;
-      volumeTargetValue: string;
+        dailyClosing: boolean;
+        priceTarget: boolean;
+        priceTargetValue: string;
+        stopLoss: boolean;
+        stopLossValue: string;
+        variation: boolean;
+        variationValue: string;
+        volumeTarget: boolean;
+        volumeTargetValue: string;
     };
     subscription: {
-      email: string;
-      firstName: string;
-      lastName: string;
-      profession: string;
-      company: string;
-      country: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        profession: string;
+        company: string;
+        country: string;
     };
     modifyEmail: string;
-  }
+}
+
+
+export interface Document {
+    id: string;
+    name: string;
+    type: 'earnings' | 'datasheet' | 'financial' | 'presentation' | 'all';
+    url: string;
+    size: string;
+    downloadCount: number;
+    isNew?: boolean;
+}
+
+export interface PeriodData {
+    period: string;
+    shortName: string;
+    color: string;
+    documents: Document[];
+}
+export interface YearData {
+    year: string;
+    periods: PeriodData[];
+}
+
+export interface ReportProps {
+    data: PeriodData[];
+}
+
+
+export interface FinancialData {
+    period: string;
+    revenue: number;
+    ebitda: number;
+    ebitdaMargin: number;
+    profitForPeriod: number;
+    netProfitMargin: number;
+    dividendsDeclared?: number;
+}
+
+export interface FinancialPositionData {
+    period: string;
+    currentAssets: number;
+    nonCurrentAssets: number;
+    totalAssets: number;
+    currentLiabilities: number;
+    nonCurrentLiabilities: number;
+    totalLiabilities: number;
+    equity: number;
+    grossDebt: number;
+    cashAndEquivalent: number;
+    netDebt: number;
+}
+
+export interface CashFlowData {
+    period: string;
+    operatingActivities: number;
+    investingActivities: number;
+    financingActivities: number;
+    changeInCash: number;
+    freecashFlow: number;
+    freecashFlowMargin: number;
+}
+
+export interface OperatingData {
+    period: string;
+    tollGates: number;
+    totalTrips: number;
+    discountedTrips?: number;
+    netTollTraffic?: number;
+    revenueGeneratingTrips?: number;
+}
+
+export type DataCategory = 'income' | 'position' | 'cashflow' | 'operating';

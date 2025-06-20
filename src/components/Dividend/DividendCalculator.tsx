@@ -288,7 +288,7 @@ const DividendCalculator: React.FC<DividendCalculatorProps> = ({
                                     </VStack>
                                 </Box>
 
-                                {/* Dividends Cashed Out */}
+                             
                                 <Box bg="green.50" p={4} borderRadius="md">
                                     <Text fontSize="lg" fontWeight="bold" mb={4} textAlign="center">
                                         Dividends cashed out

@@ -217,7 +217,7 @@ const ShareGraph: React.FC = () => {
             />
           )}
 
-        {/* Moving averages for all chart types */}
+      
         {controls.showMovingAverages.ma10 && (
           <Line
             type="monotone"
@@ -425,7 +425,7 @@ const ShareGraph: React.FC = () => {
                   { value: "custom", label: "Custom range" },
                 ].map((option) => (
                   <RadioGroup.Item key={option.value} value={option.value}>
-                    {/* <RadioGroup.ItemControl /> */}
+                
                     <RadioGroup.ItemIndicator />
                     <RadioGroup.ItemHiddenInput />
                     <RadioGroup.ItemText fontSize="sm">
@@ -436,7 +436,6 @@ const ShareGraph: React.FC = () => {
               </Flex>
             </RadioGroup.Root>
 
-            {/* Stock Price Info */}
             <Box p={2} bg="gray.50" borderRadius="md">
               <Text fontSize="sm">
                 22/05/2025{" "}
@@ -479,7 +478,7 @@ const ShareGraph: React.FC = () => {
 
 
 
-          {/* Action Buttons */}
+     
           <Flex gap={2} mb={4}>
             <Button bg="#53565a" color="white" size="sm">
               Detach Graph
@@ -492,9 +491,8 @@ const ShareGraph: React.FC = () => {
             </Button>
           </Flex>
 
-          {/* Controls Panel */}
           <SimpleGrid columns={{ base: 1, md: 4 }} gap={6}>
-            {/* Indicators */}
+           
             <Box>
               <Text fontWeight="bold" mb={2}>
                 Indicators
@@ -518,7 +516,7 @@ const ShareGraph: React.FC = () => {
               </VStack>
             </Box>
 
-            {/* Moving Averages */}
+          
             <Box>
               <Text fontWeight="bold" mb={2}>
                 Moving averages
@@ -549,7 +547,7 @@ const ShareGraph: React.FC = () => {
               <Input placeholder="Insert period" size="sm" mt={2} />
             </Box>
 
-            {/* Diagram Type */}
+        
             <Box>
               <Text fontWeight="bold" mb={2}>
                 Diagram type
@@ -579,7 +577,7 @@ const ShareGraph: React.FC = () => {
               </RadioGroup.Root>
             </Box>
 
-            {/* Lower Graphs & Indices */}
+          
             <Box>
               <Text fontWeight="bold" mb={2}>
                 Lower graphs

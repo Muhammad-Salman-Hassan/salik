@@ -110,7 +110,7 @@ const SharePriceLookup: React.FC = () => {
         />
         <Tooltip content={<CustomTooltip />} />
 
-        {/* Render chart elements based on type */}
+       
         {controls.chartType === "mountain" && (
           <Area
             type="monotone"
@@ -135,7 +135,7 @@ const SharePriceLookup: React.FC = () => {
             />
           )}
 
-        {/* Moving averages for all chart types */}
+  
         {controls.showMovingAverages.ma10 && (
           <Line
             type="monotone"

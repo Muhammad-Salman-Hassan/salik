@@ -110,14 +110,14 @@ export default function SharePriceAlertForm() {
           transform: "translateY(-2px)"
         }}
       >
-        {/* Share Price Alerts Section */}
+     
         <Box mb={{ base: 6, md: 8 }}>
           <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" mb={{ base: 4, md: 6 }}>
             Select Share Price Alerts:
           </Text>
 
           <VStack gap={{ base: 4, md: 5 }} align="stretch">
-            {/* Daily Closing Price */}
+          
             <AlertOption
               id="dailyClosing"
               label="Daily Closing Price"
@@ -126,7 +126,7 @@ export default function SharePriceAlertForm() {
               onCheckChange={(checked) => handleAlertChange('dailyClosing', checked)}
             />
 
-            {/* Price Target and Stop Loss */}
+          
             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, md: 5 }}>
               <AlertOption
                 id="priceTarget"
@@ -153,7 +153,7 @@ export default function SharePriceAlertForm() {
               />
             </SimpleGrid>
 
-            {/* Variation % and Volume Target */}
+         
             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, md: 5 }}>
               <AlertOption
                 id="variation"
@@ -182,7 +182,7 @@ export default function SharePriceAlertForm() {
           </VStack>
         </Box>
 
-        {/* Subscription Section */}
+    
         <Box
           mb={{ base: 6, md: 8 }}
           bg="gray.50"
@@ -202,7 +202,7 @@ export default function SharePriceAlertForm() {
             </Box>
 
             <Stack gap={{ base: 4, md: 5 }} w="full">
-              {/* First Row - Email (full width) */}
+           
               <Field.Root >
                 <Field.Label fontSize={{ base: "sm", md: "md" }} fontWeight="medium">
                   Email *
@@ -217,7 +217,7 @@ export default function SharePriceAlertForm() {
                 />
               </Field.Root>
 
-              {/* Second Row - Name Fields */}
+           
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 5 }}>
                 <Field.Root >
                   <Field.Label fontSize={{ base: "sm", md: "md" }} fontWeight="medium">
@@ -246,7 +246,7 @@ export default function SharePriceAlertForm() {
                 </Field.Root>
               </SimpleGrid>
 
-              {/* Third Row - Profession and Company */}
+      
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 5 }}>
                 <Field.Root>
                   <Field.Label fontSize={{ base: "sm", md: "md" }} fontWeight="medium">
@@ -294,7 +294,7 @@ export default function SharePriceAlertForm() {
                 </Field.Root>
               </SimpleGrid>
 
-              {/* Fourth Row - Country */}
+          
               <Field.Root>
                 <Field.Label fontSize={{ base: "sm", md: "md" }} fontWeight="medium">
                   Country
@@ -337,7 +337,7 @@ export default function SharePriceAlertForm() {
           </VStack>
         </Box>
 
-        {/* Modify/Unsubscribe Section */}
+    
         <Box bg="gray.50" p={{ base: 4, md: 6 }} borderRadius="lg">
           <VStack align="start" gap={{ base: 4, md: 5 }}>
             <Box>

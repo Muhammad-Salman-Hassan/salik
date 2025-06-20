@@ -81,7 +81,7 @@ const TargetPriceHistory: React.FC<TargetPriceHistoryProps> = ({
                         </Flex>
                     ))}
 
-                    {/* Additional info if both values exist */}
+                   
                     {payload.length === 2 && (
                         <Box mt={3} pt={2} borderTop="1px solid" borderColor="gray.100">
                             <Flex justify="space-between">

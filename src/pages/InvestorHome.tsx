@@ -16,6 +16,8 @@ const InvestorHome: React.FC = () => {
       <Link to="/investors/dividends">Go to Dividend Page</Link>
       <br />
       <Link to="/investors/stock">Go to Stock Page</Link>
+      <br />
+      <Link to="/investors/results">Go to Result Page</Link>
     </Box>
   );
 };
