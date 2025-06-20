@@ -417,25 +417,7 @@ export const shareSeriesDummyData = [
     { label: "Time", value: "18/06/2025 14:57 (GMT+04:00)" },
     { label: "Currency", value: "AED" },
     { label: "Market", value: "Dubai" },
-    { label: "ISIN", value: "AEE01110S227" },
-    { label: "Industry", value: "Transportation" },
-    { label: "Symbol", value: "SALIK" },
-    { label: "Bid", value: 5.49 },
-    { label: "Ask", value: 5.54 },
-    { label: "Open", value: 5.59 },
-    { label: "Last", value: 5.5 },
-    { label: "Change +/-", value: -0.1 },
-    { label: "Change %", value: -1.79 },
-    { label: "High", value: 5.59 },
-    { label: "Low", value: 5.47 },
-    { label: "Volume", value: 6605615 },
-    { label: "Previous Close", value: 5.6 },
-    { label: "52 Weeks High", value: 5.99 },
-    { label: "52 Weeks Low", value: 3.26 },
-    { label: "YTD %", value: 3.7 },
-    { label: "52 Weeks %", value: 69.7 },
-    { label: "Number of Shares", value: 7500000000 },
-    { label: "Market Cap (AED Million)", value: 41250.0 },
+
 ];
 
 export const sharePricelookupdummydata = [
@@ -1729,45 +1711,109 @@ export const dummyoperatingData = [
 
 export const dummychartTypes = {
     income: {
-      revenue: [
-        { title: 'Revenue', dataKey: 'revenue', color: '#3182ce', format: 'currency' },
-        { title: 'EBITDA', dataKey: 'ebitda', color: '#38a169', format: 'currency' }
-      ],
-      margins: [
-        { title: 'EBITDA Margin', dataKey: 'ebitdaMargin', color: '#d69e2e', format: 'percentage' },
-        { title: 'Net Profit Margin', dataKey: 'netProfitMargin', color: '#e53e3e', format: 'percentage' }
-      ]
+        revenue: [
+            { title: 'Revenue', dataKey: 'revenue', color: '#3182ce', format: 'currency' },
+            { title: 'EBITDA', dataKey: 'ebitda', color: '#38a169', format: 'currency' }
+        ],
+        margins: [
+            { title: 'EBITDA Margin', dataKey: 'ebitdaMargin', color: '#d69e2e', format: 'percentage' },
+            { title: 'Net Profit Margin', dataKey: 'netProfitMargin', color: '#e53e3e', format: 'percentage' }
+        ]
     },
     position: {
-      assets: [
-        { title: 'Total Assets', dataKey: 'totalAssets', color: '#3182ce', format: 'currency' },
-        { title: 'Current Assets', dataKey: 'currentAssets', color: '#38a169', format: 'currency' },
-        { title: 'Non-Current Assets', dataKey: 'nonCurrentAssets', color: '#d69e2e', format: 'currency' }
-      ],
-      debt: [
-        { title: 'Gross Debt', dataKey: 'grossDebt', color: '#e53e3e', format: 'currency' },
-        { title: 'Net Debt', dataKey: 'netDebt', color: '#805ad5', format: 'currency' },
-        { title: 'Cash & Equivalent', dataKey: 'cashAndEquivalent', color: '#38a169', format: 'currency' }
-      ]
+        assets: [
+            { title: 'Total Assets', dataKey: 'totalAssets', color: '#3182ce', format: 'currency' },
+            { title: 'Current Assets', dataKey: 'currentAssets', color: '#38a169', format: 'currency' },
+            { title: 'Non-Current Assets', dataKey: 'nonCurrentAssets', color: '#d69e2e', format: 'currency' }
+        ],
+        debt: [
+            { title: 'Gross Debt', dataKey: 'grossDebt', color: '#e53e3e', format: 'currency' },
+            { title: 'Net Debt', dataKey: 'netDebt', color: '#805ad5', format: 'currency' },
+            { title: 'Cash & Equivalent', dataKey: 'cashAndEquivalent', color: '#38a169', format: 'currency' }
+        ]
     },
     cashflow: {
-      activities: [
-        { title: 'Operating Activities', dataKey: 'operatingActivities', color: '#38a169', format: 'currency' },
-        { title: 'Investing Activities', dataKey: 'investingActivities', color: '#d69e2e', format: 'currency' },
-        { title: 'Financing Activities', dataKey: 'financingActivities', color: '#e53e3e', format: 'currency' }
-      ],
-      freeflow: [
-        { title: 'Free Cash Flow', dataKey: 'freeashFlow', color: '#3182ce', format: 'currency' },
-        { title: 'FCF Margin', dataKey: 'freeashFlowMargin', color: '#805ad5', format: 'percentage' }
-      ]
+        activities: [
+            { title: 'Operating Activities', dataKey: 'operatingActivities', color: '#38a169', format: 'currency' },
+            { title: 'Investing Activities', dataKey: 'investingActivities', color: '#d69e2e', format: 'currency' },
+            { title: 'Financing Activities', dataKey: 'financingActivities', color: '#e53e3e', format: 'currency' }
+        ],
+        freeflow: [
+            { title: 'Free Cash Flow', dataKey: 'freeashFlow', color: '#3182ce', format: 'currency' },
+            { title: 'FCF Margin', dataKey: 'freeashFlowMargin', color: '#805ad5', format: 'percentage' }
+        ]
     },
     operating: {
-      traffic: [
-        { title: 'Total Trips', dataKey: 'totalTrips', color: '#3182ce', format: 'number' },
-        { title: 'Revenue Generating Trips', dataKey: 'revenueGeneratingTrips', color: '#38a169', format: 'number' }
-      ],
-      gates: [
-        { title: 'Toll Gates', dataKey: 'tollGates', color: '#d69e2e', format: 'number' }
-      ]
+        traffic: [
+            { title: 'Total Trips', dataKey: 'totalTrips', color: '#3182ce', format: 'number' },
+            { title: 'Revenue Generating Trips', dataKey: 'revenueGeneratingTrips', color: '#38a169', format: 'number' }
+        ],
+        gates: [
+            { title: 'Toll Gates', dataKey: 'tollGates', color: '#d69e2e', format: 'number' }
+        ]
     }
-  };
+};
+
+
+export const dividendOverviewdummydata = {
+    latestDividend: {
+        amount: 0.020,
+        currency: 'EUR',
+        exDividendDate: '18/04/2025',
+        paymentDate: '28/04/2025',
+        type: 'Semi-Annual'
+    },
+    dividendYield: {
+        currentYield: 2.90,
+        monthlyDividend: 0.038,
+        currency: 'EUR'
+    },
+    totalReturns: {
+        twelveMonths: 61.96,
+        threeYears: 135.28
+    },
+    annualDividend: [
+        { year: '2020', amount: 0.016 },
+        { year: '2021', amount: 0.025 },
+        { year: '2022', amount: 0.037 },
+        { year: '2023', amount: 0.038 },
+        { year: '2024', amount: 0.042 }
+    ],
+    annualDividendYield: [
+        { year: '2020', yield: 2.56 },
+        { year: '2021', yield: 3.20 },
+        { year: '2022', yield: 4.15 },
+        { year: '2023', yield: 4.79 },
+        { year: '2024', yield: 2.66 }
+    ],
+    chartData: {
+        twelveMonths: [
+            { month: 'Jan', value: 5.2 },
+            { month: 'Feb', value: 8.1 },
+            { month: 'Mar', value: 12.5 },
+            { month: 'Apr', value: 18.3 },
+            { month: 'May', value: 25.7 },
+            { month: 'Jun', value: 32.4 },
+            { month: 'Jul', value: 38.9 },
+            { month: 'Aug', value: 45.2 },
+            { month: 'Sep', value: 52.1 },
+            { month: 'Oct', value: 57.8 },
+            { month: 'Nov', value: 60.2 },
+            { month: 'Dec', value: 61.96 }
+        ],
+        threeYears: [
+            { month: '2022 Q1', value: 15.2 },
+            { month: '2022 Q2', value: 28.5 },
+            { month: '2022 Q3', value: 42.1 },
+            { month: '2022 Q4', value: 55.8 },
+            { month: '2023 Q1', value: 68.3 },
+            { month: '2023 Q2', value: 82.7 },
+            { month: '2023 Q3', value: 95.4 },
+            { month: '2023 Q4', value: 108.2 },
+            { month: '2024 Q1', value: 118.5 },
+            { month: '2024 Q2', value: 127.8 },
+            { month: '2024 Q3', value: 132.1 },
+            { month: '2024 Q4', value: 135.28 }
+        ]
+    }
+};
