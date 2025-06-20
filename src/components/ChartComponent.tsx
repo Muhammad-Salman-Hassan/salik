@@ -128,6 +128,7 @@ export const ChartComponent: React.FC<ChartProps> = ({
                             }}
                         />
                         <Legend />
+                        
                         {configs.map((config, index) => (
                             <Area
                                 key={config.dataKey}
@@ -136,7 +137,7 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                 stackId="1"
                                 stroke={config.color || COLORS[index % COLORS.length]}
                                 fill={config.color || COLORS[index % COLORS.length]}
-                                fillOpacity={0.6}
+                                fillOpacity={0.1}
                                 name={config.title}
                             />
                         ))}

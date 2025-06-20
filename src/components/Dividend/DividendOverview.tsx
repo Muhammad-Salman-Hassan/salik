@@ -16,73 +16,13 @@ import {
     YAxis,
 } from 'recharts';
 import { DividendDashboardProps, DividendOverviewData } from '../../util/Interface';
+import { dividendOverviewdummydata } from '../../util/DummyData';
 
 
 
 const DividendOverview: React.FC<DividendDashboardProps> = ({ data }) => {
 
-    const defaultData: DividendOverviewData = {
-        latestDividend: {
-            amount: 0.020,
-            currency: 'EUR',
-            exDividendDate: '18/04/2025',
-            paymentDate: '28/04/2025',
-            type: 'Semi-Annual'
-        },
-        dividendYield: {
-            currentYield: 2.90,
-            monthlyDividend: 0.038,
-            currency: 'EUR'
-        },
-        totalReturns: {
-            twelveMonths: 61.96,
-            threeYears: 135.28
-        },
-        annualDividend: [
-            { year: '2020', amount: 0.016 },
-            { year: '2021', amount: 0.025 },
-            { year: '2022', amount: 0.037 },
-            { year: '2023', amount: 0.038 },
-            { year: '2024', amount: 0.042 }
-        ],
-        annualDividendYield: [
-            { year: '2020', yield: 2.56 },
-            { year: '2021', yield: 3.20 },
-            { year: '2022', yield: 4.15 },
-            { year: '2023', yield: 4.79 },
-            { year: '2024', yield: 2.66 }
-        ],
-        chartData: {
-            twelveMonths: [
-                { month: 'Jan', value: 5.2 },
-                { month: 'Feb', value: 8.1 },
-                { month: 'Mar', value: 12.5 },
-                { month: 'Apr', value: 18.3 },
-                { month: 'May', value: 25.7 },
-                { month: 'Jun', value: 32.4 },
-                { month: 'Jul', value: 38.9 },
-                { month: 'Aug', value: 45.2 },
-                { month: 'Sep', value: 52.1 },
-                { month: 'Oct', value: 57.8 },
-                { month: 'Nov', value: 60.2 },
-                { month: 'Dec', value: 61.96 }
-            ],
-            threeYears: [
-                { month: '2022 Q1', value: 15.2 },
-                { month: '2022 Q2', value: 28.5 },
-                { month: '2022 Q3', value: 42.1 },
-                { month: '2022 Q4', value: 55.8 },
-                { month: '2023 Q1', value: 68.3 },
-                { month: '2023 Q2', value: 82.7 },
-                { month: '2023 Q3', value: 95.4 },
-                { month: '2023 Q4', value: 108.2 },
-                { month: '2024 Q1', value: 118.5 },
-                { month: '2024 Q2', value: 127.8 },
-                { month: '2024 Q3', value: 132.1 },
-                { month: '2024 Q4', value: 135.28 }
-            ]
-        }
-    };
+    const defaultData: DividendOverviewData = dividendOverviewdummydata
 
     const displayData = data || defaultData;
 
