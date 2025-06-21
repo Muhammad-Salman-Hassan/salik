@@ -73,7 +73,7 @@ const DividendOverview: React.FC<DividendDashboardProps> = ({ data }) => {
 
     return (
         <Box bg="gray.50" minH="100vh">
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} gap={6}>
 
                 <DividendOverviewCard>
                     <VStack align="start" gap={4}>

@@ -131,10 +131,9 @@ const DividendCalculator: React.FC<DividendCalculatorProps> = ({
                                         value={inputs.dateOfInvestment}
                                         onChange={(e) => handleInputChange('dateOfInvestment', e.target.value)}
                                         placeholder="DD/MM/YYYY"
+                                        type='date'
                                     />
-                                    <Button variant="outline" size="sm">
-                                        <MdCalendarToday />
-                                    </Button>
+                                   
                                 </HStack>
                             </Box>
 
@@ -145,11 +144,10 @@ const DividendCalculator: React.FC<DividendCalculatorProps> = ({
                                         value={inputs.endDateOfInvestment}
                                         onChange={(e) => handleInputChange('endDateOfInvestment', e.target.value)}
                                         placeholder="DD/MM/YYYY"
+                                        type='date'
 
                                     />
-                                    <Button variant="outline" size="sm">
-                                        <MdCalendarToday />
-                                    </Button>
+                                    
                                 </HStack>
                             </Box>
 

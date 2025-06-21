@@ -10,7 +10,11 @@ import { MdCandlestickChart, MdPriceChange } from "react-icons/md";
 import { FaChartSimple } from "react-icons/fa6";
 import { BsCalculator } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
+import { stockDummyData } from "../../util/DummyData";
 const StockChart: React.FC = () => {
+
+    const earningsData = ["23/5", "1/6", "15/6"];
+const pressReleaseData = ["25/5", "5/6", "12/6"]
     return (
         <Box w="full" h="full" p={{ base: 3, md: 6 }} >
 
@@ -106,7 +110,11 @@ const StockChart: React.FC = () => {
                 </Tabs.List>
                 {/* <Box flex="1" overflowY="auto" px={{ base: 2, md: 4 }} py={4}> */}
                 <Tabs.Content value="graph">
-                    <ShareGraph />
+                <ShareGraph 
+  stockData={stockDummyData}
+  earningsData={earningsData}
+  pressReleaseData={pressReleaseData}
+/>
                 </Tabs.Content>
                 <Tabs.Content value="Series">
                     <ShareSeries />

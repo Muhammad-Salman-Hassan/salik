@@ -87,7 +87,7 @@ const RecommendationHistoryChart: React.FC<RecommendationHistoryChartProps> = ({
                         <ReferenceLine y={5} stroke="#DC2626" strokeDasharray="2 2" strokeOpacity={0.3} />
 
                         <Line
-                            type="stepAfter"
+                            type="linear"
                             dataKey="recommendation"
                             stroke="#008080"
                             strokeWidth={3}

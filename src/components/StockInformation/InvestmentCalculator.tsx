@@ -139,8 +139,8 @@ const InvestmentCalculator: React.FC = () => {
       <ResponsiveContainer width="100%" height={400}>
         <ChartComponent data={dataWithMA} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-          <XAxis 
-            dataKey="date" 
+          <XAxis
+            dataKey="date"
             tick={{ fontSize: 11 }}
             stroke="#666"
           />
@@ -216,10 +216,10 @@ const InvestmentCalculator: React.FC = () => {
 
   const ResultsSection = () => (
     <Card.Root mt={6} p={6} bg="gray.50">
-     
-      <Flex 
-        direction={{ base: "column", lg: "row" }} 
-        gap={6} 
+
+      <Flex
+        direction={{ base: "column", lg: "row" }}
+        gap={6}
         mb={6}
       >
         <Box flex={1}>
@@ -269,7 +269,7 @@ const InvestmentCalculator: React.FC = () => {
         </Box>
       </Flex>
 
-   
+
       <Box mb={4}>
         <Text fontSize="sm" fontWeight="medium" mb={3} color="gray.700">
           Chart Type:
@@ -300,7 +300,7 @@ const InvestmentCalculator: React.FC = () => {
         </RadioGroup.Root>
       </Box>
 
-     
+
       <Card.Root bg="white" p={4}>
         <Box height="400px" width="100%">
           {renderChart()}
@@ -310,166 +310,163 @@ const InvestmentCalculator: React.FC = () => {
   );
 
   return (
-    <Card.Root 
-        bg="white"
-        p={{ base: 4, md: 6, lg: 8 }}
-        borderRadius="xl"
-        boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
-        border="1px solid"
-        borderColor="gray.100"
-        transition="all 0.3s ease"
-        _hover={{
-          boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
-          transform: "translateY(-2px)"
-        }}
-      >
-        <Text fontSize="sm" color="gray.600" mb={6}>
-          Salik - Data starting from 29/09/2022
-        </Text>
+    <Card.Root
+      bg="white"
+      p={{ base: 4, md: 6, lg: 8 }}
+      borderRadius="xl"
+      boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+      border="1px solid"
+      borderColor="gray.100"
+      transition="all 0.3s ease"
+      _hover={{
+        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        transform: "translateY(-2px)"
+      }}
+    >
+      <Text fontSize="sm" color="gray.600" mb={6}>
+        Salik - Data starting from 29/09/2022
+      </Text>
 
-        <Tabs.Root defaultValue="amount" variant="enclosed">
-          <Tabs.List bg="gray.100" rounded="lg" p={1} mb={6}>
-            <Tabs.Trigger 
-              value="amount" 
-              px={4} 
-              py={2} 
-              fontWeight="medium"
-              _selected={{ bg: "white", boxShadow: "sm" }}
+      <Tabs.Root defaultValue="amount" variant="enclosed">
+        <Tabs.List bg="gray.100" rounded="lg" p={1} mb={6}>
+          <Tabs.Trigger
+            value="amount"
+            px={4}
+            py={2}
+            fontWeight="medium"
+            _selected={{ bg: "white", boxShadow: "sm" }}
+          >
+            By Amount Invested
+          </Tabs.Trigger>
+          <Tabs.Trigger
+            value="share"
+            px={4}
+            py={2}
+            fontWeight="medium"
+            _selected={{ bg: "white", boxShadow: "sm" }}
+          >
+            By Share Bought
+          </Tabs.Trigger>
+          <Tabs.Indicator rounded="md" />
+        </Tabs.List>
+
+        <Tabs.Content value="amount">
+          <Card.Root bg="gray.50" p={6} mb={4}>
+            <Flex
+              direction={{ base: "column", md: "row" }}
+              gap={4}
+              align={{ base: "stretch", md: "end" }}
+              wrap={{ base: "nowrap", lg: "wrap" }}
             >
-              By Amount Invested
-            </Tabs.Trigger>
-            <Tabs.Trigger 
-              value="share" 
-              px={4} 
-              py={2} 
-              fontWeight="medium"
-              _selected={{ bg: "white", boxShadow: "sm" }}
-            >
-              By Share Bought
-            </Tabs.Trigger>
-            <Tabs.Indicator rounded="md" />
-          </Tabs.List>
-
-          <Tabs.Content value="amount">
-            <Card.Root bg="gray.50" p={6} mb={4}>
-              <Flex 
-                direction={{ base: "column", md: "row" }} 
-                gap={4} 
-                align={{ base: "stretch", md: "end" }}
-                wrap={{ base: "nowrap", lg: "wrap" }}
-              >
-                <VStack align="start" flex={1} minW="200px">
-                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                    Date of Investment
-                  </Text>
-                  <Input type="date" bg="white" />
-                </VStack>
-
-                <VStack align="start" flex={1} minW="200px">
-                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                    End Date of Investment
-                  </Text>
-                  <Input type="date" bg="white" />
-                </VStack>
-
-                <VStack align="start" flex={1} minW="180px">
-                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                    Choose Currency
-                  </Text>
-                  <NativeSelect.Root>
-                    <NativeSelect.Field bg="white">
-                      <option value="aed">AED - UAE Dirham</option>
-                      <option value="usd">USD - US Dollar</option>
-                      <option value="eur">EUR - Euro</option>
-                    </NativeSelect.Field>
-                    <NativeSelect.Indicator />
-                  </NativeSelect.Root>
-                </VStack>
-
-                <VStack align="start" flex={1} minW="200px">
-                  <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                    Amount Invested
-                  </Text>
-                  <Input placeholder="Enter amount" bg="white" />
-                </VStack>
-
-                <Button
-                  colorScheme="blue"
-                  size="lg"
-                  px={8}
-                  onClick={() => setHideGraph(true)}
-                  alignSelf={{ base: "stretch", md: "end" }}
-                >
-                  Calculate
-                </Button>
-              </Flex>
-            </Card.Root>
-
-            {hideGraph && <ResultsSection />}
-          </Tabs.Content>
-
-          <Tabs.Content value="share">
-            <Card.Root bg="gray.50" p={6} mb={4}>
-              <VStack gap={6} align="stretch" maxW="600px">
-                <VStack align="start" gap={4}>
-                  <VStack align="start" w="full">
-                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                      Date of Investment
-                    </Text>
-                    <Input type="date" bg="white" />
-                  </VStack>
-                  
-                  <VStack align="start" w="full">
-                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                      End Date of Investment
-                    </Text>
-                    <Input type="date" bg="white" />
-                  </VStack>
-                </VStack>
-
-                <Flex 
-                  direction={{ base: "column", md: "row" }} 
-                  gap={4} 
-                  align={{ base: "stretch", md: "end" }}
-                >
-                  <VStack align="start" flex={1}>
-                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                      Number of Shares
-                    </Text>
-                    <Input placeholder="Enter number of shares" bg="white" />
-                  </VStack>
-
-                  <VStack align="start" flex={1}>
-                    <Text fontSize="sm" fontWeight="medium" color="gray.700">
-                      Choose Currency
-                    </Text>
-                    <NativeSelect.Root>
-                      <NativeSelect.Field bg="white">
-                        <option value="aed">AED - UAE Dirham</option>
-                        <option value="usd">USD - US Dollar</option>
-                        <option value="eur">EUR - Euro</option>
-                      </NativeSelect.Field>
-                      <NativeSelect.Indicator />
-                    </NativeSelect.Root>
-                  </VStack>
-
-                  <Button
-                    colorScheme="blue"
-                    size="lg"
-                    px={8}
-                    onClick={() => setShowShareGraph(true)}
-                    alignSelf={{ base: "stretch", md: "end" }}
-                  >
-                    Calculate
-                  </Button>
-                </Flex>
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Date of Investment
+                </Text>
+                <Input type="date" bg="white" />
               </VStack>
-            </Card.Root>
 
-            {(hideGraph || showShareGraph) && <ResultsSection />}
-          </Tabs.Content>
-        </Tabs.Root>
-      </Card.Root>
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  End Date of Investment
+                </Text>
+                <Input type="date" bg="white" />
+              </VStack>
+
+              <VStack align="start" flex={1} minW="180px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Choose Currency
+                </Text>
+                <NativeSelect.Root>
+                  <NativeSelect.Field bg="white">
+                    <option value="aed">AED - UAE Dirham</option>
+                    <option value="usd">USD - US Dollar</option>
+                    <option value="eur">EUR - Euro</option>
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
+              </VStack>
+
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Amount Invested
+                </Text>
+                <Input placeholder="Enter amount" bg="white" />
+              </VStack>
+
+              <Button
+                colorScheme="blue"
+                size="lg"
+                px={8}
+                onClick={() => setHideGraph(true)}
+                alignSelf={{ base: "stretch", md: "end" }}
+              >
+                Calculate
+              </Button>
+            </Flex>
+          </Card.Root>
+
+          {hideGraph && <ResultsSection />}
+        </Tabs.Content>
+
+        <Tabs.Content value="share">
+        <Card.Root bg="gray.50" p={6} mb={4}>
+            <Flex
+              direction={{ base: "column", md: "row" }}
+              gap={4}
+              align={{ base: "stretch", md: "end" }}
+              wrap={{ base: "nowrap", lg: "wrap" }}
+            >
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Date of Investment
+                </Text>
+                <Input type="date" bg="white" />
+              </VStack>
+
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  End Date of Investment
+                </Text>
+                <Input type="date" bg="white" />
+              </VStack>
+
+              <VStack align="start" flex={1} minW="180px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Choose Currency
+                </Text>
+                <NativeSelect.Root>
+                  <NativeSelect.Field bg="white">
+                    <option value="aed">AED - UAE Dirham</option>
+                    <option value="usd">USD - US Dollar</option>
+                    <option value="eur">EUR - Euro</option>
+                  </NativeSelect.Field>
+                  <NativeSelect.Indicator />
+                </NativeSelect.Root>
+              </VStack>
+
+              <VStack align="start" flex={1} minW="200px">
+                <Text fontSize="sm" fontWeight="medium" color="gray.700">
+                  Amount Invested
+                </Text>
+                <Input placeholder="Enter amount" bg="white" />
+              </VStack>
+
+              <Button
+                colorScheme="blue"
+                size="lg"
+                px={8}
+                onClick={() => setHideGraph(true)}
+                alignSelf={{ base: "stretch", md: "end" }}
+              >
+                Calculate
+              </Button>
+            </Flex>
+          </Card.Root>
+
+          {(hideGraph || showShareGraph) && <ResultsSection />}
+        </Tabs.Content>
+      </Tabs.Root>
+    </Card.Root>
   );
 };
 

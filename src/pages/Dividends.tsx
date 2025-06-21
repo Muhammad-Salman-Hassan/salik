@@ -44,7 +44,7 @@ const Dividends = () => {
                 overflow="hidden"
                 mt={4}
             >
-                <Tabs.Root defaultValue="analysts" fitted variant="enclosed" >
+                <Tabs.Root defaultValue="overview" fitted variant="enclosed" >
                     <Tabs.List
                         flexDirection={{ base: 'column', md: 'row' }}
                         overflowX={{ base: 'visible' }}
