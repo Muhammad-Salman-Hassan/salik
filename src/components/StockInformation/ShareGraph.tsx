@@ -177,6 +177,7 @@ const ShareGraph: React.FC = () => {
         <YAxis
           domain={["dataMin - 0.1", "dataMax + 0.1"]}
           tick={{ fontSize: 11 }}
+          tickFormatter={(value) => parseFloat(value.toFixed(2)).toString()}
         />
         <Tooltip content={<CustomTooltip />} />
         <defs>
