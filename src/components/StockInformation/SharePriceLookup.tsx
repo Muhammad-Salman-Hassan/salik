@@ -113,22 +113,22 @@ const SharePriceLookup: React.FC = () => {
        
         {controls.chartType === "mountain" && (
           <Area
-            type="monotone"
+            type="linear"
             dataKey="close"
             stroke="#4A5568"
-            fill="#E2E8F0"
-            fillOpacity={0.6}
+            fill="#008080"
+            fillOpacity={0.3}
           />
         )}
 
-        {controls.chartType === "bar" && <Bar dataKey="close" fill="#4A5568" />}
+        {controls.chartType === "bar" && <Bar dataKey="close" fill="#008080" />}
 
         {(controls.chartType === "line" ||
           controls.chartType === "candlestick") && (
             <Line
               type="monotone"
               dataKey="close"
-              stroke="#4A5568"
+              stroke="#008080"
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 4 }}
@@ -147,18 +147,18 @@ const SharePriceLookup: React.FC = () => {
         )}
         {controls.showMovingAverages.ma20 && (
           <Line
-            type="monotone"
+            type="linear"
             dataKey="ma20"
-            stroke="#4ECDC4"
+            stroke="#008080"
             strokeWidth={1}
             dot={false}
           />
         )}
         {controls.showMovingAverages.ma50 && (
           <Line
-            type="monotone"
+            type="linear"
             dataKey="ma50"
-            stroke="#45B7D1"
+            stroke="#008080"
             strokeWidth={1}
             dot={false}
           />
@@ -291,7 +291,7 @@ const SharePriceLookup: React.FC = () => {
                       {[
                         { value: "line", label: "Line Graph" },
                         { value: "bar", label: "Bar" },
-                        { value: "candlestick", label: "Candlestick" },
+                     
                         { value: "mountain", label: "Mountain" },
                       ].map((option) => (
                         <RadioGroup.Item

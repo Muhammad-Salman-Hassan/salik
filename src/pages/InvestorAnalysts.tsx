@@ -3,61 +3,16 @@ import {
   Box,
   Flex,
   Tabs,
-  Text,
-} from '@chakra-ui/react';
-import {
-  TabsRoot,
-  TabsList,
-  TabsTrigger,
-  TabsContent
 } from '@chakra-ui/react';
 import { AnalystWithRating } from '../components/AnalystList/AnalystList';
-import { ChartDataPoint, CompanyRating, RecommendationData } from '../util/Interface';
+import { CompanyRating, RecommendationData } from '../util/Interface';
 import ConsensusEstimates from '../components/ConsensusEstimate/ConsensuEstimates';
 import ConsensusRecommendation from '../components/ConsensusRecommendation/ConsensusRecommendation';
+import { dummycompanyRatingData } from '../util/DummyData';
+import { MdOutlineAnalytics, MdOutlineTableChart, MdRecommend } from 'react-icons/md';
 
 const InvestorAnalysts: React.FC = () => {
-  const mockCompanyRatings: CompanyRating[] = [
-    {
-      company: 'Acme Corp',
-      analyst: {
-        name: 'Joice Smith',
-        email: 'joice@usoman.com',
-        phone: '+968 2476 3311',
-        lastRatingDate: '2025-05-26',
-      },
-      country: 'Oman',
-      ratingValue: 1,
-      rating: 'Buy',
-      date: '2025-05-26',
-    },
-    {
-      company: 'Globex Inc',
-      analyst: {
-        name: 'Mark Johnson',
-        email: 'mark@globex.com',
-        phone: '+1 202 555 0133',
-        lastRatingDate: '2025-03-15',
-      },
-      country: 'USA',
-      rating: 'Hold',
-      ratingValue: 2,
-      date: '2025-03-15',
-    },
-    {
-      company: 'TechWave Ltd',
-      analyst: {
-        name: 'Alina Ray',
-        email: 'alina@techwave.co.uk',
-        phone: '+44 20 7946 0999',
-        lastRatingDate: '2024-12-01',
-      },
-      country: 'UK',
-      ratingValue: 5,
-      rating: 'Sell',
-      date: '2024-12-01',
-    },
-  ];
+  const mockCompanyRatings: CompanyRating[] = dummycompanyRatingData
 
   const data: RecommendationData = {
     buy: 4.2,
@@ -85,59 +40,59 @@ const InvestorAnalysts: React.FC = () => {
             flexWrap="nowrap"
             background="teal"
           >
-            <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }} 
-                            color="white"
-                            bg="transparent"
-                            borderRadius="md"
-                            px={4}
-                            py={3}
-                            fontSize="sm"
-                            fontWeight="medium"
-                            transition="all 0.2s"
+            <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }}
+              color="white"
+              bg="transparent"
+              borderRadius="md"
+              px={4}
+              py={3}
+              fontSize="sm"
+              fontWeight="medium"
+              transition="all 0.2s"
 
-                            _selected={{
-                                bg: "white",
-                                color: "teal.600",
-                                fontWeight: "semibold",
-                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                            }}>
-              Analyst List with Rating
+              _selected={{
+                bg: "white",
+                color: "teal.600",
+                fontWeight: "semibold",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+              }}>
+              <MdOutlineAnalytics size={20} />  Analyst List with Rating
             </Tabs.Trigger>
-            <Tabs.Trigger value="consensus"w={{ base: '100%', md: 'auto' }} 
-                            color="white"
-                            bg="transparent"
-                            borderRadius="md"
-                            px={4}
-                            py={3}
-                            fontSize="sm"
-                            fontWeight="medium"
-                            transition="all 0.2s"
+            <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }}
+              color="white"
+              bg="transparent"
+              borderRadius="md"
+              px={4}
+              py={3}
+              fontSize="sm"
+              fontWeight="medium"
+              transition="all 0.2s"
 
-                            _selected={{
-                                bg: "white",
-                                color: "teal.600",
-                                fontWeight: "semibold",
-                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                            }}>
-              Consensus Estimates
+              _selected={{
+                bg: "white",
+                color: "teal.600",
+                fontWeight: "semibold",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+              }}>
+              <MdOutlineTableChart size={20} /> Consensus Estimates
             </Tabs.Trigger>
-            <Tabs.Trigger value="details"w={{ base: '100%', md: 'auto' }} 
-                            color="white"
-                            bg="transparent"
-                            borderRadius="md"
-                            px={4}
-                            py={3}
-                            fontSize="sm"
-                            fontWeight="medium"
-                            transition="all 0.2s"
+            <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }}
+              color="white"
+              bg="transparent"
+              borderRadius="md"
+              px={4}
+              py={3}
+              fontSize="sm"
+              fontWeight="medium"
+              transition="all 0.2s"
 
-                            _selected={{
-                                bg: "white",
-                                color: "teal.600",
-                                fontWeight: "semibold",
-                                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                            }}>
-              Recommendation OverView
+              _selected={{
+                bg: "white",
+                color: "teal.600",
+                fontWeight: "semibold",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+              }}>
+              <MdRecommend size={20} />Recommendation OverView
             </Tabs.Trigger>
           </Tabs.List>
 

@@ -4,7 +4,9 @@ import DividendCalculator from "../components/Dividend/DividendCalculator"
 import DividendPerShare from "../components/Dividend/DividendHistory"
 import TotalReturn from "../components/Dividend/TotalReturn"
 import DividendOverview from "../components/Dividend/DividendOverview"
-
+import { FaMagnifyingGlassChart } from "react-icons/fa6";
+import { MdAssignmentReturn, MdHistory } from "react-icons/md"
+import { IoCalculatorSharp } from "react-icons/io5";
 const Dividends = () => {
     return (
         <Box minH="100vh" p={{ base: 3, md: 6 }}>
@@ -68,7 +70,7 @@ const Dividends = () => {
                                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                             }}
                         >
-                            OverView
+                            <FaMagnifyingGlassChart size={20} /> OverView
                         </Tabs.Trigger>
                         <Tabs.Trigger value="analysts" w={{ base: '100%', md: 'auto' }} color="white"
                             bg="transparent"
@@ -85,7 +87,7 @@ const Dividends = () => {
                                 fontWeight: "semibold",
                                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                             }}>
-                            Total Returns
+                            <MdAssignmentReturn size={20} />Total Returns
                         </Tabs.Trigger>
                         <Tabs.Trigger value="consensus" w={{ base: '100%', md: 'auto' }} color="white"
                             bg="transparent"
@@ -102,7 +104,7 @@ const Dividends = () => {
                                 fontWeight: "semibold",
                                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                             }}>
-                            Dividend History
+                            <MdHistory size={20} /> Dividend History
                         </Tabs.Trigger>
                         <Tabs.Trigger value="details" w={{ base: '100%', md: 'auto' }} color="white"
                             bg="transparent"
@@ -119,11 +121,11 @@ const Dividends = () => {
                                 fontWeight: "semibold",
                                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                             }}>
-                            Dividend Calculator
+                           <IoCalculatorSharp size={20} /> Dividend Calculator
                         </Tabs.Trigger>
                     </Tabs.List>
 
-                    <Box flex="1" overflowY="auto"  py={4}>
+                    <Box flex="1" overflowY="auto" py={4}>
                         <Tabs.Content value="overview">
                             <DividendOverview />
                         </Tabs.Content>

@@ -27,10 +27,11 @@ import {
   Area,
   Brush,
 } from "recharts";
-import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import { FaCaretUp, FaCaretDown, FaChartArea, FaDatabase } from "react-icons/fa";
 import { performanceDummyData, performanceDummyDataByYear, sharesDummyData, stockDummyData, tradeDummyData } from "../../util/DummyData";
 import { ChartControls, PerformanceData, StockDataPoint, StockInfo } from "../../util/Interface";
-// Types
+import { GiTrade } from "react-icons/gi";
+import { GrDocumentPerformance } from "react-icons/gr";
 
 const ShareGraph: React.FC = () => {
   const [stockInfo] = useState<StockInfo>({
@@ -350,7 +351,7 @@ const ShareGraph: React.FC = () => {
               color: "teal.600",
               fontWeight: "semibold",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-            }}>Share Graph</Tabs.Trigger>
+            }}><FaChartArea size={20}/>Share Graph</Tabs.Trigger>
           <Tabs.Trigger value="data" color="white"
             bg="transparent"
             borderRadius="md"
@@ -365,7 +366,7 @@ const ShareGraph: React.FC = () => {
               color: "teal.600",
               fontWeight: "semibold",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-            }}>Share Data</Tabs.Trigger>
+            }}><FaDatabase size={20}/>Share Data</Tabs.Trigger>
           <Tabs.Trigger value="trades" color="white"
             bg="transparent"
             borderRadius="md"
@@ -380,7 +381,7 @@ const ShareGraph: React.FC = () => {
               color: "teal.600",
               fontWeight: "semibold",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-            }}>Trades</Tabs.Trigger>
+            }}><GiTrade size={20}/>Trades</Tabs.Trigger>
           <Tabs.Trigger value="performance" color="white"
             bg="transparent"
             borderRadius="md"
@@ -395,7 +396,7 @@ const ShareGraph: React.FC = () => {
               color: "teal.600",
               fontWeight: "semibold",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-            }}>Performance</Tabs.Trigger>
+            }}><GrDocumentPerformance size={20} />Performance</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="graph">
           <Box bg="white"

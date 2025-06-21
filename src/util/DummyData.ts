@@ -1,3 +1,53 @@
+import { CompanyRating } from "./Interface";
+
+export const dummycompanyRatingData: CompanyRating[] = [
+    {
+        company: 'Acme Corp',
+        analyst: {
+            name: 'Joice Smith',
+            email: 'joice@usoman.com',
+            phone: '+968 2476 3311',
+            lastRatingDate: '2025-05-26',
+        },
+        country: 'Oman',
+        ratingValue: 1,
+        rating: 'Buy',
+        date: '2025-05-26',
+    },
+    {
+        company: 'Globex Inc',
+        analyst: {
+            name: 'Mark Johnson',
+            email: 'mark@globex.com',
+            phone: '+1 202 555 0133',
+            lastRatingDate: '2025-03-15',
+        },
+        country: 'USA',
+        rating: 'Hold',
+        ratingValue: 2,
+        date: '2025-03-15',
+    },
+    {
+        company: 'TechWave Ltd',
+        analyst: {
+            name: 'Alina Ray',
+            email: 'alina@techwave.co.uk',
+            phone: '+44 20 7946 0999',
+            lastRatingDate: '2024-12-01',
+        },
+        country: 'UK',
+        ratingValue: 5,
+        rating: 'Sell',
+        date: '2024-12-01',
+    },
+];
+
+
+
+
+
+
+
 export const stockDummyData = [
     {
         date: "20/5",
