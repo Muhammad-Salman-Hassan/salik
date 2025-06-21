@@ -24,8 +24,7 @@ import {
     FiCalendar,
     FiExternalLink
 } from 'react-icons/fi';
-import { dummyPeriodDataResult } from '../../util/DummyData';
-import { Document, ReportProps, YearData } from '../../util/Interface';
+import { Document, ReportProps } from '../../util/Interface';
 import { ReportsSummary } from './ReportSummaryDisplay';
 
 
@@ -269,7 +268,8 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
                                                 </Text>
                                             </Box>
 
-                                            <Collapsible.Root open={expandedPeriods.includes(periodData.period)}>
+                                            <Collapsible.Root open={true}>
+                                            {/* //expandedPeriods.includes(periodData.period)  */}
                                                 <Collapsible.Content>
                                                     <VStack gap={3} p={4} align="stretch">
                                                         {periodData.documents.map((document) => (

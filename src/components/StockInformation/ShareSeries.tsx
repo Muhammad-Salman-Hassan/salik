@@ -1,22 +1,22 @@
 import React from "react";
-import { Box, Flex, Table } from "@chakra-ui/react";
+import { Box, Button, Flex, Table } from "@chakra-ui/react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { shareSeriesDummyData } from "../../util/DummyData";
 
 const ShareSeries: React.FC = () => {
   const tableData: { label: string; value: string | number }[] = shareSeriesDummyData
   return (
-    <Box maxW="100%" mx="auto"  bg="white"
-    p={6}
-    borderRadius="xl"
-    boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
-    border="1px solid"
-    borderColor="gray.100"
-    transition="all 0.3s ease"
-    _hover={{
-      boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
-      transform: "translateY(-2px)"
-    }}>
+    <Box maxW="100%" mx="auto" bg="white"
+      p={6}
+      borderRadius="xl"
+      boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+      border="1px solid"
+      borderColor="gray.100"
+      transition="all 0.3s ease"
+      _hover={{
+        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        transform: "translateY(-2px)"
+      }}>
       <Table.Root size="sm" variant="outline">
         <Table.Header bg="teal">
           <Table.Row>
@@ -54,6 +54,12 @@ const ShareSeries: React.FC = () => {
           ))}
         </Table.Body>
       </Table.Root>
+
+      <Flex justifyContent={"center"} align={"center"}>
+        <Button bg="teal" color="white" size="sm" mt={5}>
+          Print This Page
+        </Button>
+      </Flex>
     </Box>
   );
 };

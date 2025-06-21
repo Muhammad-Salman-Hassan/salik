@@ -240,6 +240,13 @@ export interface DividendData {
     color: string;
 }
 
+export interface AnnualData {
+    year: string;
+    semiAnnual1: number;
+    semiAnnual2: number;
+    dividendYield: number;
+    totalDividend: number;
+}
 export interface DividendTableData {
     financialPeriod: string;
     type: string;
