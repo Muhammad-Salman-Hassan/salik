@@ -72,7 +72,7 @@ export const AnalystWithRating = ({ data }: { data: CompanyRating[] }) => {
                                 </Table.Cell>
                                 <Table.Cell>{item.country}</Table.Cell>
                                 <Table.Cell>
-                                    <RatingScaleTooltip value={item.ratingValue} label={item.rating} />
+                                <RatingScaleTooltip value={item.ratingValue} label={item.rating} />
                                 </Table.Cell>
                             </Table.Row>
                         ))}
