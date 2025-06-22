@@ -5,7 +5,6 @@ import {
   Stack,
   Text,
   Tabs,
-
   RadioGroup,
   VStack,
   Flex,
@@ -27,12 +26,14 @@ import {
   ResponsiveContainer,
   XAxis,
   YAxis,
-  Tooltip
+  Tooltip,
+  Brush
 } from "recharts";
 import { FaCaretDown, FaCaretUp, FaEyeSlash } from "react-icons/fa";
 import { sharePricelookupdummydata, sharePricelookupTabledummydata } from "../../util/DummyData";
 import { ChartControls, StockDataPoint } from "../../util/Interface";
-
+import { GiGrapes } from "react-icons/gi";
+import { BsGraphDown } from "react-icons/bs";
 
 const SharePriceLookup: React.FC = () => {
   const stockData: StockDataPoint[] = sharePricelookupTabledummydata
@@ -61,6 +62,7 @@ const SharePriceLookup: React.FC = () => {
       dfmGeneralIndex: false,
     },
   });
+
   const calculateMovingAverage = (data: StockDataPoint[], period: number) => {
     return data.map((point, index) => {
       if (index < period - 1) return { ...point, ma: null };
@@ -72,6 +74,7 @@ const SharePriceLookup: React.FC = () => {
       return { ...point, ma: sum / period };
     });
   };
+
   const dataWithMA = useMemo(() => {
     let result = stockData;
 
@@ -92,6 +95,9 @@ const SharePriceLookup: React.FC = () => {
 
     return result;
   }, [stockData, controls.showMovingAverages]);
+  const formatYAxisLabel = (value: number) => {
+    return value.toFixed(2);
+  };
   const renderChart = () => {
     const ChartComponent =
       controls.chartType === "mountain"
@@ -101,16 +107,17 @@ const SharePriceLookup: React.FC = () => {
           : LineChart;
 
     return (
-      <ChartComponent data={dataWithMA}>
+      <ChartComponent data={dataWithMA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+
         <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
         <XAxis dataKey="date" tick={{ fontSize: 11 }} />
         <YAxis
           domain={["dataMin - 0.1", "dataMax + 0.1"]}
           tick={{ fontSize: 11 }}
+          tickFormatter={formatYAxisLabel}
         />
         <Tooltip content={<CustomTooltip />} />
 
-       
         {controls.chartType === "mountain" && (
           <Area
             type="linear"
@@ -135,7 +142,6 @@ const SharePriceLookup: React.FC = () => {
             />
           )}
 
-  
         {controls.showMovingAverages.ma10 && (
           <Line
             type="monotone"
@@ -163,9 +169,14 @@ const SharePriceLookup: React.FC = () => {
             dot={false}
           />
         )}
+        <Brush dataKey="date" height={30} stroke="#008080" />
+
       </ChartComponent>
     );
   };
+
+
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -181,22 +192,24 @@ const SharePriceLookup: React.FC = () => {
           <Text fontWeight="bold" mb={1}>
             {label}
           </Text>
-          <Text fontSize="sm">Open: {data.open?.toFixed(2)}</Text>
-          <Text fontSize="sm">High: {data.high?.toFixed(2)}</Text>
-          <Text fontSize="sm">Low: {data.low?.toFixed(2)}</Text>
-          <Text fontSize="sm">Close: {data.close?.toFixed(2)}</Text>
-          <Text fontSize="sm">Volume: {data.volume?.toLocaleString()}</Text>
+          <Text fontSize="sm" color={"green.500"}>Open: {data.open?.toFixed(2)}</Text>
+          <Text fontSize="sm" color={'green.600'}>High: {data.high?.toFixed(2)}</Text>
+          <Text fontSize="sm" color={"red.500"}>Low: {data.low?.toFixed(2)}</Text>
+          <Text fontSize="sm" color={"red.500"}>Close: {data.close?.toFixed(2)}</Text>
+          <Text fontSize="sm" color={"blue.500"}>Volume: {data.volume?.toLocaleString()}</Text>
         </Box>
       );
     }
     return null;
   };
+
   const tableData: { label: string; value: string | number }[] = [
     { label: "Open", value: "5.59" },
     { label: "Day's High", value: " 5.59" },
     { label: "Day's Low", value: "5.47" },
     { label: "Volume", value: "6,605,615" },
   ];
+
   const updateControl = (key: keyof ChartControls, value: any) => {
     console.log(key, value);
     setControls((prev) => ({
@@ -204,14 +217,18 @@ const SharePriceLookup: React.FC = () => {
       [key]: value,
     }));
   };
+
   const [hideGraph, setHideGraph] = useState(false);
   const [showShareGraph, setShowShareGraph] = useState(false);
+
   interface StockStat {
     label: string;
     value: string;
     date: string | null;
   }
+
   const stockStats: StockStat[] = sharePricelookupdummydata
+
   const getTextColor = (change: number | null | undefined) => {
     if (Number(change) && Number(change) > 0) {
       return "green";
@@ -221,8 +238,11 @@ const SharePriceLookup: React.FC = () => {
       return "black";
     }
   };
+
   return (
-    <Box borderTop="1px" bg="white"
+    <Box
+      borderTop="1px"
+      bg="white"
       p={6}
       borderRadius="xl"
       boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
@@ -232,11 +252,12 @@ const SharePriceLookup: React.FC = () => {
       _hover={{
         boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
         transform: "translateY(-2px)"
-      }}>
-
+      }}
+    >
       <Text fontSize="sm" color="gray.600" mb={4}>
         Salik - Data starting from 09/29/2022
       </Text>
+
       <Tabs.Root defaultValue="historical" variant="plain">
         <Tabs.List bg="bg.muted" rounded="l3" p="1">
           <Tabs.Trigger value="historical">
@@ -245,6 +266,7 @@ const SharePriceLookup: React.FC = () => {
           <Tabs.Trigger value="share">Share Price Download</Tabs.Trigger>
           <Tabs.Indicator rounded="l2" />
         </Tabs.List>
+
         <Tabs.Content value="historical">
           <Flex gap={4} align={"end"} mb={4}>
             <Grid mt={4}>
@@ -274,9 +296,10 @@ const SharePriceLookup: React.FC = () => {
               </Button>
             )}
           </Flex>
+
           {!hideGraph ? (
             <>
-              <Box>
+              <Box mb={4}>
                 <Text fontWeight="bold" mb={2}>
                   Diagram type
                 </Text>
@@ -291,7 +314,6 @@ const SharePriceLookup: React.FC = () => {
                       {[
                         { value: "line", label: "Line Graph" },
                         { value: "bar", label: "Bar" },
-                     
                         { value: "mountain", label: "Mountain" },
                       ].map((option) => (
                         <RadioGroup.Item
@@ -309,13 +331,15 @@ const SharePriceLookup: React.FC = () => {
                   </VStack>
                 </RadioGroup.Root>
               </Box>
+
               <Box
                 h="400px"
-                mt={4}
+                w="100%"
                 border="1px solid"
                 borderColor="gray.200"
                 borderRadius="md"
-                p={2}
+                p={4}
+                overflow="hidden"
               >
                 <ResponsiveContainer width="100%" height="100%">
                   {renderChart()}
@@ -323,60 +347,73 @@ const SharePriceLookup: React.FC = () => {
               </Box>
             </>
           ) : (
-            <Flex
-              justify="space-between"
-              align="center"
-              mt={2}
-              w="100%"
-              background={"gray.50"}
+            <Box mt={4}>
+              <Flex
+                direction={{ base: "column", lg: "row" }}
+                gap={4}
+                align={{ base: "stretch", lg: "start" }}
+                w="100%"
+              >
+                <Box
+                  flex="1"
+                  minW="300px"
+                  background="gray.50"
+                  borderRadius="md"
+                  p={4}
+                >
+                  <Table.Root size="sm" variant="outline">
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.ColumnHeader>
+                          June/18/2025
+                        </Table.ColumnHeader>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      {tableData.map((item, index) => (
+                        <Table.Row key={index}>
+                          <Table.Cell>
+                            {item.label}: {item.value}
+                          </Table.Cell>
+                        </Table.Row>
+                      ))}
+                    </Table.Body>
+                  </Table.Root>
+                </Box>
 
-              borderRadius="md"
-            >
-              <Table.Root size="sm" w="600px" variant="outline">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeader minW="200px">
-                      June/18/2025
-                    </Table.ColumnHeader>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {tableData.map((item, index) => (
-                    <Table.Row key={index}>
-                      <Table.Cell>
-                        {item.label}: {item.value}
-                      </Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table.Root>
-              <Box w={"600px"} textAlign="center" p={6}
-                borderRadius="xl"
-                boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
-                border="1px solid"
-                borderColor="gray.100"
-                transition="all 0.3s ease"
-                _hover={{
-                  boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
-                  transform: "translateY(-2px)"
-                }}>
-                <Heading size="4xl">Close Price</Heading>
-                <Heading size="6xl">5.50AED</Heading>
-              </Box>
-            </Flex>
+                <Box
+                  flex="1"
+                  minW="300px"
+                  textAlign="center"
+                  p={6}
+                  borderRadius="xl"
+                  boxShadow="0 4px 20px rgba(0, 0, 0, 0.08)"
+                  border="1px solid"
+                  borderColor="gray.100"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+                    transform: "translateY(-2px)"
+                  }}
+                >
+                  <Heading size="4xl">Close Price</Heading>
+                  <Heading size="6xl">5.50AED</Heading>
+                </Box>
+              </Flex>
+            </Box>
           )}
         </Tabs.Content>
+
         <Tabs.Content value="share">
-          <Flex gap={4} direction={"column"} w={"200px"}>
+          <Flex gap={4} direction={"column"} w={"100%"} maxW="400px">
             <Grid mt={4}>
               <small>Select time period</small>
-              <Flex gap={2} align="center">
-                {" "}
-                From: <Input placeholder="Select Date" type="date" />
-                To: <Input placeholder="Select Date" type="date" />
+              <Flex gap={2} align="center" wrap="wrap">
+                From: <Input placeholder="Select Date" type="date" flex="1" minW="150px" />
+                To: <Input placeholder="Select Date" type="date" flex="1" minW="150px" />
               </Flex>
             </Grid>
-            <Flex gap={2} align="end">
+            <Flex gap={2} align="end" wrap="wrap">
               <Grid>
                 <small>Choose currency</small>
                 <NativeSelect.Root w={170}>
@@ -396,15 +433,11 @@ const SharePriceLookup: React.FC = () => {
               </Button>
             </Flex>
           </Flex>
+
           {showShareGraph && (
-            <Box
-              // h="400px"
-              mt={4}
-              borderColor="gray.200"
-              borderRadius="md"
-              p={2}
-            >
-              <Table.Root size="sm" variant="outline" mb={3}>
+
+            <Box mt={4} w="100%">
+              <Table.Root size="sm" variant="outline" mb={4}>
                 <Table.Body>
                   {stockStats.map((item, index) => (
                     <Table.Row key={index}>
@@ -430,14 +463,36 @@ const SharePriceLookup: React.FC = () => {
                   ))}
                 </Table.Body>
               </Table.Root>
-              <ResponsiveContainer width="100%" height="100%" >
-                {renderChart()}
-              </ResponsiveContainer>
+
+              <Flex justifyContent={"center"} alignItems={"center"} mb={4}>
+                <Button colorScheme="teal">
+                  <BsGraphDown /> Download Graph
+                </Button>
+              </Flex>
+              {/* Main Price Chart */}
+              <Box
+                h="400px"
+                w="100%"
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="md"
+                borderBottomRadius="none"
+                p={4}
+                overflow="hidden"
+                bg="white"
+              >
+
+                <ResponsiveContainer width="100%" height="100%">
+
+                  {renderChart()}
+                </ResponsiveContainer>
+              </Box>
+
+
             </Box>
           )}
         </Tabs.Content>
       </Tabs.Root>
-
     </Box>
   );
 };
