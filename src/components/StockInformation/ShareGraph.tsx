@@ -12,7 +12,7 @@ import {
   Card,
   HStack,
   VStack,
-  Float,
+
   Circle,
   SimpleGrid
 } from '@chakra-ui/react';
@@ -27,15 +27,14 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+
   ResponsiveContainer,
   Brush,
   ReferenceLine,
-  ReferenceArea,
-  Dot
+
 } from 'recharts';
 
-// TypeScript interfaces
+
 interface StockData {
   date: string;
   timestamp: Date;
@@ -91,7 +90,7 @@ interface ShareGraphProps {
   pressReleaseData?: string[];
 }
 
-// Diagram type options for radio group
+
 const diagramTypeOptions = [
   { label: "Line Graph", value: "line" },
   { label: "Mountain", value: "mountain" }
@@ -123,9 +122,8 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
   const [syncedHover, setSyncedHover] = useState<string | null>(null);
   const [brushRange, setBrushRange] = useState<{ startIndex?: number, endIndex?: number }>({});
 
-  // Color scheme
+
   const bgColor = 'white';
-  const borderColor = 'gray.200';
   const textColor = 'gray.800';
 
   // Calculate period high/low
@@ -151,7 +149,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     return result;
   }, []);
 
-  // Generate DFM data (simulated based on main stock with some variation)
+  // Generate DFM data 
   const generateDFMData = useCallback((baseData: StockData[], variation: number) => {
     return baseData.map((item, index) => {
       const baseValue = item.close;
@@ -160,7 +158,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     });
   }, []);
 
-  // Enhanced data with moving averages and indicators
+
   const enhancedData = useMemo((): MovingAverageData[] => {
     const ma10Values = calculateMovingAverage(stockData, 10);
     const ma20Values = calculateMovingAverage(stockData, 20);
@@ -186,7 +184,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     }));
   }, [stockData, calculateMovingAverage, generateDFMData, earningsData, pressReleaseData]);
 
-  // Custom tooltip component
+  
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -249,14 +247,14 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     }));
   };
 
-  // Format volume for display
+ 
   const formatVolume = (value: number) => {
     if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
     if (value >= 1000) return `${(value / 1000).toFixed(0)}K`;
     return value.toString();
   };
 
-  // Custom dot component for indicators
+  // Custom dot component indicatoree
   const CustomDot = (props: any) => {
     const { cx, cy, payload } = props;
     if (!cx || !cy) return null;
@@ -282,7 +280,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     return <g>{dots}</g>;
   };
 
-  // Handle brush change
+  // Handle brush when you change brush
   const handleBrushChange = (brushData: any) => {
     setBrushRange({
       startIndex: brushData?.startIndex,
@@ -290,17 +288,16 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     });
   };
 
-  // Handle synchronized hover
+ 
   const handleSyncedHover = (label: string | null) => {
     setSyncedHover(label);
   };
 
-  // Format Y-axis values to avoid floating point precision issues
   const formatYAxis = (value: number) => {
     return parseFloat(value.toFixed(3)).toString();
   };
 
-  // Render main chart based on diagram type
+
   const renderMainChart = () => {
     const commonProps = {
       data: enhancedData,
@@ -317,50 +314,16 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
 
     // Add main chart based on type
     switch (diagramType) {
-      // case 'candlestick':
-      //   chartElements.push(
-      //     <LineChart key="main" {...commonProps}>
-      //       <CartesianGrid opacity={0.3} />
-      //       <XAxis dataKey="date" stroke={textColor} />
-      //       <YAxis domain={['dataMin - 0.05', 'dataMax + 0.05']} stroke={textColor} tickFormatter={formatYAxis} />
-      //       <Tooltip content={<CustomTooltip />} />
-      //       <Line type="monotone" dataKey="high" stroke="#22c55e" dot={<CustomDot />} />
-      //       <Line type="monotone" dataKey="low" stroke="#ef4444" dot={false} />
-      //       <Line type="monotone" dataKey="close" stroke="#3b82f6" dot={false} />
-      //       {/* DFM Indices */}
-      //       {chartConfig.dfmIndustrials && (
-      //         <Line type="monotone" dataKey="dfmIndustrials" stroke="#1e40af" dot={false} />
-      //       )}
-      //       {chartConfig.dfmGeneralIndex && (
-      //         <Line type="monotone" dataKey="dfmGeneralIndex" stroke="#0ea5e9" dot={false} />
-      //       )}
-      //       {/* Period High/Low lines */}
-      //       {chartConfig.periodHighLow && (
-      //         <>
-      //           <ReferenceLine y={periodHighLow.high} stroke="#22c55e" label="Period High" />
-      //           <ReferenceLine y={periodHighLow.low} stroke="#ef4444" label="Period Low" />
-      //         </>
-      //       )}
-      //     </LineChart>
-      //   );
-      //   break;
-
-      // case 'bar':
-      //   chartElements.push(
-      //     <BarChart key="main" {...commonProps}>
-      //       <CartesianGrid strokeDasharray="3 3" stroke={borderColor} opacity={0.3} />
-      //       <XAxis dataKey="date" stroke={textColor} />
-      //       <YAxis stroke={textColor} tickFormatter={formatYAxis} />
-      //       <Tooltip content={<CustomTooltip />} />
-      //       <Bar dataKey="close" fill="#3b82f6" />
-      //     </BarChart>
-      //   );
-      //   break;
-
+     
       case 'mountain':
         chartElements.push(
           <AreaChart key="main" {...commonProps}>
-            <CartesianGrid strokeDasharray="3 3" stroke={borderColor} opacity={0.3} />
+            <CartesianGrid
+              stroke="#e2e8f0"
+              strokeDasharray="3 3"
+              horizontal
+              vertical
+            />
             <XAxis dataKey="date" stroke={textColor} />
             <YAxis domain={['dataMin - 0.05', 'dataMax + 0.05']} stroke={textColor} tickFormatter={formatYAxis} />
             <Tooltip content={<CustomTooltip />} />
@@ -372,7 +335,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
               strokeWidth={2}
               dot={<CustomDot />}
             />
-            {/* DFM Indices */}
+       
 
             {chartConfig.dfmIndustrials && (
               <Area
@@ -415,7 +378,12 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
       default:
         chartElements.push(
           <LineChart key="main" {...commonProps}>
-            <CartesianGrid strokeDasharray="3 3" stroke={borderColor} opacity={0.3} />
+            <CartesianGrid
+              stroke="#e2e8f0"
+              strokeDasharray="3 3"
+              horizontal
+              vertical
+            />
             <XAxis dataKey="date" stroke={textColor} />
             <YAxis domain={['dataMin - 0.05', 'dataMax + 0.05']} stroke={textColor} tickFormatter={formatYAxis} />
             <Tooltip content={<CustomTooltip />} />
@@ -427,7 +395,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
               dot={<CustomDot />}
               activeDot={{ r: 6 }}
             />
-            {/* Moving averages */}
+ 
             {chartConfig.ma10 && (
               <Line
                 type="monotone"
@@ -459,7 +427,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                 strokeDasharray="5 5"
               />
             )}
-            {/* DFM Indices */}
+   
             {chartConfig.dfmIndustrials && (
               <Line
                 type="monotone"
@@ -480,7 +448,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                 name="DFM General Index"
               />
             )}
-            {/* Period High/Low lines */}
+        
             {chartConfig.periodHighLow && (
               <>
                 <ReferenceLine y={periodHighLow.high} stroke="#22c55e" strokeDasharray="5 5" label="Period High" />
@@ -503,22 +471,13 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     return chartElements[0];
   };
 
-  // Render lower charts (volume and daily change)
+  
   const renderLowerCharts = () => {
 
-    const commonProps = {
-      data: enhancedData,
-      margin: { top: 30, right: 30, left: 20, bottom: 5 },
-      onMouseMove: (e: any) => {
-        if (e && e.activeLabel) {
-          handleSyncedHover(e.activeLabel);
-        }
-      },
-      onMouseLeave: () => handleSyncedHover(null)
-    };
+   
     const charts = [];
 
-    // Volume chart
+   
     if (!chartConfig.hideVolume) {
       charts.push(
         <Card.Root key="volume" mb={4} variant="outline">
@@ -534,10 +493,15 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                       handleSyncedHover(e.activeLabel);
                     }
                   }}
-                  
+
                   onMouseLeave={() => handleSyncedHover(null)}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke={borderColor} opacity={0.3} />
+                  <CartesianGrid
+                    stroke="#e2e8f0"
+                    strokeDasharray="3 3"
+                    horizontal
+                    vertical
+                  />
                   <XAxis dataKey="date" stroke={textColor} />
                   <YAxis tickFormatter={formatVolume} stroke={textColor} />
                   <Tooltip formatter={(value: number) => [formatVolume(value), 'Volume']} />
@@ -558,7 +522,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
       );
     }
 
-    // Daily Change chart
+  
     if (chartConfig.dailyChange) {
       charts.push(
         <Card.Root key="dailyChange" mb={4} variant="outline">
@@ -576,7 +540,12 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                   }}
                   onMouseLeave={() => handleSyncedHover(null)}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke={borderColor} opacity={0.3} />
+                  <CartesianGrid
+                    stroke="#e2e8f0"
+                    strokeDasharray="3 3"
+                    horizontal
+                    vertical
+                  />
                   <XAxis dataKey="date" stroke={textColor} />
                   <YAxis stroke={textColor} />
                   <Tooltip />
