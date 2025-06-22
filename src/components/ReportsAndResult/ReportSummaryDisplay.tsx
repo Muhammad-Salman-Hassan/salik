@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { ChartComponent, ChartType } from '../ChartComponent';
 import { DataCategory } from '../../util/Interface';
 import {
+    dummyAnnualcashFlowData,
+    dummyAnnualfinancialPositionData,
+    dummyAnnualoperatingData,
     dummycashFlowData,
     dummyfinancialPositionData,
     dummyoperatingData,
+    incomeAnnualStatementData,
     incomeStatementData
 } from '../../util/DummyData';
 import { DataTable } from './ReportResultDataTable';
@@ -94,6 +98,15 @@ export const ReportsSummary: React.FC = () => {
             case 'position': return dummyfinancialPositionData;
             case 'cashflow': return dummycashFlowData;
             case 'operating': return dummyoperatingData;
+            default: return incomeStatementData;
+        }
+    };
+    const getDataByAnnualCategory = (category: DataCategory) => {
+        switch (category) {
+            case 'income': return incomeAnnualStatementData;
+            case 'position': return dummyAnnualfinancialPositionData;
+            case 'cashflow': return dummyAnnualcashFlowData;
+            case 'operating': return dummyAnnualoperatingData;
             default: return incomeStatementData;
         }
     };
@@ -287,7 +300,7 @@ export const ReportsSummary: React.FC = () => {
 
                             {showTable ? (
                                 <DataTable
-                                    data={getDataByCategory(activeTab)}
+                                    data={getDataByAnnualCategory(activeTab)}
                                     columns={tableColumns[activeTab]}
                                     title={`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Statement`}
                                 />
