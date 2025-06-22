@@ -284,7 +284,7 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
                                             </Collapsible.Root>
 
 
-                                            <Box p={4} pt={expandedPeriods.includes(periodData.period) ? 0 : 4}>
+                                            {/* <Box p={4} pt={expandedPeriods.includes(periodData.period) ? 0 : 4}>
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
@@ -299,7 +299,7 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
                                                 >
                                                     {expandedPeriods.includes(periodData.period) ? 'Show Less' : 'Show More'}
                                                 </Button>
-                                            </Box>
+                                            </Box> */}
                                         </Card.Root>
                                     ))}
                                 </SimpleGrid>

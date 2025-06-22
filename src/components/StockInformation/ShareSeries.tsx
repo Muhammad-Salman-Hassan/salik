@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Button, Flex, Table } from "@chakra-ui/react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { shareSeriesDummyData } from "../../util/DummyData";
 
 const ShareSeries: React.FC = () => {
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = () => {
+    if (tableRef.current) {
+      const printContent = tableRef.current.innerHTML;
+      const originalContent = document.body.innerHTML;
+
+      // Replace the body with only the table
+      document.body.innerHTML = printContent;
+
+      // Call print
+      window.print();
+
+      // Restore original content
+      document.body.innerHTML = originalContent;
+
+      
+    }
+  };
   const tableData: { label: string; value: string | number }[] = shareSeriesDummyData
   return (
     <Box maxW="100%" mx="auto" bg="white"
@@ -13,11 +32,12 @@ const ShareSeries: React.FC = () => {
       border="1px solid"
       borderColor="gray.100"
       transition="all 0.3s ease"
+      ref={tableRef}
       _hover={{
         boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
         transform: "translateY(-2px)"
       }}>
-      <Table.Root size="sm" variant="outline">
+      <Table.Root size="sm" variant="outline" >
         <Table.Header bg="teal">
           <Table.Row>
             <Table.ColumnHeader minW="200px" color="white">Share snapshot</Table.ColumnHeader>
@@ -56,7 +76,7 @@ const ShareSeries: React.FC = () => {
       </Table.Root>
 
       <Flex justifyContent={"center"} align={"center"}>
-        <Button bg="teal" color="white" size="sm" mt={5}>
+        <Button bg="teal" color="white" size="sm" mt={5} onClick={handlePrint}>
           Print This Page
         </Button>
       </Flex>

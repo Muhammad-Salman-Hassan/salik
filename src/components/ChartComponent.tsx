@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { 
-    Area, 
-    AreaChart, 
-    Bar, 
-    BarChart, 
-    CartesianGrid, 
-    Cell, 
-     
-    Line, 
-    LineChart, 
-    Pie, 
-    PieChart, 
-    ResponsiveContainer, 
-    Tooltip, 
-    XAxis, 
+import {
+    Area,
+    AreaChart,
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+
+    Line,
+    LineChart,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
     YAxis,
-    ComposedChart
+    ComposedChart,
+    Brush
 } from "recharts";
 import { Box, Checkbox, HStack, Text } from '@chakra-ui/react';
 
@@ -147,9 +148,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
+
                             {/* Currency and Number lines on left axis */}
-                            {[...currencyConfigs, ...numberConfigs].map((config, index) => 
+                            {[...currencyConfigs, ...numberConfigs].map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Line
                                         key={config.dataKey}
@@ -163,9 +164,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
-                            
+
                             {/* Percentage lines on right axis */}
-                            {percentageConfigs.map((config, index) => 
+                            {percentageConfigs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Line
                                         key={config.dataKey}
@@ -179,6 +180,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                            <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </ComposedChart>
                     );
                 } else {
@@ -204,8 +207,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
-                            {configs.map((config, index) => 
+
+                            {configs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Line
                                         key={config.dataKey}
@@ -218,6 +221,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                            <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </LineChart>
                     );
                 }
@@ -269,9 +274,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
+
                             {/* Currency and Number bars on left axis */}
-                            {[...currencyConfigs, ...numberConfigs].map((config, index) => 
+                            {[...currencyConfigs, ...numberConfigs].map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Bar
                                         key={config.dataKey}
@@ -283,9 +288,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
-                            
+
                             {/* Percentage lines on right axis */}
-                            {percentageConfigs.map((config, index) => 
+                            {percentageConfigs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Line
                                         key={config.dataKey}
@@ -299,6 +304,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                            <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </ComposedChart>
                     );
                 } else {
@@ -325,8 +332,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
-                            {configs.map((config, index) => 
+
+                            {configs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Bar
                                         key={config.dataKey}
@@ -337,6 +344,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                        <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </BarChart>
                     );
                 }
@@ -387,9 +396,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
+
                             {/* Currency and Number areas on left axis */}
-                            {[...currencyConfigs, ...numberConfigs].map((config, index) => 
+                            {[...currencyConfigs, ...numberConfigs].map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Area
                                         key={config.dataKey}
@@ -404,9 +413,9 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
-                            
+
                             {/* Percentage lines on right axis */}
-                            {percentageConfigs.map((config, index) => 
+                            {percentageConfigs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Line
                                         key={config.dataKey}
@@ -420,6 +429,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                            <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </ComposedChart>
                     );
                 } else {
@@ -445,8 +456,8 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     return [formatTooltipValue(value, config?.format), config?.title || name];
                                 }}
                             />
-                            
-                            {configs.map((config, index) => 
+
+                            {configs.map((config, index) =>
                                 visibleSeries[config.dataKey] && (
                                     <Area
                                         key={config.dataKey}
@@ -460,11 +471,13 @@ export const ChartComponent: React.FC<ChartProps> = ({
                                     />
                                 )
                             )}
+                            <Brush dataKey="period" height={30} stroke="#008080" />
+
                         </AreaChart>
                     );
                 }
 
-           
+
             default:
                 return null;
         }

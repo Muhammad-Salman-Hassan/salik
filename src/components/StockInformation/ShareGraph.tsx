@@ -184,7 +184,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     }));
   }, [stockData, calculateMovingAverage, generateDFMData, earningsData, pressReleaseData]);
 
-  
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -247,7 +247,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     }));
   };
 
- 
+
   const formatVolume = (value: number) => {
     if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
     if (value >= 1000) return `${(value / 1000).toFixed(0)}K`;
@@ -288,13 +288,13 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     });
   };
 
- 
+
   const handleSyncedHover = (label: string | null) => {
     setSyncedHover(label);
   };
 
   const formatYAxis = (value: number) => {
-    return parseFloat(value.toFixed(3)).toString();
+    return chartConfig.percentView ? `${parseFloat((value / 100).toFixed(3)).toString()}%` : parseFloat(value.toFixed(3)).toString();
   };
 
 
@@ -314,7 +314,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
 
     // Add main chart based on type
     switch (diagramType) {
-     
+
       case 'mountain':
         chartElements.push(
           <AreaChart key="main" {...commonProps}>
@@ -335,7 +335,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
               strokeWidth={2}
               dot={<CustomDot />}
             />
-       
+
 
             {chartConfig.dfmIndustrials && (
               <Area
@@ -395,7 +395,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
               dot={<CustomDot />}
               activeDot={{ r: 6 }}
             />
- 
+
             {chartConfig.ma10 && (
               <Line
                 type="monotone"
@@ -427,7 +427,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                 strokeDasharray="5 5"
               />
             )}
-   
+
             {chartConfig.dfmIndustrials && (
               <Line
                 type="monotone"
@@ -448,7 +448,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                 name="DFM General Index"
               />
             )}
-        
+
             {chartConfig.periodHighLow && (
               <>
                 <ReferenceLine y={periodHighLow.high} stroke="#22c55e" strokeDasharray="5 5" label="Period High" />
@@ -471,13 +471,13 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
     return chartElements[0];
   };
 
-  
+
   const renderLowerCharts = () => {
 
-   
+
     const charts = [];
 
-   
+
     if (!chartConfig.hideVolume) {
       charts.push(
         <Card.Root key="volume" mb={4} variant="outline">
@@ -522,7 +522,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
       );
     }
 
-  
+
     if (chartConfig.dailyChange) {
       charts.push(
         <Card.Root key="dailyChange" mb={4} variant="outline">
@@ -718,7 +718,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                   <Checkbox.Control />
                   <Checkbox.Label>50 days</Checkbox.Label>
                 </Checkbox.Root>
-                <Box>
+                {/* <Box>
                   <Text fontSize="sm" mb={1}>Insert period</Text>
                   <Input
                     size="sm"
@@ -726,7 +726,7 @@ const ShareGraph: React.FC<ShareGraphProps> = ({
                     onChange={(e) => setCustomPeriod(e.target.value)}
                     placeholder="Days"
                   />
-                </Box>
+                </Box> */}
               </VStack>
             </Card.Body>
           </Card.Root>
