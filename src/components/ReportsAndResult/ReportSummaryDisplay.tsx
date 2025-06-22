@@ -121,8 +121,8 @@ export const ReportsSummary: React.FC = () => {
         }
     };
 
-    const renderSingleChart = () => {
-        const data = getDataByCategory(activeTab);
+    const renderSingleChart = (key: string) => {
+        const data = key === "quarterly" ? getDataByCategory(activeTab) : getDataByAnnualCategory(activeTab);
         const configs = chartConfigurations[activeTab];
         const title = getChartTitle(activeTab);
 
@@ -306,7 +306,7 @@ export const ReportsSummary: React.FC = () => {
                                 />
                             ) : (
                                 <div>
-                                    {renderSingleChart()}
+                                    {renderSingleChart("annual")}
                                 </div>
                             )}
                         </Tabs.Content>
@@ -401,7 +401,7 @@ export const ReportsSummary: React.FC = () => {
                                 />
                             ) : (
                                 <div>
-                                    {renderSingleChart()}
+                                    {renderSingleChart("quarterly")}
                                 </div>
                             )}
                         </Tabs.Content>
