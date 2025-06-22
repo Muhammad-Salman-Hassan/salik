@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     Box,
     Table,
@@ -38,18 +38,25 @@ const formatValue = (value: any, format?: string): string => {
 };
 
 export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) => {
-    const [selectedYears, setSelectedYears] = useState<string[]>(['2022', '2023', '2024']);
-
-
     const availableYears = useMemo(() => {
         const years = new Set(
             data.map(item => {
-                const year = item.period?.match(/\d{4}/)?.[0];
+                const year = item.period;
                 return year;
             }).filter(Boolean)
         );
+
         return Array.from(years).sort();
     }, [data]);
+
+    // Initialize with all available years selected
+    const [selectedYears, setSelectedYears] = useState<string[]>(availableYears);
+
+    // Update selectedYears when availableYears changes (e.g., when data prop changes)
+    useEffect(() => {
+        setSelectedYears(availableYears);
+    }, [availableYears]);
+
     const getUnitLabel = (format?: string): string => {
         switch (format) {
             case 'currency':
@@ -67,11 +74,10 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
         return availableYears.filter(year => selectedYears.includes(year));
     }, [availableYears, selectedYears]);
 
-
     const dataByYear = useMemo(() => {
         const grouped: { [key: string]: any } = {};
         data.forEach(item => {
-            const year = item.period?.match(/\d{4}/)?.[0];
+            const year = item.period;
             if (year) {
                 grouped[year] = item;
             }
@@ -79,9 +85,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
         return grouped;
     }, [data]);
 
-
     const transposedData = useMemo(() => {
-
         const metricColumns = columns.filter(col => col.key !== 'period');
 
         return metricColumns.map(column => {
@@ -99,9 +103,6 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
             return row;
         });
     }, [columns, filteredYears, dataByYear]);
-
-
-
 
     const handleYearToggle = (year: string, checked: boolean) => {
         if (checked) {
@@ -128,7 +129,6 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
             my={5}
         >
             <VStack align="stretch" gap={5}>
-
                 <Heading
                     size="lg"
                     color="gray.700"
@@ -137,12 +137,10 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                     {title}
                 </Heading>
 
-
                 <Box overflowX="auto">
                     <Table.Root size="sm" variant="outline">
                         <Table.Header>
                             <Table.Row bg="gray.600">
-
                                 <Table.ColumnHeader
                                     fontWeight="600"
                                     color="white"
@@ -153,7 +151,6 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                                 >
 
                                 </Table.ColumnHeader>
-
 
                                 <Table.ColumnHeader
                                     fontWeight="600"
@@ -189,30 +186,25 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                                     _hover={{ bg: "gray.50" }}
                                     transition="background-color 0.2s"
                                 >
-                              
                                     <Table.Cell
                                         py={3}
                                         px={4}
                                         color="gray.700"
                                         fontWeight="500"
-
                                     >
                                         {row.metric}
                                     </Table.Cell>
 
-                                   
                                     <Table.Cell
                                         py={3}
                                         px={4}
                                         color="gray.600"
                                         fontStyle="italic"
-
                                         textAlign="center"
                                     >
                                         {row.unit}
                                     </Table.Cell>
 
-                                
                                     {filteredYears.map((year) => (
                                         <Table.Cell
                                             key={year}
@@ -230,7 +222,6 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                     </Table.Root>
                 </Box>
 
-            
                 <Box>
                     <HStack gap={6} wrap="wrap">
                         <Checkbox.Root
