@@ -27,9 +27,9 @@ const formatValue = (value: any, format?: string): string => {
 
     switch (format) {
         case 'currency':
-            return `AED ${value.toFixed(1)}M`;
+            return `${value.toFixed(1)}`;
         case 'percentage':
-            return `${value.toFixed(1)}%`;
+            return `${value.toFixed(1)}`;
         case 'number':
             return value.toFixed(1);
         default:
@@ -40,7 +40,7 @@ const formatValue = (value: any, format?: string): string => {
 export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) => {
     const [selectedYears, setSelectedYears] = useState<string[]>(['2022', '2023', '2024']);
 
-   
+
     const availableYears = useMemo(() => {
         const years = new Set(
             data.map(item => {
@@ -50,15 +50,58 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
         );
         return Array.from(years).sort();
     }, [data]);
+    const getUnitLabel = (format?: string): string => {
+        switch (format) {
+            case 'currency':
+                return 'AED million';
+            case 'percentage':
+                return '%';
+            case 'number':
+                return 'AED million';
+            default:
+                return '';
+        }
+    };
 
-    const filteredData = useMemo(() => {
-        if (selectedYears.length === 0) return data;
+    const filteredYears = useMemo(() => {
+        return availableYears.filter(year => selectedYears.includes(year));
+    }, [availableYears, selectedYears]);
 
-        return data.filter(item => {
+
+    const dataByYear = useMemo(() => {
+        const grouped: { [key: string]: any } = {};
+        data.forEach(item => {
             const year = item.period?.match(/\d{4}/)?.[0];
-            return year && selectedYears.includes(year);
+            if (year) {
+                grouped[year] = item;
+            }
         });
-    }, [data, selectedYears]);
+        return grouped;
+    }, [data]);
+
+
+    const transposedData = useMemo(() => {
+
+        const metricColumns = columns.filter(col => col.key !== 'period');
+
+        return metricColumns.map(column => {
+            const row: any = {
+                metric: column.header,
+                format: column.format,
+                unit: getUnitLabel(column.format)
+            };
+
+            filteredYears.forEach(year => {
+                const yearData = dataByYear[year];
+                row[year] = yearData ? yearData[column.key] : null;
+            });
+
+            return row;
+        });
+    }, [columns, filteredYears, dataByYear]);
+
+
+
 
     const handleYearToggle = (year: string, checked: boolean) => {
         if (checked) {
@@ -85,7 +128,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
             my={5}
         >
             <VStack align="stretch" gap={5}>
-                {/* Header */}
+
                 <Heading
                     size="lg"
                     color="gray.700"
@@ -98,35 +141,87 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                 <Box overflowX="auto">
                     <Table.Root size="sm" variant="outline">
                         <Table.Header>
-                            <Table.Row bg="gray.50">
-                                {columns.map((column) => (
+                            <Table.Row bg="gray.600">
+
+                                <Table.ColumnHeader
+                                    fontWeight="600"
+                                    color="white"
+                                    py={3}
+                                    px={4}
+                                    minW="200px"
+                                    bg={"teal"}
+                                >
+
+                                </Table.ColumnHeader>
+
+
+                                <Table.ColumnHeader
+                                    fontWeight="600"
+                                    bg={"teal"}
+                                    color="white"
+                                    py={3}
+                                    px={4}
+                                    minW="120px"
+                                    textAlign="center"
+                                >
+
+                                </Table.ColumnHeader>
+
+                                {filteredYears.map((year) => (
                                     <Table.ColumnHeader
-                                        key={column.key}
+                                        key={year}
                                         fontWeight="600"
-                                        color="gray.600"
+                                        color="white"
                                         py={3}
                                         px={4}
+                                        bg={'teal'}
+                                        textAlign="center"
                                     >
-                                        {column.header}
+                                        {year}
                                     </Table.ColumnHeader>
                                 ))}
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {filteredData.map((row, index) => (
+                            {transposedData.map((row, index) => (
                                 <Table.Row
                                     key={index}
                                     _hover={{ bg: "gray.50" }}
                                     transition="background-color 0.2s"
                                 >
-                                    {columns.map((column) => (
+                              
+                                    <Table.Cell
+                                        py={3}
+                                        px={4}
+                                        color="gray.700"
+                                        fontWeight="500"
+
+                                    >
+                                        {row.metric}
+                                    </Table.Cell>
+
+                                   
+                                    <Table.Cell
+                                        py={3}
+                                        px={4}
+                                        color="gray.600"
+                                        fontStyle="italic"
+
+                                        textAlign="center"
+                                    >
+                                        {row.unit}
+                                    </Table.Cell>
+
+                                
+                                    {filteredYears.map((year) => (
                                         <Table.Cell
-                                            key={column.key}
+                                            key={year}
                                             py={3}
                                             px={4}
                                             color="gray.700"
+                                            textAlign="center"
                                         >
-                                            {formatValue(row[column.key], column.format)}
+                                            {formatValue(row[year], row.format)}
                                         </Table.Cell>
                                     ))}
                                 </Table.Row>
@@ -135,6 +230,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, title }) =>
                     </Table.Root>
                 </Box>
 
+            
                 <Box>
                     <HStack gap={6} wrap="wrap">
                         <Checkbox.Root
