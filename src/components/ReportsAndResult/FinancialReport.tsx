@@ -124,11 +124,11 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
                                 <Text fontWeight="semibold" fontSize="sm" lineHeight="1.2">
                                     {getDocumentTypeLabel(document.type)}
                                 </Text>
-                                {document.isNew && (
+                                {/* {document.isNew && (
                                     <Badge colorScheme="green" size="sm">
                                         New
                                     </Badge>
-                                )}
+                                )} */}
                             </HStack>
 
                             <HStack gap={4} fontSize="xs" color="gray.600">
