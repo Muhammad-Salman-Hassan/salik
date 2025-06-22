@@ -125,6 +125,22 @@ export const ReportsSummary: React.FC = () => {
         );
     };
 
+
+    const Naming = (category: string) => {
+        switch (category) {
+            case "income":
+                return "Income Statement"
+            case "position":
+                return "Financial Position"
+            case "cashflow":
+                return "Cash FLow"
+            case "operating":
+                return "Key Operating Figure"
+
+            default:
+                return "Income";
+        }
+    }
     return (
         <div style={{
             padding: '20px',
@@ -194,7 +210,7 @@ export const ReportsSummary: React.FC = () => {
                                 marginBottom: '20px',
                                 boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                             }}>
-                                
+
                                 <div style={{
                                     display: 'flex',
                                     gap: '20px',
@@ -219,12 +235,12 @@ export const ReportsSummary: React.FC = () => {
                                                     transition: 'all 0.2s'
                                                 }}
                                             >
-                                                {category === 'cashflow' ? 'Cash Flow' : category}
+                                                {Naming(category)}
                                             </Button>
                                         ))}
                                     </div>
-                                    
-                                    
+
+
                                     <div style={{ display: 'flex', gap: '8px' }}>
                                         {(['line', 'bar', 'area'] as ChartType[]).map((type) => (
                                             <Button
@@ -290,7 +306,7 @@ export const ReportsSummary: React.FC = () => {
                                 marginBottom: '20px',
                                 boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                             }}>
-                                
+
 
                                 <div style={{
                                     display: 'flex',
@@ -316,12 +332,11 @@ export const ReportsSummary: React.FC = () => {
                                                     transition: 'all 0.2s'
                                                 }}
                                             >
-                                                {category === 'cashflow' ? 'Cash Flow' : category}
+                                                {Naming(category)}
                                             </Button>
                                         ))}
                                     </div>
 
-                                    {/* Chart Type Selection */}
                                     <div style={{ display: 'flex', gap: '8px' }}>
                                         {(['line', 'bar', 'area'] as ChartType[]).map((type) => (
                                             <Button
@@ -344,7 +359,6 @@ export const ReportsSummary: React.FC = () => {
                                         ))}
                                     </div>
 
-                                    {/* Table Toggle */}
                                     <Button
                                         onClick={() => setShowTable(!showTable)}
                                         style={{

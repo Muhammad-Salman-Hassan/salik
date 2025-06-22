@@ -206,7 +206,7 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
 
 
                 {data.map((yearData) => (
-                    <VStack key={yearData.year} gap={6} align="stretch">
+                    <VStack key={yearData.period} gap={6} align="stretch">
 
                         <Flex justify="space-between" align="center" py={4}>
                             <HStack gap={3}>
