@@ -67,8 +67,7 @@ const getDocumentTypeLabel = (type: Document['type']) => {
 
 const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
     const [expandedYears, setExpandedYears] = useState<string[]>(['2025']);
-    const [expandedPeriods, setExpandedPeriods] = useState<string[]>(['']);
-
+   
     const toggleYear = (year: string) => {
         setExpandedYears(prev =>
             prev.includes(year)
@@ -77,13 +76,6 @@ const FinancialDocuments: React.FC<ReportProps> = ({ data }) => {
         );
     };
 
-    const togglePeriod = (period: string) => {
-        setExpandedPeriods(prev =>
-            prev.includes(period)
-                ? prev.filter(p => p !== period)
-                : [...prev, period]
-        );
-    };
 
     const handleDownload = (document: Document) => {
         const link = window.document.createElement('a');

@@ -11,6 +11,7 @@ import { GiCash } from 'react-icons/gi';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { HiOutlineDocumentReport } from "react-icons/hi";
 
+
 const InvestorsReport: React.FC = () => {
     const yearWiseData = dummyPeriodDataResult
 
