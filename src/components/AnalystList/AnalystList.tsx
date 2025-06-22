@@ -3,16 +3,12 @@ import {
     Table,
     Text,
     Box,
-    Link,
-    Flex,
-    useDisclosure,
     Collapsible,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { CompanyRating, RatingFilter } from '../../util/Interface';
 import { filterRatings } from '../../util/filterRating';
 import { FilterBar } from '../filterBar';
-import { FaRegFileExcel, FaRegFilePdf } from 'react-icons/fa';
 import { RatingScaleTooltip } from '../RatingScaleTooltip';
 import Disclaimer from '../Discalimer/Disclaimer';
 

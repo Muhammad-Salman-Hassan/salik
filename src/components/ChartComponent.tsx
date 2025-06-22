@@ -6,7 +6,7 @@ import {
     BarChart, 
     CartesianGrid, 
     Cell, 
-    Legend, 
+     
     Line, 
     LineChart, 
     Pie, 
@@ -17,7 +17,7 @@ import {
     YAxis,
     ComposedChart
 } from "recharts";
-import { Box, Checkbox, HStack, VStack, Text } from '@chakra-ui/react';
+import { Box, Checkbox, HStack, Text } from '@chakra-ui/react';
 
 const COLORS = ['#4a5568', '#1a365d', '#38a169', '#d69e2e', '#e53e3e', '#805ad5', '#dd6b20', '#319795'];
 
@@ -464,38 +464,7 @@ export const ChartComponent: React.FC<ChartProps> = ({
                     );
                 }
 
-            case 'pie':
-                const pieData = data.map((item, index) => ({
-                    name: item.period,
-                    value: item[configs[0].dataKey],
-                    fill: COLORS[index % COLORS.length]
-                }));
-
-                return (
-                    <PieChart>
-                        <Pie
-                            data={pieData}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                            outerRadius={120}
-                            fill="#8884d8"
-                            dataKey="value"
-                        >
-                            {pieData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.fill} />
-                            ))}
-                        </Pie>
-                        <Tooltip
-                            formatter={(value) => {
-                                const config = configs[0];
-                                return [formatTooltipValue(value, config?.format), config?.title];
-                            }}
-                        />
-                    </PieChart>
-                );
-
+           
             default:
                 return null;
         }

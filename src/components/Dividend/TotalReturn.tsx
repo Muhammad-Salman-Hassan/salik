@@ -177,7 +177,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
 
                             fillOpacity={0.2}
                         />
-                        
+
                         <Brush dataKey="period" height={30} stroke="#008080" />
 
                     </AreaChart>
@@ -255,36 +255,17 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                     </Button>
                 </HStack>
 
-                {activeChart === 'cumulative' && (
-                    <ButtonGroup size="sm" >
-                        <Button
-                            variant={timeRange === '1year' ? 'solid' : 'outline'}
-                            onClick={() => handleTimeRangeChange('1year')}
-                            bg={timeRange === '1year' ? '#4A5568' : 'transparent'}
-                            color={timeRange === '1year' ? 'white' : 'gray.600'}
-                        >
-                            1 Year
-                        </Button>
-                        <Button
-                            variant={timeRange === '3year' ? 'solid' : 'outline'}
-                            onClick={() => handleTimeRangeChange('3year')}
-                            bg={timeRange === '3year' ? '#4A5568' : 'transparent'}
-                            color={timeRange === '3year' ? 'white' : 'gray.600'}
-                        >
-                            3 Year
-                        </Button>
-                    </ButtonGroup>
-                )}
 
-                {activeChart === 'cumulative' && (
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={toggleTable}
-                    >
-                        {showTable ? 'Hide' : 'Show'} Table
-                    </Button>
-                )}
+
+
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={toggleTable}
+                >
+                    {showTable ? 'Hide' : 'Show'} Table
+                </Button>
+
             </Flex>
 
             <Box
@@ -299,24 +280,20 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                 {renderChart()}
             </Box>
 
-            {showTable && activeChart === 'cumulative' && (
+            {showTable && (
                 <Box overflowX="auto">
                     <Text fontSize="lg" fontWeight="bold" mb={4}>
-                        Cumulative Returns Data
+                        Annualized Total Return*, %
                     </Text>
                     <Table.Root variant="outline" size="sm">
                         <Table.Header bg="#008080">
                             <Table.Row>
                                 <Table.ColumnHeader color="white">Period</Table.ColumnHeader>
+
                                 <Table.ColumnHeader color="white" textAlign="center">
-                                    Periodic Return (%)
+                                    Salik
                                 </Table.ColumnHeader>
-                                <Table.ColumnHeader color="white" textAlign="center">
-                                    Cumulative Return (%)
-                                </Table.ColumnHeader>
-                                <Table.ColumnHeader color="white" textAlign="center">
-                                    Annualized Return (%)
-                                </Table.ColumnHeader>
+
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
@@ -325,12 +302,7 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                                     <Table.Cell py={3} fontWeight="medium">
                                         {row.period}
                                     </Table.Cell>
-                                    <Table.Cell py={3} textAlign="center" color={row.periodicReturn >= 0 ? 'green.600' : 'red.600'}>
-                                        {row.periodicReturn.toFixed(2)}%
-                                    </Table.Cell>
-                                    <Table.Cell py={3} textAlign="center" color={row.cumulativeReturn >= 0 ? 'green.600' : 'red.600'}>
-                                        {row.cumulativeReturn.toFixed(2)}%
-                                    </Table.Cell>
+
                                     <Table.Cell py={3} textAlign="center" color={row.annualReturn >= 0 ? 'green.600' : 'red.600'}>
                                         {row.annualReturn.toFixed(2)}%
                                     </Table.Cell>
@@ -339,7 +311,9 @@ const TotalReturn: React.FC<ReturnsChartProps> = ({
                         </Table.Body>
                     </Table.Root>
                 </Box>
+
             )}
+
 
 
         </Box>
